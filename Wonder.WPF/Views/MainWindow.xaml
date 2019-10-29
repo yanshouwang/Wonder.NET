@@ -1,10 +1,33 @@
 ﻿<Window x:Class="Wonder.WPF.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:prism="http://prismlibrary.com/"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="350" Width="525" >
-    <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        xmlns:mvvm="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:Wonder.Core.Behaviors;assembly=Wonder.Core"
+        mvvm:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="600" Width="900"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid Background="Orange">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="White">
+            <i:Interaction.Behaviors>
+                <b:ControlWindowBehavior/>
+            </i:Interaction.Behaviors>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Assets/Logo.ico" Margin="4"/>
+            <Button Grid.Column="2" Content="-" Background="Transparent" BorderThickness="0"/>
+            <Button Grid.Column="3" Content="+" Background="Transparent" BorderThickness="0"/>
+            <Button Grid.Column="4" Content="x" Background="Transparent" BorderThickness="0"/>
+        </Grid>
+        <ContentControl Grid.Row="1" mvvm:RegionManager.RegionName="ContentRegion" />
     </Grid>
 </Window>
