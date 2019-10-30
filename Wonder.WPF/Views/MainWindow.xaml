@@ -5,14 +5,19 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:b="clr-namespace:Wonder.Core.Behaviors;assembly=Wonder.Core"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="600" Width="900"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
-    <Grid Background="Orange">
+        Title="{Binding Title}"
+        Width="900" Height="600" MinWidth="600" MinHeight="400"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        SnapsToDevicePixels="True" Background="Orange">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="{Binding Source={x:Static SystemParameters.WindowResizeBorderThickness}}"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="White">
+        <Grid Grid.Row="0" Background="Transparent">
             <i:Interaction.Behaviors>
                 <b:ControlWindowBehavior/>
             </i:Interaction.Behaviors>
@@ -28,6 +33,6 @@
             <Button Grid.Column="3" Content="+" Background="Transparent" BorderThickness="0"/>
             <Button Grid.Column="4" Content="x" Background="Transparent" BorderThickness="0"/>
         </Grid>
-        <ContentControl Grid.Row="1" mvvm:RegionManager.RegionName="ContentRegion" />
+        <ContentControl Grid.Row="1" mvvm:RegionManager.RegionName="ContentRegion"/>
     </Grid>
 </Window>
