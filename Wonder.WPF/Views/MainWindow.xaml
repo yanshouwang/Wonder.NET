@@ -4,6 +4,7 @@
         xmlns:mvvm="http://prismlibrary.com/"
         mvvm:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}"
+        WindowStyle="None"
         Width="900" Height="600" MinWidth="600" MinHeight="400"
         Style="{StaticResource Wonder.Window}">
     <ContentControl Grid.Row="1" mvvm:RegionManager.RegionName="ContentRegion"/>
