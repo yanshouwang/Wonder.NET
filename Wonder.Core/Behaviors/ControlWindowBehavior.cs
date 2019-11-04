@@ -57,13 +57,13 @@ namespace Wonder.Core.Behaviors
 
         private IntPtr WindowHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            var message = (Win32Message)msg;
+            var message = (Win32Codes)msg;
             switch (message)
             {
-                case Win32Message.WM_GETMINMAXINFO:
+                case Win32Codes.WM_GETMINMAXINFO:
                     handled = HandleWM_GETMINMAXINFO(hwnd, lParam);
                     break;
-                case Win32Message.WM_SETTINGCHANGE:
+                case Win32Codes.WM_SETTINGCHANGE:
                     handled = HandleWM_SETTINGCHANGE(hwnd);
                     break;
                 default:
@@ -119,7 +119,8 @@ namespace Wonder.Core.Behaviors
             var window = Window.GetWindow(AssociatedObject);
             var minLimit = new Point(window.MinWidth, window.MinHeight);
             var maxLimit = new Point(window.MaxWidth, window.MaxHeight);
-            var source = (HwndSource)PresentationSource.FromVisual(AssociatedObject);
+            //var source = (HwndSource)PresentationSource.FromVisual(AssociatedObject);
+            var source = HwndSource.FromHwnd(hwnd);
             var matrix = source.CompositionTarget.TransformToDevice;
             var minUnits = matrix.Transform(minLimit);
             var maxUnits = matrix.Transform(maxLimit);

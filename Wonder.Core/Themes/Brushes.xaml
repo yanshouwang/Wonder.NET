@@ -296,29 +296,4 @@
     <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.800" Color="{StaticResource Wonder.Color.BlueGrey.800}"/>
     <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.900" Color="{StaticResource Wonder.Color.BlueGrey.900}"/>
     <!--#endregion-->
-    <!--#region WINDOWS-->
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Button.Background.Static" Color="#FFDDDDDD"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Button.Background.MouseOver" Color="#FFBEE6FD"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Button.Background.Pressed" Color="#FFC4E5F6"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Button.Background.Disabled" Color="#FFF4F4F4"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Button.Foreground.Disabled" Color="#FF838383"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Minimize.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Minimize.MouseOver" Color="#3F999999"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Minimize.Pressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.MaximizeOrRestore.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.MaximizeOrRestore.MouseOver" Color="#3F999999"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.MaximizeOrRestore.Pressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Close.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Close.MouseOver" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Background.Close.Pressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Minimize.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Minimize.MouseOver" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Minimize.Pressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.MaximizeOrRestore.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.MaximizeOrRestore.MouseOver" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.MaximizeOrRestore.Pressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Close.Static" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Close.MouseOver" Color="Transparent"/>
-    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Windows.Foreground.Close.Pressed" Color="Transparent"/>
-    <!--#endregion-->
 </ResourceDictionary>

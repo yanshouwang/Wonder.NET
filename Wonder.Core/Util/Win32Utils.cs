@@ -4,7 +4,7 @@ using System.Security;
 
 namespace Wonder.Core.Util
 {
-    public static class Win32Utils
+    internal static class Win32Utils
     {
         public const int MONITOR_DEFAULTTONULL = 0x00000000;
         public const int MONITOR_DEFAULTTOPRIMARY = 0x00000001;
@@ -74,6 +74,30 @@ namespace Wonder.Core.Util
 
         public int X { get; set; }
         public int Y { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var value = obj is POINT another
+                      ? another.X == X && another.Y == Y
+                      : false;
+            return value;
+        }
+
+        public override int GetHashCode()
+        {
+            var code = HashCode.Combine(X, Y);
+            return code;
+        }
+
+        public static bool operator ==(POINT left, POINT right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(POINT left, POINT right)
+        {
+            return !(left == right);
+        }
     }
 
     public struct SIZE
@@ -86,6 +110,30 @@ namespace Wonder.Core.Util
         {
             Width = width;
             Height = height;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var value = obj is SIZE another
+                      ? another.Width == Width && another.Height == Height
+                      : false;
+            return value;
+        }
+
+        public override int GetHashCode()
+        {
+            var code = HashCode.Combine(Width, Height);
+            return code;
+        }
+
+        public static bool operator ==(SIZE left, SIZE right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(SIZE left, SIZE right)
+        {
+            return !(left == right);
         }
     }
 
@@ -119,12 +167,12 @@ namespace Wonder.Core.Util
 
         public override bool Equals(object obj)
         {
-            if (obj is RECT rect)
+            if (obj is RECT another)
             {
-                var value = Left == rect.Left &&
-                            Top == rect.Top &&
-                            Right == rect.Right &&
-                            Bottom == rect.Bottom;
+                var value = Left == another.Left &&
+                            Top == another.Top &&
+                            Right == another.Right &&
+                            Bottom == another.Bottom;
                 return value;
             }
             else
@@ -135,8 +183,7 @@ namespace Wonder.Core.Util
 
         public override int GetHashCode()
         {
-            var code = (Left << 16 | Win32Utils.LOWORD((uint)Right)) ^
-                       (Top << 16 | Win32Utils.LOWORD((uint)Bottom));
+            var code = HashCode.Combine(Left, Top, Right, Bottom);
             return code;
         }
 
@@ -149,6 +196,16 @@ namespace Wonder.Core.Util
             var rect = new RECT(left, top, right, bottom);
             return rect;
         }
+
+        public static bool operator ==(RECT left, RECT right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(RECT left, RECT right)
+        {
+            return !(left == right);
+        }
     }
 
     public struct MINMAXINFO
@@ -158,6 +215,34 @@ namespace Wonder.Core.Util
         public POINT MaxPosition { get; set; }
         public POINT MinTrackSize { get; set; }
         public POINT MaxTrackSize { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var value = obj is MINMAXINFO another
+                      ? another.Reserved == Reserved &&
+                        another.MaxSize == MaxSize &&
+                        another.MaxPosition == MaxPosition &&
+                        another.MinTrackSize == MinTrackSize &&
+                        another.MaxTrackSize == MaxTrackSize
+                      : false;
+            return value;
+        }
+
+        public override int GetHashCode()
+        {
+            var code = HashCode.Combine(Reserved, MaxSize, MaxPosition, MinTrackSize, MaxTrackSize);
+            return code;
+        }
+
+        public static bool operator ==(MINMAXINFO left, MINMAXINFO right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(MINMAXINFO left, MINMAXINFO right)
+        {
+            return !(left == right);
+        }
     }
 
     public struct MONITORINFO
@@ -166,9 +251,36 @@ namespace Wonder.Core.Util
         public RECT MonitorRect { get; set; }
         public RECT WorkRect { get; set; }
         public int Flags { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var value = obj is MONITORINFO another
+                      ? another.Size == Size &&
+                        another.MonitorRect == MonitorRect &&
+                        another.WorkRect == WorkRect &&
+                        another.Flags == Flags
+                      : false;
+            return value;
+        }
+
+        public override int GetHashCode()
+        {
+            var code = HashCode.Combine(Size, MonitorRect, WorkRect, Flags);
+            return code;
+        }
+
+        public static bool operator ==(MONITORINFO left, MONITORINFO right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(MONITORINFO left, MONITORINFO right)
+        {
+            return !(left == right);
+        }
     }
 
-    public enum Win32Message
+    public enum Win32Codes
     {
         WM_NULL = 0x0000,
         WM_CREATE = 0x0001,
