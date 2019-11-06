@@ -7,12 +7,6 @@
     <ApplicationIcon>Assets\Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Behaviors\**" />
-    <EmbeddedResource Remove="Behaviors\**" />
-    <None Remove="Behaviors\**" />
-    <Page Remove="Behaviors\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Assets\Logo.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -22,6 +16,14 @@
     <PackageReference Include="Prism.DryIoc" Version="7.2.0.1367" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wonder.Core\Wonder.Core.csproj" />
+    <Page Update="Styles\Brushes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Windows.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

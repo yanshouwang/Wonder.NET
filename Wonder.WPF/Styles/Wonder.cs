@@ -1,15 +1,13 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
-using Wonder.Core.Extension;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using System.Windows.Interop;
-using Wonder.Core.Util;
+﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
+using Wonder.WPF.Extension;
+using Wonder.WPF.Util;
 
-namespace Wonder.Core.Themes
+namespace Wonder.WPF.Styles
 {
     public static class Wonder
     {
@@ -155,7 +153,7 @@ namespace Wonder.Core.Themes
 
         // Using a DependencyProperty as the backing store for IsMaximizedToWorkAera.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsMaximizedToWorkAeraProperty =
-            DependencyProperty.RegisterAttached("IsMaximizedToWorkAera", typeof(bool), typeof(Wonder), new PropertyMetadata(true, OnIsMaximizedToWorkAeraPropertyChanged));
+            DependencyProperty.RegisterAttached("IsMaximizedToWorkAera", typeof(bool), typeof(Wonder), new PropertyMetadata(default(bool), OnIsMaximizedToWorkAeraPropertyChanged));
 
         private static void OnIsMaximizedToWorkAeraPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

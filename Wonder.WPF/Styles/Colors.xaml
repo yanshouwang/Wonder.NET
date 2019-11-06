@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Wonder.Core.Themes">
+                    xmlns:local="clr-namespace:Wonder.WPF.Styles">
     <!--#region RED-->
     <Color x:Key="Wonder.Color.Red.50">#FFFFEBEE</Color>
     <Color x:Key="Wonder.Color.Red.100">#FFFFCDD2</Color>

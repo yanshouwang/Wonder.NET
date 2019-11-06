@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Wonder.Core.Extension
+namespace Wonder.WPF.Extension
 {
     public static class UIElementExtensions
     {

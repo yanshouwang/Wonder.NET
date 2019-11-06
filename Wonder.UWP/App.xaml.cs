@@ -1,13 +1,14 @@
-﻿using Prism.Unity.Windows;
-using Prism.Mvvm;
+﻿using Microsoft.Practices.Unity;
+using Prism.Unity.Windows;
 using System;
 using System.Globalization;
-using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
-using Wonder.UWP.ViewModels;
-using Wonder.UWP.Views;
 using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Wonder.UWP.Constants;
+using Wonder.UWP.Views;
 
 namespace Wonder.UWP
 {
@@ -28,8 +29,7 @@ namespace Wonder.UWP
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-            NavigationService.Navigate("HomeView", null);
+            NavigationService.Navigate(ViewTokens.HomeView, null);
             return Task.FromResult<object>(null);
         }
 
@@ -40,6 +40,13 @@ namespace Wonder.UWP
             var typeName = string.Format(CultureInfo.InvariantCulture, format, pageToken);
             var type = Type.GetType(typeName) ?? base.GetPageType(pageToken);
             return type;
+        }
+
+        protected override UIElement CreateShell(Frame rootFrame)
+        {
+            var shell = Container.Resolve<ShellView>();
+            shell.SetRootFrame(rootFrame);
+            return shell;
         }
 
         protected override Task OnInitializeAsync(IActivatedEventArgs args)

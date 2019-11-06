@@ -1,12 +1,12 @@
-﻿using Microsoft.Xaml.Behaviors;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 using System.Windows.Interop;
-using Wonder.Core.Util;
+using Wonder.WPF.Util;
 
-namespace Wonder.Core.Behaviors
+namespace Wonder.WPF.Behaviors
 {
     public class ControlWindowBehavior : Behavior<UIElement>
     {
