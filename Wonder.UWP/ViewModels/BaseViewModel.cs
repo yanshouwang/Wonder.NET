@@ -12,17 +12,5 @@ namespace Wonder.UWP.ViewModels
         {
             NavigationService = navigationService;
         }
-
-        private DelegateCommand _gobackCommand;
-        public DelegateCommand GoBackCommand =>
-            _gobackCommand ?? (_gobackCommand = new DelegateCommand(ExecuteGoBackCommand));
-
-        void ExecuteGoBackCommand()
-        {
-            if (!NavigationService.CanGoBack())
-                return;
-
-            NavigationService.GoBack();
-        }
     }
 }

@@ -6,17 +6,10 @@ namespace Wonder.UWP.ViewModels
 {
     public class ShellViewModel : BaseViewModel
     {
-        private IList<string> _views;
-        public IList<string> Views
-        {
-            get { return _views; }
-            set { SetProperty(ref _views, value); }
-        }
-
         public ShellViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Views = new List<string>() { "ABC" };
+
         }
 
         private DelegateCommand<string> _navigateCommand;
@@ -26,6 +19,18 @@ namespace Wonder.UWP.ViewModels
         void ExecuteNavigateCommand(string viewToken)
         {
             NavigationService.Navigate(viewToken, null);
+        }
+
+        private DelegateCommand _gobackCommand;
+        public DelegateCommand GoBackCommand =>
+            _gobackCommand ?? (_gobackCommand = new DelegateCommand(ExecuteGoBackCommand));
+
+        void ExecuteGoBackCommand()
+        {
+            if (!NavigationService.CanGoBack())
+                return;
+
+            NavigationService.GoBack();
         }
     }
 }

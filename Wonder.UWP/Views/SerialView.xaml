@@ -10,7 +10,7 @@
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-        <TextBlock Text="{Binding Title}" FontSize="32"
+        <TextBlock Text="串口" FontSize="32"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
     </Grid>

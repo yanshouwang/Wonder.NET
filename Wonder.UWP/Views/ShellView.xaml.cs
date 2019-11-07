@@ -26,6 +26,28 @@ namespace Wonder.UWP.Views
         {
             this.InitializeComponent();
             this.CustomizeTitleBar();
+            
+            NavView.RegisterPropertyChangedCallback(MUXC.NavigationView.DisplayModeProperty, OnNavViewPropertyChanged);
+            NavView.RegisterPropertyChangedCallback(MUXC.NavigationView.IsBackButtonVisibleProperty, OnNavViewPropertyChanged);
+
+            CalculateTitleBarPosition();
+        }
+
+        private void OnNavViewPropertyChanged(DependencyObject sender, DependencyProperty dp)
+        {
+            if (dp == MUXC.NavigationView.DisplayModeProperty ||
+                dp == MUXC.NavigationView.IsBackButtonVisibleProperty)
+            {
+                CalculateTitleBarPosition();
+            }
+        }
+
+        private void CalculateTitleBarPosition()
+        {
+            TitleBar.Margin = NavView.DisplayMode == MUXC.NavigationViewDisplayMode.Minimal &&
+                              NavView.IsBackButtonVisible == MUXC.NavigationViewBackButtonVisible.Visible
+                            ? new Thickness(80, 0, 0, 0)
+                            : new Thickness(40, 0, 0, 0);
         }
 
         private void CustomizeTitleBar()
@@ -47,7 +69,12 @@ namespace Wonder.UWP.Views
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
             var frame = (Frame)sender;
+            // 更新后退按钮状态
             NavView.IsBackEnabled = frame.CanGoBack;
+            NavView.IsBackButtonVisible = frame.CanGoBack
+                                        ? MUXC.NavigationViewBackButtonVisible.Visible
+                                        : MUXC.NavigationViewBackButtonVisible.Collapsed;
+            // 更新导航栏选择项
             if (e.SourcePageType.Name == nameof(SettingsView))
             {
                 NavView.SelectedItem = NavView.SettingsItem;
