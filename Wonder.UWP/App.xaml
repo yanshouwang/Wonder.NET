@@ -33,6 +33,7 @@
                         <ResourceDictionary x:Key="HighContrast"/>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
+                <ResourceDictionary Source="Styles/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </mvvm:PrismUnityApplication.Resources>

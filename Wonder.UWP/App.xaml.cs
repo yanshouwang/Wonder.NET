@@ -1,10 +1,10 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Unity.Windows;
+using Prism.Windows.AppModel;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Wonder.UWP.Constants;
@@ -29,7 +29,7 @@ namespace Wonder.UWP
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate(ViewTokens.HomeView, null);
+            NavigationService.Navigate(ViewTokens.Serial, null);
             return Task.FromResult<object>(null);
         }
 
@@ -47,6 +47,13 @@ namespace Wonder.UWP
             var shell = Container.Resolve<ShellView>();
             shell.SetRootFrame(rootFrame);
             return shell;
+        }
+
+        protected override IDeviceGestureService OnCreateDeviceGestureService()
+        {
+            var service = base.OnCreateDeviceGestureService();
+            service.UseTitleBarBackButton = false;
+            return service;
         }
 
         protected override Task OnInitializeAsync(IActivatedEventArgs args)

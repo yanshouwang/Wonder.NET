@@ -7,16 +7,43 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behaviors="using:Wonder.UWP.Behaviors"
+    xmlns:helpers="using:Wonder.UWP.Helpers"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <muxc:NavigationView x:Name="NavView"
                              IsTitleBarAutoPaddingEnabled="False"
-                             IsBackButtonVisible="Collapsed"/>
+                             IsBackButtonVisible="Collapsed"
+                             IsSettingsVisible="True">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem x:Uid="SerialNavItem" helpers:NavHelper.ViewToken="SerialView">
+                    <muxc:NavigationViewItem.Icon>
+                        <PathIcon Width="1024" Height="1024">
+                            <PathIcon.Data>
+                                M 246.042 4.50933 h 531.913 v 106.382 h 106.382 v 159.574 h -159.574 v 319.149 H 299.234 V 270.468 H 139.661 V 110.894 h 106.382 V 4.50933
+                                m 531.913 319.149 h 106.382 v 265.958 h -106.382 V 323.66
+                                m -319.149 319.149 h 106.382 v 372.339 h -106.382 v -372.339
+                                M 139.661 323.66 h 106.382 v 265.958 H 139.661 V 323.66 Z
+                            </PathIcon.Data>
+                        </PathIcon>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.MenuItems>
+            <i:Interaction.Behaviors>
+                <behaviors:NavigationViewItemInvokedEventToCommandBehavior Command="{x:Bind ViewModel.NavigateCommand}"/>
+                <ic:EventTriggerBehavior EventName="BackRequested">
+                    <ic:InvokeCommandAction Command="{x:Bind ViewModel.GoBackCommand}"/>
+                </ic:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </muxc:NavigationView>
         <Grid x:Name="TitleBar"
               Background="Transparent"
               Height="32" VerticalAlignment="Top"
-              Margin="40,0,0,0"/>
+              Margin="40,0,0,0">
+        </Grid>
     </Grid>
 </Page>
