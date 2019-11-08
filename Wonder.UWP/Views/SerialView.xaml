@@ -6,12 +6,54 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-        <TextBlock Text="串口" FontSize="32"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="240" MaxWidth="400"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Padding="12">
+            <StackPanel Orientation="Vertical" Spacing="20">
+                <mutc:HeaderedContentControl x:Uid="SerialHCC" x:Name="SerialHCC" HorizontalContentAlignment="Stretch">
+                    <mutc:HeaderedContentControl.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="16" Margin="0,0,0,12"/>
+                        </DataTemplate>
+                    </mutc:HeaderedContentControl.HeaderTemplate>
+                    <Grid RowSpacing="8" ColumnSpacing="8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="SerialNameTBK" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock x:Uid="SerialBaudRateTBK" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock x:Uid="SerialDataBitsTBK" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock x:Uid="SerialStopBitsTBK" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock x:Uid="SerialParityTBK" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Padding="8,0,0,0" HorizontalAlignment="Stretch" CornerRadius="0" Height="24" ItemsSource="{x:Bind ViewModel.Devices}"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" Padding="8,0,0,0" HorizontalAlignment="Stretch" CornerRadius="0" Height="24"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Padding="8,0,0,0" HorizontalAlignment="Stretch" CornerRadius="0" Height="24"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" Padding="8,0,0,0" HorizontalAlignment="Stretch" CornerRadius="0" Height="24"/>
+                        <ComboBox Grid.Row="4" Grid.Column="1" Padding="8,0,0,0" HorizontalAlignment="Stretch" CornerRadius="0" Height="24"/>
+                    </Grid>
+                </mutc:HeaderedContentControl>
+                <Button Content="打开串口" HorizontalAlignment="Stretch" CornerRadius="0"/>
+            </StackPanel>
+        </ScrollViewer>
+        <mutc:GridSplitter Grid.Column="1"
+                           HorizontalAlignment="Left">
+        </mutc:GridSplitter>
     </Grid>
 </Page>

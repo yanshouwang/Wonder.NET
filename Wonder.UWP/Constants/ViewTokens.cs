@@ -4,7 +4,7 @@ namespace Wonder.UWP.Constants
 {
     internal static class ViewTokens
     {
-        public const string Serial = nameof(SerialView);
-        public const string Settings = nameof(SettingsView);
+        public const string SERIAL = nameof(SerialView);
+        public const string SETTINGS = nameof(SettingsView);
     }
 }

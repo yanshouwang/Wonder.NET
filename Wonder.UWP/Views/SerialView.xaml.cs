@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Wonder.UWP.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -22,6 +23,9 @@ namespace Wonder.UWP.Views
     /// </summary>
     public sealed partial class SerialView : Page
     {
+        public SerialViewModel ViewModel
+            => DataContext as SerialViewModel;
+
         public SerialView()
         {
             this.InitializeComponent();

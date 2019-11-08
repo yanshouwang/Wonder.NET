@@ -9,7 +9,6 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:behaviors="using:Wonder.UWP.Behaviors"
     xmlns:helpers="using:Wonder.UWP.Helpers"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -18,9 +17,13 @@
         <muxc:NavigationView x:Name="NavView"
                              IsTitleBarAutoPaddingEnabled="False"
                              IsBackButtonVisible="Collapsed"
-                             IsSettingsVisible="True">
+                             IsSettingsVisible="True"
+                             Content="{x:Bind NavFrame}">
+            <muxc:NavigationView.PaneHeader>
+                <Grid/>
+            </muxc:NavigationView.PaneHeader>
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem x:Uid="SerialNavItem" helpers:NavHelper.ViewToken="SerialView">
+                <muxc:NavigationViewItem x:Uid="SerialNVI" helpers:NavHelper.ViewToken="SerialView">
                     <muxc:NavigationViewItem.Icon>
                         <PathIcon Width="1024" Height="1024">
                             <PathIcon.Data>
@@ -34,7 +37,6 @@
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
             <i:Interaction.Behaviors>
-                <behaviors:NavigationViewItemInvokedEventToCommandBehavior Command="{x:Bind ViewModel.NavigateCommand}"/>
                 <ic:EventTriggerBehavior EventName="BackRequested">
                     <ic:InvokeCommandAction Command="{x:Bind ViewModel.GoBackCommand}"/>
                 </ic:EventTriggerBehavior>

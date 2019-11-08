@@ -29,7 +29,7 @@ namespace Wonder.UWP
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate(ViewTokens.Serial, null);
+            NavigationService.Navigate(ViewTokens.SERIAL, null);
             return Task.FromResult<object>(null);
         }
 
@@ -44,8 +44,8 @@ namespace Wonder.UWP
 
         protected override UIElement CreateShell(Frame rootFrame)
         {
-            var shell = Container.Resolve<ShellView>();
-            shell.SetRootFrame(rootFrame);
+            var parameter = new ParameterOverride("navFrame", rootFrame);
+            var shell = Container.Resolve<ShellView>(parameter);
             return shell;
         }
 

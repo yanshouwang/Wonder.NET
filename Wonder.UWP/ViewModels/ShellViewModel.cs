@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Windows.Navigation;
+using System;
 using System.Collections.Generic;
 
 namespace Wonder.UWP.ViewModels
@@ -18,7 +19,10 @@ namespace Wonder.UWP.ViewModels
 
         void ExecuteNavigateCommand(string viewToken)
         {
-            NavigationService.Navigate(viewToken, null);
+            if (NavigationService.Navigate(viewToken, null))
+                return;
+
+            throw new NotImplementedException();
         }
 
         private DelegateCommand _gobackCommand;
