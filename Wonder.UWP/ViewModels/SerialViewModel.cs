@@ -2,52 +2,48 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO.Ports;
 using System.Linq;
-using System.Text;
-using Windows.ApplicationModel.Core;
+using System.Threading;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SerialCommunication;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
+using Wonder.UWP.IO;
 
 namespace Wonder.UWP.ViewModels
 {
     public class SerialViewModel : BaseViewModel
     {
-        public ObservableCollection<DeviceViewModel> Devices { get; set; }
+        private readonly DeviceWatcher _watcher;
+
+        public ObservableCollection<SerialDeviceViewModel> Devices { get; }
 
         public SerialViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Devices = new ObservableCollection<DeviceViewModel>();
-
-            InitializeViewModel();
+            Devices = new ObservableCollection<SerialDeviceViewModel>();
+            var selector = SerialDevice.GetDeviceSelector();
+            _watcher = DeviceInformation.CreateWatcher(selector);
+            _watcher.Added += OnDeviceAdded;
+            _watcher.Removed += OnDeviceRemoved;
+            _watcher.Updated += OnDeviceUpdated;
+            _watcher.EnumerationCompleted += OnWatcherEnumerationCompleted;
+            _watcher.Stopped += OnWatcherStoped;
         }
 
-        private void InitializeViewModel()
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
-            var selector = SerialDevice.GetDeviceSelector();
-            // 获取已连接设备
-            //var items = await DeviceInformation.FindAllAsync(selector);
-            //foreach (var item in items)
-            //{
-            //    var device = new DeviceViewModel(item.Id, item.Name);
-            //    Devices.Add(device);
-            //}
-            // 监听设备
-            var watcher = DeviceInformation.CreateWatcher(selector);
-            watcher.Added += OnDeviceAdded;
-            watcher.Removed += OnDeviceRemoved;
-            watcher.Updated += OnDeviceUpdated;
-            watcher.EnumerationCompleted += OnWatcherEnumerationCompleted;
-            watcher.Stopped += OnWatcherStoped;
-            watcher.Start();
+            base.OnNavigatedTo(e, viewModelState);
+            _watcher.Start();
+        }
+
+        public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
+        {
+            base.OnNavigatingFrom(e, viewModelState, suspending);
+            _watcher.Stop();
         }
 
         private void OnWatcherStoped(DeviceWatcher sender, object args)
         {
-            throw new NotImplementedException();
+
         }
 
         private void OnWatcherEnumerationCompleted(DeviceWatcher sender, object args)
@@ -60,16 +56,30 @@ namespace Wonder.UWP.ViewModels
             throw new NotImplementedException();
         }
 
-        private void OnDeviceRemoved(DeviceWatcher sender, DeviceInformationUpdate args)
+        private async void OnDeviceRemoved(DeviceWatcher sender, DeviceInformationUpdate args)
         {
             var device = Devices.Single(i => i.ID == args.Id);
-            RunOnUI(() => Devices.Remove(device));
+            await DispatcherRunAsync(() => Devices.Remove(device));
         }
 
-        private void OnDeviceAdded(DeviceWatcher sender, DeviceInformation args)
+        private async void OnDeviceAdded(DeviceWatcher sender, DeviceInformation args)
         {
-            var device = new DeviceViewModel(args.Id, args.Name);
-            RunOnUI(() => Devices.Add(device));
+            var portNames = Serial.GetPortNames();
+
+            foreach (var portName in portNames)
+            {
+                var selector = SerialDevice.GetDeviceSelector(portName);
+                var items = await DeviceInformation.FindAllAsync(selector);
+                if (items.All(i => i.Id != args.Id))
+                    continue;
+                var device = new SerialDeviceViewModel(portName, args.Id, args.Name);
+                await DispatcherRunAsync(() =>
+                {
+                    if (Devices.Any(i => i.ID == device.ID))
+                        return;
+                    Devices.Add(device);
+                });
+            }
         }
     }
 }
