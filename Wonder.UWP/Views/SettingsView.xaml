@@ -6,12 +6,38 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:xaml="using:Windows.UI.Xaml"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
-        <TextBlock Text="设置" FontSize="32"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-    </Grid>
+    <Page.Resources>
+        <xaml:ElementTheme x:Key="Wonder.Theme.Light">Light</xaml:ElementTheme>
+        <xaml:ElementTheme x:Key="Wonder.Theme.Dark">Dark</xaml:ElementTheme>
+        <xaml:ElementTheme x:Key="Wonder.Theme.Default">Default</xaml:ElementTheme>
+    </Page.Resources>
+    <StackPanel Orientation="Vertical" Margin="12">
+        <mutc:HeaderedItemsControl x:Uid="ThemeSettingHIC" Orientation="Horizontal">
+            <mutc:HeaderedItemsControl.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="16" Margin="0,0,24,2"
+                               VerticalAlignment="Center"/>
+                </DataTemplate>
+            </mutc:HeaderedItemsControl.HeaderTemplate>
+            <mutc:HeaderedItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </mutc:HeaderedItemsControl.ItemsPanel>
+            <RadioButton x:Uid="LightThemeRBN" GroupName="Theme"
+                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         CommandParameter="{StaticResource Wonder.Theme.Light}"/>
+            <RadioButton x:Uid="DarkThemeRBN" GroupName="Theme"
+                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         CommandParameter="{StaticResource Wonder.Theme.Dark}"/>
+            <RadioButton x:Uid="SystemThemeRBN" GroupName="Theme"
+                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         CommandParameter="{StaticResource Wonder.Theme.Default}"/>
+        </mutc:HeaderedItemsControl>
+    </StackPanel>
 </Page>

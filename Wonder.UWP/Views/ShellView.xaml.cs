@@ -101,9 +101,9 @@ namespace Wonder.UWP.Views
         {
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-            var appTitleBar = ApplicationView.GetForCurrentView().TitleBar;
-            appTitleBar.ButtonBackgroundColor = Colors.Transparent;
-            appTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            var viewTitleBar = ApplicationView.GetForCurrentView().TitleBar;
+            viewTitleBar.ButtonBackgroundColor = Colors.Transparent;
+            viewTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             Window.Current.SetTitleBar(TitleBar);
         }
     }

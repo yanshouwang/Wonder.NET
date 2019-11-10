@@ -1,4 +1,7 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.Practices.Unity;
 using Prism.Unity.Windows;
 using Prism.Windows.AppModel;
 using System;
@@ -25,6 +28,7 @@ namespace Wonder.UWP
         {
             this.InitializeComponent();
             //this.Suspending += OnSuspending;
+            AppCenter.Start("", typeof(Analytics), typeof(Crashes));
         }
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
