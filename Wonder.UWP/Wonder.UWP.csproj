@@ -125,6 +125,7 @@
     <Compile Include="Constants\ViewTokens.cs" />
     <Compile Include="Constants\Win32Errors.cs" />
     <Compile Include="Constants\Win32Libraries.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\Win32Helper.cs" />
     <Compile Include="IO\Serial.cs" />

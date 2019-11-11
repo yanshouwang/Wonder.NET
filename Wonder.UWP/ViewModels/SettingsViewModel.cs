@@ -13,10 +13,20 @@ namespace Wonder.UWP.ViewModels
     {
         public ThemeService ThemeService { get; }
 
+        private ThemeMode _themeMode;
+        public ThemeMode ThemeMode
+        {
+            get { return _themeMode; }
+            set { SetProperty(ref _themeMode, value); }
+        }
+
         public SettingsViewModel(INavigationService navigationService, ThemeService themeService)
             : base(navigationService)
         {
             ThemeService = themeService;
+            ThemeMode = ApplicationData.Current.LocalSettings.Values.ContainsKey(SettingsKeys.THEME)
+                      ? (ThemeMode)ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME]
+                      : ThemeMode.System;
         }
 
         private DelegateCommand<object> _setThemeCommand;
@@ -27,7 +37,8 @@ namespace Wonder.UWP.ViewModels
         {
             var mode = (ThemeMode)obj;
             ThemeService.SetThemeMode(mode);
-            ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME] = (int)obj;
+            ThemeMode = mode;
+            ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME] = (int)mode;
         }
     }
 }

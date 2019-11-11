@@ -23,14 +23,11 @@ namespace Wonder.UWP.Views
         public ShellViewModel ViewModel
             => DataContext as ShellViewModel;
 
-        public IUnityContainer Container { get; }
         public Frame NavFrame { get; }
 
-        public ShellView(IUnityContainer container, Frame navFrame)
+        public ShellView(Frame navFrame)
         {
             this.InitializeComponent();
-
-            Container = container;
 
             NavFrame = navFrame;
             NavFrame.Navigated += OnNavFrameNavigated;
@@ -41,7 +38,9 @@ namespace Wonder.UWP.Views
             NavView.RegisterPropertyChangedCallback(NavigationView.DisplayModeProperty, OnNavViewPropertyChanged);
             NavView.RegisterPropertyChangedCallback(NavigationView.IsBackButtonVisibleProperty, OnNavViewPropertyChanged);
 
-            InitializeTitleBar();
+            // 设置自定义标题栏
+            Window.Current.SetTitleBar(TitleBar);
+            CalculateTitleBarSize();
         }
 
         private void OnNavViewPropertyChanged(DependencyObject sender, DependencyProperty dp)
@@ -91,21 +90,6 @@ namespace Wonder.UWP.Views
             NavView.SelectedItem = item;
             // 更新导航栏标头
             NavView.Header = ((NavigationViewItem)NavView.SelectedItem).Content;
-        }
-
-        private void InitializeTitleBar()
-        {
-            // 扩展视图至标题栏区域
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-            // 自定义标题栏颜色
-            var viewTitleBar = ApplicationView.GetForCurrentView().TitleBar;
-            Container.RegisterInstance(viewTitleBar);
-            viewTitleBar.ButtonBackgroundColor = Colors.Transparent;
-            viewTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            // 设置自定义标题栏
-            Window.Current.SetTitleBar(TitleBar);
-            CalculateTitleBarSize();
         }
 
         private void CalculateTitleBarSize()

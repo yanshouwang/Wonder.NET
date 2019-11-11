@@ -150,8 +150,8 @@
     <comment>文本：串口名称</comment>
   </data>
   <data name="SerialNVI.Content" xml:space="preserve">
-    <value>串口</value>
-    <comment>导航条目：串口</comment>
+    <value>串口助手</value>
+    <comment>导航条目：串口助手</comment>
   </data>
   <data name="SerialParityCBX.Header" xml:space="preserve">
     <value>校验位：</value>

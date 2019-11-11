@@ -8,13 +8,17 @@
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:xaml="using:Wonder.UWP.Xaml"
+    xmlns:converters="using:Wonder.UWP.Converters"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <xaml:ThemeMode x:Key="Wonder.ThemeMode.Light">Light</xaml:ThemeMode>
         <xaml:ThemeMode x:Key="Wonder.ThemeMode.Dark">Dark</xaml:ThemeMode>
-        <xaml:ThemeMode x:Key="Wonder.ThemeMode.Windows">Windows</xaml:ThemeMode>
+        <xaml:ThemeMode x:Key="Wonder.ThemeMode.System">System</xaml:ThemeMode>
+        <converters:EnumToBoolConverter x:Key="IsLightConverter" Target="{StaticResource Wonder.ThemeMode.Light}"/>
+        <converters:EnumToBoolConverter x:Key="IsDarkConverter" Target="{StaticResource Wonder.ThemeMode.Dark}"/>
+        <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource Wonder.ThemeMode.System}"/>
     </Page.Resources>
     <StackPanel Orientation="Vertical" Margin="12">
         <mutc:HeaderedItemsControl x:Uid="ThemeModeHIC" Orientation="Horizontal">
@@ -30,14 +34,17 @@
                 </ItemsPanelTemplate>
             </mutc:HeaderedItemsControl.ItemsPanel>
             <RadioButton x:Uid="LightThemeRBN" GroupName="Theme"
+                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
                          CommandParameter="{StaticResource Wonder.ThemeMode.Light}"/>
             <RadioButton x:Uid="DarkThemeRBN" GroupName="Theme"
+                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
                          CommandParameter="{StaticResource Wonder.ThemeMode.Dark}"/>
             <RadioButton x:Uid="SystemThemeRBN" GroupName="Theme"
+                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
-                         CommandParameter="{StaticResource Wonder.ThemeMode.Windows}"/>
+                         CommandParameter="{StaticResource Wonder.ThemeMode.System}"/>
         </mutc:HeaderedItemsControl>
     </StackPanel>
 </Page>

@@ -1,7 +1,15 @@
-﻿using Prism.Commands;
+﻿using Microsoft.Practices.Unity;
+using Prism.Commands;
 using Prism.Windows.Navigation;
 using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Core;
+using Windows.Storage;
+using Windows.UI;
+using Windows.UI.ViewManagement;
+using Wonder.UWP.Constants;
+using Wonder.UWP.Services;
+using Wonder.UWP.Xaml;
 
 namespace Wonder.UWP.ViewModels
 {
@@ -10,7 +18,6 @@ namespace Wonder.UWP.ViewModels
         public ShellViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-
         }
 
         private DelegateCommand<string> _navigateCommand;

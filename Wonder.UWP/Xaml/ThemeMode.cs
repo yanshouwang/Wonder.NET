@@ -4,6 +4,6 @@
     {
         Light,
         Dark,
-        Windows
+        System
     }
 }
