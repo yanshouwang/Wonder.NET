@@ -1,6 +1,6 @@
 ﻿namespace Wonder.UWP.Constants
 {
-    internal static class StorageKeys
+    internal static class SettingsKeys
     {
         public const string THEME = "Theme";
     }

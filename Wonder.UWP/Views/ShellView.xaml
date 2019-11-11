@@ -464,7 +464,11 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Grid x:Name="PaneToggleButtonGrid" HorizontalAlignment="Left" Margin="0,0,0,8" VerticalAlignment="Top" Canvas.ZIndex="100">
+                            <Grid x:Name="PaneToggleButtonGrid"
+                                  HorizontalAlignment="Left"
+                                  Margin="0,0,0,8"
+                                  VerticalAlignment="Top"
+                                  Canvas.ZIndex="100">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -589,38 +593,41 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid>
-        <NavigationView Style="{StaticResource NavigationViewStyle1}" x:Name="NavView"
+    <Page.Content>
+        <Grid>
+            <NavigationView x:Name="NavView"
+                        Style="{StaticResource NavigationViewStyle1}"
                         IsBackButtonVisible="Collapsed"
                         IsSettingsVisible="True"
                         Content="{x:Bind NavFrame}">
-            <NavigationView.PaneHeader>
-                <Grid/>
-            </NavigationView.PaneHeader>
-            <NavigationView.MenuItems>
-                <NavigationViewItem x:Uid="SerialNVI" helpers:NavHelper.ViewToken="SerialView">
-                    <NavigationViewItem.Icon>
-                        <PathIcon Width="1024" Height="1024">
-                            <PathIcon.Data>
-                                M 246.042 4.50933 h 531.913 v 106.382 h 106.382 v 159.574 h -159.574 v 319.149 H 299.234 V 270.468 H 139.661 V 110.894 h 106.382 V 4.50933
+                <NavigationView.PaneHeader>
+                    <Grid/>
+                </NavigationView.PaneHeader>
+                <NavigationView.MenuItems>
+                    <NavigationViewItem x:Uid="SerialNVI" helpers:NavHelper.ViewToken="SerialView">
+                        <NavigationViewItem.Icon>
+                            <PathIcon Width="1024" Height="1024">
+                                <PathIcon.Data>
+                                    M 246.042 4.50933 h 531.913 v 106.382 h 106.382 v 159.574 h -159.574 v 319.149 H 299.234 V 270.468 H 139.661 V 110.894 h 106.382 V 4.50933
                                 m 531.913 319.149 h 106.382 v 265.958 h -106.382 V 323.66
                                 m -319.149 319.149 h 106.382 v 372.339 h -106.382 v -372.339
                                 M 139.661 323.66 h 106.382 v 265.958 H 139.661 V 323.66 Z
-                            </PathIcon.Data>
-                        </PathIcon>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-            </NavigationView.MenuItems>
-            <i:Interaction.Behaviors>
-                <ic:EventTriggerBehavior EventName="BackRequested">
-                    <ic:InvokeCommandAction Command="{x:Bind ViewModel.GoBackCommand}"/>
-                </ic:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </NavigationView>
-        <Grid x:Name="TitleBar"
+                                </PathIcon.Data>
+                            </PathIcon>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </NavigationView.MenuItems>
+                <i:Interaction.Behaviors>
+                    <ic:EventTriggerBehavior EventName="BackRequested">
+                        <ic:InvokeCommandAction Command="{x:Bind ViewModel.GoBackCommand}"/>
+                    </ic:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </NavigationView>
+            <Grid x:Name="TitleBar"
               Background="Transparent"
-              Height="32" VerticalAlignment="Top"
-              Margin="40,0,0,0">
+              Height="32"
+              VerticalAlignment="Top">
+            </Grid>
         </Grid>
-    </Grid>
+    </Page.Content>
 </Page>

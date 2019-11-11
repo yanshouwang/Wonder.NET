@@ -423,7 +423,7 @@
                               Style="{StaticResource Wonder.Style.ComboBoxStyle}"/>
                     <ComboBox x:Uid="SerialParityCBX"
                               Style="{StaticResource Wonder.Style.ComboBoxStyle}"/>
-                    <Button Content="打开串口"/>
+                    <Button Style="{StaticResource ButtonRevealStyle}" Content="打开串口" HorizontalAlignment="Stretch"/>
                 </mutc:HeaderedItemsControl>
             </StackPanel>
         </ScrollViewer>

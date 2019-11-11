@@ -8,10 +8,13 @@ using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Wonder.UWP.Constants;
+using Wonder.UWP.Services;
 using Wonder.UWP.Views;
+using Wonder.UWP.Xaml;
 
 namespace Wonder.UWP
 {
@@ -31,6 +34,43 @@ namespace Wonder.UWP
             AppCenter.Start("", typeof(Analytics), typeof(Crashes));
         }
 
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+            Container.RegisterInstance(Container);
+            var themeService = Container.Resolve<ThemeService>();
+            Container.RegisterInstance(themeService);
+        }
+
+        protected override IDeviceGestureService OnCreateDeviceGestureService()
+        {
+            var service = base.OnCreateDeviceGestureService();
+            service.UseTitleBarBackButton = false;
+            return service;
+        }
+
+        protected override Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            return base.OnInitializeAsync(args);
+        }
+
+        protected override Task OnActivateApplicationAsync(IActivatedEventArgs args)
+        {
+            return base.OnActivateApplicationAsync(args);
+        }
+
+        protected override Task OnResumeApplicationAsync(IActivatedEventArgs args)
+        {
+            return base.OnResumeApplicationAsync(args);
+        }
+
+        protected override UIElement CreateShell(Frame rootFrame)
+        {
+            var parameter = new ParameterOverride("navFrame", rootFrame);
+            var shell = Container.Resolve<ShellView>(parameter);
+            return shell;
+        }
+
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             NavigationService.Navigate(ViewTokens.SERIAL, null);
@@ -44,25 +84,6 @@ namespace Wonder.UWP
             var typeName = string.Format(CultureInfo.InvariantCulture, format, pageToken);
             var type = Type.GetType(typeName) ?? base.GetPageType(pageToken);
             return type;
-        }
-
-        protected override UIElement CreateShell(Frame rootFrame)
-        {
-            var parameter = new ParameterOverride("navFrame", rootFrame);
-            var shell = Container.Resolve<ShellView>(parameter);
-            return shell;
-        }
-
-        protected override IDeviceGestureService OnCreateDeviceGestureService()
-        {
-            var service = base.OnCreateDeviceGestureService();
-            service.UseTitleBarBackButton = false;
-            return service;
-        }
-
-        protected override Task OnInitializeAsync(IActivatedEventArgs args)
-        {
-            return base.OnInitializeAsync(args);
         }
 
         #region ORIGINAL CODES

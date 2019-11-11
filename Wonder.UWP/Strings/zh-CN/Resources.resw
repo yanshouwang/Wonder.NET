@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DarkThemeRBN.Content" xml:space="preserve">
-    <value>深色</value>
+    <value>深色主题</value>
     <comment>单选按钮：深色</comment>
   </data>
   <data name="Description" xml:space="preserve">
@@ -130,7 +130,7 @@
     <comment>显示名称</comment>
   </data>
   <data name="LightThemeRBN.Content" xml:space="preserve">
-    <value>浅色</value>
+    <value>浅色主题</value>
     <comment>单选按钮：浅色</comment>
   </data>
   <data name="SerialBaudRateCBX.Header" xml:space="preserve">
@@ -165,8 +165,8 @@
     <value>跟随系统</value>
     <comment>单选按钮：跟随系统</comment>
   </data>
-  <data name="ThemeSettingHIC.Header" xml:space="preserve">
-    <value>主题</value>
+  <data name="ThemeModeHIC.Header" xml:space="preserve">
+    <value>主题模式</value>
     <comment>标头：主题</comment>
   </data>
 </root>

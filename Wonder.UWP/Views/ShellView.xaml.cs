@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Linq;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Wonder.UWP.Helpers;
 using Wonder.UWP.ViewModels;
@@ -21,12 +23,14 @@ namespace Wonder.UWP.Views
         public ShellViewModel ViewModel
             => DataContext as ShellViewModel;
 
+        public IUnityContainer Container { get; }
         public Frame NavFrame { get; }
 
-        public ShellView(Frame navFrame)
+        public ShellView(IUnityContainer container, Frame navFrame)
         {
             this.InitializeComponent();
-            this.CustomizeTitleBar();
+
+            Container = container;
 
             NavFrame = navFrame;
             NavFrame.Navigated += OnNavFrameNavigated;
@@ -37,15 +41,7 @@ namespace Wonder.UWP.Views
             NavView.RegisterPropertyChangedCallback(NavigationView.DisplayModeProperty, OnNavViewPropertyChanged);
             NavView.RegisterPropertyChangedCallback(NavigationView.IsBackButtonVisibleProperty, OnNavViewPropertyChanged);
 
-            CalculateTitleBarPosition();
-        }
-
-        private void CalculateTitleBarPosition()
-        {
-            TitleBar.Margin = NavView.DisplayMode == NavigationViewDisplayMode.Minimal &&
-                              NavView.IsBackButtonVisible == NavigationViewBackButtonVisible.Visible
-                            ? new Thickness(80, 0, 0, 0)
-                            : new Thickness(40, 0, 0, 0);
+            InitializeTitleBar();
         }
 
         private void OnNavViewPropertyChanged(DependencyObject sender, DependencyProperty dp)
@@ -53,7 +49,7 @@ namespace Wonder.UWP.Views
             if (dp == NavigationView.DisplayModeProperty ||
                 dp == NavigationView.IsBackButtonVisibleProperty)
             {
-                CalculateTitleBarPosition();
+                CalculateTitleBarSize();
             }
         }
 
@@ -97,14 +93,27 @@ namespace Wonder.UWP.Views
             NavView.Header = ((NavigationViewItem)NavView.SelectedItem).Content;
         }
 
-        private void CustomizeTitleBar()
+        private void InitializeTitleBar()
         {
+            // 扩展视图至标题栏区域
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
+            // 自定义标题栏颜色
             var viewTitleBar = ApplicationView.GetForCurrentView().TitleBar;
+            Container.RegisterInstance(viewTitleBar);
             viewTitleBar.ButtonBackgroundColor = Colors.Transparent;
             viewTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            // 设置自定义标题栏
             Window.Current.SetTitleBar(TitleBar);
+            CalculateTitleBarSize();
+        }
+
+        private void CalculateTitleBarSize()
+        {
+            TitleBar.Margin = NavView.DisplayMode == NavigationViewDisplayMode.Minimal &&
+                              NavView.IsBackButtonVisible == NavigationViewBackButtonVisible.Visible
+                            ? new Thickness(80, 0, 0, 0)
+                            : new Thickness(40, 0, 0, 0);
         }
     }
 }

@@ -121,7 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\ContainerNames.cs" />
-    <Compile Include="Constants\StorageKeys.cs" />
+    <Compile Include="Constants\SettingsKeys.cs" />
     <Compile Include="Constants\ViewTokens.cs" />
     <Compile Include="Constants\Win32Errors.cs" />
     <Compile Include="Constants\Win32Libraries.cs" />
@@ -144,6 +144,7 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Xaml\ThemeMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

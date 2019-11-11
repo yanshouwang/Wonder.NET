@@ -1,51 +1,81 @@
-﻿using System;
-using Windows.Storage;
+﻿using Microsoft.Practices.Unity;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Wonder.UWP.Constants;
+using Wonder.UWP.Xaml;
+
+using MTUH = Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Wonder.UWP.Services
 {
-    public static class ThemeService
+    public class ThemeService
     {
-        private static UISettings _uiSettings = new UISettings();
+        public IUnityContainer Container { get; }
+        public UISettings UISettings { get; }
 
-        public static void SetTheme(ElementTheme theme)
+        public ThemeService(IUnityContainer container, UISettings uiSettings)
         {
-            // 设置标题栏按钮主题
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            var target = theme != ElementTheme.Default
-                       ? theme
-                       : Application.Current.RequestedTheme == ApplicationTheme.Light
-                       ? ElementTheme.Light
-                       : ElementTheme.Dark;
-            if (target == ElementTheme.Light)
-            {
-                titleBar.ButtonForegroundColor = Colors.Black;
-            }
-            else
-            {
-                titleBar.ButtonForegroundColor = Colors.White;
-            }
-            // TODO: 当在系统中切换主题时，标题栏按钮颜色不生效
-            if (theme == ElementTheme.Default)
-            {
-                _uiSettings.ColorValuesChanged += OnColorValuesChanged;
-            }
-            else
-            {
-                _uiSettings.ColorValuesChanged -= OnColorValuesChanged;
-            }
-            // 设置元素主题
-            if (!(Window.Current.Content is FrameworkElement element))
-                return;
-            element.RequestedTheme = theme;
+            Container = container;
+            UISettings = uiSettings;
         }
 
-        private static void OnColorValuesChanged(UISettings sender, object args)
+        public void SetThemeMode(ThemeMode mode)
         {
+            if (!(Window.Current.Content is FrameworkElement element))
+                return;
+            var theme = mode == ThemeMode.Light
+                      ? ElementTheme.Light
+                      : mode == ThemeMode.Dark
+                      ? ElementTheme.Dark
+                      : ElementTheme.Default;
+            element.RequestedTheme = theme;
+            SetTitleBarTheme(theme);
+            if (theme == ElementTheme.Default)
+            {
+                UISettings.ColorValuesChanged += OnColorValuesChanged;
+            }
+            else
+            {
+                UISettings.ColorValuesChanged -= OnColorValuesChanged;
+            }
+        }
 
+        private void SetTitleBarTheme(ElementTheme theme)
+        {
+            var titleBar = Container.Resolve<ApplicationViewTitleBar>();
+            if (theme == ElementTheme.Default)
+            {
+                theme = UISettings.GetColorValue(UIColorType.Background) == Colors.White
+                      ? ElementTheme.Light
+                      : ElementTheme.Dark;
+            }
+            if (theme == ElementTheme.Light)
+            {
+                if (titleBar.ButtonForegroundColor == Colors.Black)
+                    return;
+                titleBar.ButtonHoverBackgroundColor = MTUH.ColorHelper.ToColor("#19000000");
+                titleBar.ButtonPressedBackgroundColor = MTUH.ColorHelper.ToColor("#33000000");
+                titleBar.ButtonForegroundColor = Colors.Black;
+                titleBar.ButtonHoverForegroundColor = Colors.Black;
+                titleBar.ButtonPressedForegroundColor = Colors.Black;
+                titleBar.ButtonInactiveForegroundColor = MTUH.ColorHelper.ToColor("#FF858585");
+            }
+            else
+            {
+                if (titleBar.ButtonForegroundColor == Colors.White)
+                    return;
+                titleBar.ButtonHoverBackgroundColor = MTUH.ColorHelper.ToColor("#19FFFFFF");
+                titleBar.ButtonPressedBackgroundColor = MTUH.ColorHelper.ToColor("#33FFFFFF");
+                titleBar.ButtonForegroundColor = Colors.White;
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedForegroundColor = Colors.White;
+                titleBar.ButtonInactiveForegroundColor = MTUH.ColorHelper.ToColor("#FF6D6D6D");
+            }
+        }
+
+        private void OnColorValuesChanged(UISettings sender, object args)
+        {
+            SetTitleBarTheme(ElementTheme.Default);
         }
     }
 }
