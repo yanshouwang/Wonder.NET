@@ -24,45 +24,46 @@ namespace Wonder.UWP.Views
         public ShellViewModel ViewModel
             => DataContext as ShellViewModel;
 
+        public IUnityContainer Container { get; }
         public Frame NavFrame { get; }
 
-        public ShellView(Frame navFrame)
+        public ShellView(IUnityContainer container, Frame navFrame)
         {
             this.InitializeComponent();
+
+            Container = container;
 
             NavFrame = navFrame;
             NavFrame.Navigated += OnNavFrameNavigated;
             NavFrame.NavigationFailed += OnNavFrameNaviagtionFailed;
             NavFrame.NavigationStopped += OnNavFrameNavigationStopped;
 
-            NavView.ItemInvoked += OnNavViewItemInvoked;
-            NavView.RegisterPropertyChangedCallback(MUXC.NavigationView.DisplayModeProperty, OnNavViewPropertyChanged);
-            NavView.RegisterPropertyChangedCallback(MUXC.NavigationView.IsBackButtonVisibleProperty, OnNavViewPropertyChanged);
+            ExtendTitleBar();
+        }
 
+        private void ExtendTitleBar()
+        {
+            var titleBar = CoreApplication.GetCurrentView().TitleBar;
+            // 扩展视图至标题栏区域
+            titleBar.ExtendViewIntoTitleBar = true;
+            titleBar.LayoutMetricsChanged += OnTitleBarLayoutMetricsChanged;
             // 设置自定义标题栏
             Window.Current.SetTitleBar(TitleBar);
-            CalculateTitleBarSize();
         }
 
-        private void OnNavViewPropertyChanged(DependencyObject sender, DependencyProperty dp)
+        private void OnTitleBarLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
         {
-            if (dp == MUXC.NavigationView.DisplayModeProperty ||
-                dp == MUXC.NavigationView.IsBackButtonVisibleProperty)
+            if (FlowDirection == FlowDirection.LeftToRight)
             {
-                CalculateTitleBarSize();
+                TabStripHeader.Margin = new Thickness(sender.SystemOverlayLeftInset, 0, 0, 0);
+                TabStripFooter.Margin = new Thickness(0, 0, sender.SystemOverlayRightInset, 0);
             }
-        }
-
-        private void OnNavViewItemInvoked(MUXC.NavigationView sender, MUXC.NavigationViewItemInvokedEventArgs args)
-        {
-            var viewToken = args.IsSettingsInvoked
-                          ? "SettingsView"
-                          : NavHelper.GetViewToken(args.InvokedItemContainer);
-            // 判断是否为重复导航
-            if (NavFrame.SourcePageType.Name == viewToken ||
-                !ViewModel.NavigateCommand.CanExecute(viewToken))
-                return;
-            ViewModel.NavigateCommand.Execute(viewToken);
+            else
+            {
+                TabStripHeader.Margin = new Thickness(sender.SystemOverlayRightInset, 0, 0, 0);
+                TabStripFooter.Margin = new Thickness(0, 0, sender.SystemOverlayLeftInset, 0);
+            }
+            TabStripHeader.Height = TabStripFooter.Height = sender.Height;
         }
 
         private void OnNavFrameNavigationStopped(object sender, NavigationEventArgs e)
@@ -77,28 +78,7 @@ namespace Wonder.UWP.Views
 
         private void OnNavFrameNavigated(object sender, NavigationEventArgs e)
         {
-            var frame = (Frame)sender;
-            // 更新后退按钮状态
-            NavView.IsBackEnabled = frame.CanGoBack;
-            NavView.IsBackButtonVisible = frame.CanGoBack
-                                        ? MUXC.NavigationViewBackButtonVisible.Visible
-                                        : MUXC.NavigationViewBackButtonVisible.Collapsed;
-            // 更新导航栏选择项
-            var item = e.SourcePageType.Name == nameof(SettingsView)
-                     ? NavView.SettingsItem
-                     : NavView.MenuItems.OfType<MUXC.NavigationViewItem>()
-                                        .Single(i => NavHelper.GetViewToken(i) == e.SourcePageType.Name);
-            NavView.SelectedItem = item;
-            // 更新导航栏标头
-            NavView.Header = ((MUXC.NavigationViewItem)NavView.SelectedItem).Content;
-        }
 
-        private void CalculateTitleBarSize()
-        {
-            TitleBar.Margin = NavView.DisplayMode == MUXC.NavigationViewDisplayMode.Minimal &&
-                              NavView.IsBackButtonVisible == MUXC.NavigationViewBackButtonVisible.Visible
-                            ? new Thickness(80, 0, 0, 0)
-                            : new Thickness(40, 0, 0, 0);
         }
     }
 }
