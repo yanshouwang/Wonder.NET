@@ -22,7 +22,7 @@
         <converters:EnumToBoolConverter x:Key="IsDarkConverter" Target="{StaticResource Dark}"/>
         <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource System}"/>
     </Page.Resources>
-    <StackPanel Orientation="Vertical" Margin="12" Spacing="12"
+    <StackPanel Orientation="Vertical" Margin="12" Spacing="32"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
         <mutc:HeaderedItemsControl>
@@ -31,7 +31,7 @@
             </mutc:HeaderedItemsControl.Header>
             <mutc:HeaderedItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40"/>
                 </ItemsPanelTemplate>
             </mutc:HeaderedItemsControl.ItemsPanel>
             <RadioButton x:Uid="LightRBN" GroupName="Theme"
@@ -51,6 +51,11 @@
             <mutc:HeaderedItemsControl.Header>
                 <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"/>
             </mutc:HeaderedItemsControl.Header>
+            <mutc:HeaderedItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" Spacing="8"/>
+                </ItemsPanelTemplate>
+            </mutc:HeaderedItemsControl.ItemsPanel>
             <TextBlock TextAlignment="Center">
                 <Run Text="{x:Bind ViewModel.DisplayName}"/>
                 <Run Text="-"/>
