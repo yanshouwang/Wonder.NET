@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls">
     <!--#region THICKNESS -->
     <Thickness x:Key="TabViewHeaderPadding">0</Thickness>
     <Thickness x:Key="TabViewItemScrollButtonPadding">4</Thickness>
@@ -158,6 +159,21 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Padding="{TemplateBinding Padding}"/>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    <!--#region HEADERED_ITEMS_CONTROL -->
+    <Style TargetType="mutc:HeaderedItemsControl">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="mutc:HeaderedItemsControl">
+                    <StackPanel Orientation="{TemplateBinding Orientation}">
+                        <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}"/>
+                        <ItemsPresenter Margin="{TemplateBinding Padding}"/>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

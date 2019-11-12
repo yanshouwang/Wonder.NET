@@ -117,21 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DarkThemeRBN.Content" xml:space="preserve">
+  <data name="AboutTBK.Text" xml:space="preserve">
+    <value>关于</value>
+    <comment>文本：关于</comment>
+  </data>
+  <data name="DarkRBN.Content" xml:space="preserve">
     <value>深色主题</value>
-    <comment>单选按钮：深色</comment>
+    <comment>单选按钮：深色主题</comment>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Wonder 工具箱</value>
+    <value>Wonder 工具箱，一切皆有可能，漂亮的不像实力派</value>
+    <comment>说明</comment>
+  </data>
+  <data name="DescriptionTBK.Text" xml:space="preserve">
+    <value>Wonder 工具箱，一切皆有可能，漂亮的不像实力派</value>
     <comment>说明</comment>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Wonder</value>
     <comment>显示名称</comment>
   </data>
-  <data name="LightThemeRBN.Content" xml:space="preserve">
+  <data name="LicenseHLK.NavigateUri" xml:space="preserve">
+    <value>https://github.com/yanshouwang/Wonder.NET/blob/master/LICENSE</value>
+    <comment>链接：许可证</comment>
+  </data>
+  <data name="LicenseRUN.Text" xml:space="preserve">
+    <value>许可证</value>
+    <comment>文本：许可证</comment>
+  </data>
+  <data name="LightRBN.Content" xml:space="preserve">
     <value>浅色主题</value>
-    <comment>单选按钮：浅色</comment>
+    <comment>单选按钮：浅色主题</comment>
   </data>
   <data name="SerialBaudRateCBX.Header" xml:space="preserve">
     <value>波特率：</value>
@@ -161,12 +177,20 @@
     <value>停止位：</value>
     <comment>文本：停止位</comment>
   </data>
-  <data name="SystemThemeRBN.Content" xml:space="preserve">
+  <data name="SourceHLK.NavigateUri" xml:space="preserve">
+    <value>https://github.com/yanshouwang/Wonder.NET</value>
+    <comment>链接：源代码</comment>
+  </data>
+  <data name="SourceRUN.Text" xml:space="preserve">
+    <value>源代码</value>
+    <comment>文本：源代码</comment>
+  </data>
+  <data name="SystemRBN.Content" xml:space="preserve">
     <value>跟随系统</value>
     <comment>单选按钮：跟随系统</comment>
   </data>
-  <data name="ThemeModeHIC.Header" xml:space="preserve">
+  <data name="ThemeModeTBK.Text" xml:space="preserve">
     <value>主题模式</value>
-    <comment>标头：主题</comment>
+    <comment>文本：主题模式</comment>
   </data>
 </root>

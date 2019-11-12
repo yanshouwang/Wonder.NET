@@ -329,17 +329,6 @@
                                         BorderThickness="1"
                                         IsTabStop="False"
                                         Padding="0">
-                                    <Button.Resources>
-                                        <ResourceDictionary>
-                                            <StaticResource x:Key="ButtonBackground" ResourceKey="SystemControlTransparentBrush"/>
-                                            <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="SystemControlBackgroundListLowBrush"/>
-                                            <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="SystemControlBackgroundListMediumBrush"/>
-                                            <StaticResource x:Key="ButtonForeground" ResourceKey="SystemControlBackgroundBaseMediumBrush"/>
-                                            <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="SystemControlForegroundBaseMediumHighBrush"/>
-                                            <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="SystemControlForegroundBaseMediumHighBrush"/>
-                                            <Thickness x:Key="ButtonBorderThemeThickness">0</Thickness>
-                                        </ResourceDictionary>
-                                    </Button.Resources>
                                 </Button>
                             </Grid>
                         </Grid>
@@ -348,7 +337,7 @@
             </Setter>
         </Style>
         <Style x:Key="TabViewStyle" TargetType="muxc:TabView">
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="{ThemeResource TabViewHeaderPadding}"/>
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="Background" Value="{ThemeResource TabViewBackground}"/>

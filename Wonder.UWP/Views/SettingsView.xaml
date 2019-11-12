@@ -9,43 +9,63 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:xaml="using:Wonder.UWP.Xaml"
+    xmlns:wam="using:Windows.ApplicationModel"
     xmlns:converters="using:Wonder.UWP.Converters"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <xaml:ThemeMode x:Key="Wonder.ThemeMode.Light">Light</xaml:ThemeMode>
-        <xaml:ThemeMode x:Key="Wonder.ThemeMode.Dark">Dark</xaml:ThemeMode>
-        <xaml:ThemeMode x:Key="Wonder.ThemeMode.System">System</xaml:ThemeMode>
-        <converters:EnumToBoolConverter x:Key="IsLightConverter" Target="{StaticResource Wonder.ThemeMode.Light}"/>
-        <converters:EnumToBoolConverter x:Key="IsDarkConverter" Target="{StaticResource Wonder.ThemeMode.Dark}"/>
-        <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource Wonder.ThemeMode.System}"/>
+        <xaml:ThemeMode x:Key="Light">Light</xaml:ThemeMode>
+        <xaml:ThemeMode x:Key="Dark">Dark</xaml:ThemeMode>
+        <xaml:ThemeMode x:Key="System">System</xaml:ThemeMode>
+        <converters:EnumToBoolConverter x:Key="IsLightConverter" Target="{StaticResource Light}"/>
+        <converters:EnumToBoolConverter x:Key="IsDarkConverter" Target="{StaticResource Dark}"/>
+        <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource System}"/>
     </Page.Resources>
-    <StackPanel Orientation="Vertical" Margin="12" Spacing="12">
-        <mutc:HeaderedItemsControl x:Uid="ThemeModeHIC" Orientation="Horizontal">
-            <mutc:HeaderedItemsControl.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="16" Margin="0,0,24,2"
-                               VerticalAlignment="Center"/>
-                </DataTemplate>
-            </mutc:HeaderedItemsControl.HeaderTemplate>
+    <StackPanel Orientation="Vertical" Margin="12" Spacing="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <mutc:HeaderedItemsControl>
+            <mutc:HeaderedItemsControl.Header>
+                <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"/>
+            </mutc:HeaderedItemsControl.Header>
             <mutc:HeaderedItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </mutc:HeaderedItemsControl.ItemsPanel>
-            <RadioButton x:Uid="LightThemeRBN" GroupName="Theme"
+            <RadioButton x:Uid="LightRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
-                         CommandParameter="{StaticResource Wonder.ThemeMode.Light}"/>
-            <RadioButton x:Uid="DarkThemeRBN" GroupName="Theme"
+                         CommandParameter="{StaticResource Light}"/>
+            <RadioButton x:Uid="DarkRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
-                         CommandParameter="{StaticResource Wonder.ThemeMode.Dark}"/>
-            <RadioButton x:Uid="SystemThemeRBN" GroupName="Theme"
+                         CommandParameter="{StaticResource Dark}"/>
+            <RadioButton x:Uid="SystemRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
                          Command="{x:Bind ViewModel.SetThemeCommand}"
-                         CommandParameter="{StaticResource Wonder.ThemeMode.System}"/>
+                         CommandParameter="{StaticResource System}"/>
+        </mutc:HeaderedItemsControl>
+        <mutc:HeaderedItemsControl>
+            <mutc:HeaderedItemsControl.Header>
+                <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"/>
+            </mutc:HeaderedItemsControl.Header>
+            <TextBlock TextAlignment="Center">
+                <Run Text="{x:Bind ViewModel.DisplayName}"/>
+                <Run Text="-"/>
+                <Run Text="{x:Bind ViewModel.Version}"/>
+            </TextBlock>
+            <TextBlock x:Uid="DescriptionTBK" TextAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock TextAlignment="Center">
+                <Hyperlink x:Uid="SourceHLK">
+                    <Run x:Uid="SourceRUN"/>
+                </Hyperlink>
+                <Run Text="-"/>
+                <Hyperlink x:Uid="LicenseHLK">
+                    <Run x:Uid="LicenseRUN"/>
+                </Hyperlink>
+            </TextBlock>
         </mutc:HeaderedItemsControl>
     </StackPanel>
 </Page>

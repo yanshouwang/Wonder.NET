@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
 using Prism.Windows.Navigation;
 using System;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Wonder.UWP.Constants;
 using Wonder.UWP.Services;
@@ -20,6 +22,20 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _themeMode, value); }
         }
 
+        private string _displayName;
+        public string DisplayName
+        {
+            get { return _displayName; }
+            set { SetProperty(ref _displayName, value); }
+        }
+
+        private Version _version;
+        public Version Version
+        {
+            get { return _version; }
+            set { SetProperty(ref _version, value); }
+        }
+
         public SettingsViewModel(INavigationService navigationService, ThemeService themeService)
             : base(navigationService)
         {
@@ -27,6 +43,22 @@ namespace Wonder.UWP.ViewModels
             ThemeMode = ApplicationData.Current.LocalSettings.Values.ContainsKey(SettingsKeys.THEME)
                       ? (ThemeMode)ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME]
                       : ThemeMode.System;
+            DisplayName = GetDisplayName();
+            Version = GetVersion();
+        }
+
+        private Version GetVersion()
+        {
+            var value = Package.Current.Id.Version;
+            var version = new Version(value.Major, value.Minor, value.Build, value.Revision);
+            return version;
+        }
+
+        private string GetDisplayName()
+        {
+            var loader = new ResourceLoader();
+            var displayName = loader.GetString("DisplayName");
+            return displayName;
         }
 
         private DelegateCommand<object> _setThemeCommand;
