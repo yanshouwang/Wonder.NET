@@ -76,21 +76,13 @@ namespace Wonder.UWP
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate(ViewTokens.SERIAL, null);
             InitializeTheme();
+            NavigationService.Navigate(ViewTokens.SERIAL, null);
             return Task.CompletedTask;
         }
 
         private void InitializeTheme()
         {
-            // 扩展视图至标题栏区域
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-            // 自定义标题栏颜色
-            var viewTitleBar = ApplicationView.GetForCurrentView().TitleBar;
-            Container.RegisterInstance(viewTitleBar);
-            viewTitleBar.ButtonBackgroundColor = Colors.Transparent;
-            viewTitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             // 设置主题模式
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(SettingsKeys.THEME))
                 return;

@@ -475,13 +475,26 @@
                                 </Grid.RowDefinitions>
                                 <!--<Grid x:Name="TogglePaneTopPadding" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>-->
                                 <Grid x:Name="ButtonHolderGrid" Grid.Row="1">
-                                    <Button x:Name="NavigationViewBackButton" IsEnabled="{TemplateBinding IsBackEnabled}" Style="{StaticResource NavigationBackButtonNormalStyle}" VerticalAlignment="Top" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <Button x:Name="NavigationViewBackButton"
+                                            IsEnabled="{TemplateBinding IsBackEnabled}"
+                                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                                            VerticalAlignment="Top"
+                                            Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                         <ToolTipService.ToolTip>
                                             <ToolTip x:Name="NavigationViewBackButtonToolTip"/>
                                         </ToolTipService.ToolTip>
                                     </Button>
-                                    <Button x:Name="TogglePaneButton" AutomationProperties.LandmarkType="Navigation" Style="{TemplateBinding PaneToggleButtonStyle}" VerticalAlignment="Top" Visibility="{Binding TemplateSettings.PaneToggleButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                        <TextBlock x:Name="PaneTitleTextBlock" Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource NavigationViewItemHeaderTextStyle}" Text="{TemplateBinding PaneTitle}" VerticalAlignment="Center"/>
+                                    <Button x:Name="TogglePaneButton"
+                                            AutomationProperties.LandmarkType="Navigation"
+                                            Style="{TemplateBinding PaneToggleButtonStyle}"
+                                            VerticalAlignment="Top"
+                                            Visibility="{Binding TemplateSettings.PaneToggleButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <TextBlock x:Name="PaneTitleTextBlock"
+                                                   Grid.Column="0"
+                                                   HorizontalAlignment="Left"
+                                                   Style="{StaticResource NavigationViewItemHeaderTextStyle}"
+                                                   Text="{TemplateBinding PaneTitle}"
+                                                   VerticalAlignment="Center"/>
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -558,21 +571,51 @@
                                                 <RowDefinition Height="8"/>
                                             </Grid.RowDefinitions>
                                             <!--<Grid x:Name="ContentPaneTopPadding" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>-->
-                                            <Grid Height="{StaticResource PaneToggleButtonHeight}" Grid.Row="2">
+                                            <Grid Grid.Row="2" Height="{StaticResource PaneToggleButtonHeight}">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="{ThemeResource PaneToggleButtonWidth}"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <ContentControl x:Name="PaneHeaderContentBorder" Grid.Column="1" HorizontalContentAlignment="Stretch" IsTabStop="False" VerticalContentAlignment="Stretch"/>
+                                                <ContentControl x:Name="PaneHeaderContentBorder"
+                                                                Grid.Column="1"
+                                                                HorizontalContentAlignment="Stretch"
+                                                                IsTabStop="False"
+                                                                VerticalContentAlignment="Stretch"/>
                                             </Grid>
-                                            <Grid x:Name="AutoSuggestArea" Height="{ThemeResource NavigationViewTopPaneHeight}" Grid.Row="3" VerticalAlignment="Center">
-                                                <ContentControl x:Name="PaneAutoSuggestBoxPresenter" HorizontalContentAlignment="Stretch" IsTabStop="False" Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}" VerticalContentAlignment="Center"/>
+                                            <Grid x:Name="AutoSuggestArea"
+                                                  Grid.Row="3"
+                                                  Height="{ThemeResource NavigationViewTopPaneHeight}"
+                                                  VerticalAlignment="Center">
+                                                <ContentControl x:Name="PaneAutoSuggestBoxPresenter"
+                                                                HorizontalContentAlignment="Stretch"
+                                                                IsTabStop="False"
+                                                                Margin="{ThemeResource NavigationViewAutoSuggestBoxMargin}"
+                                                                VerticalContentAlignment="Center"/>
                                                 <Button x:Name="PaneAutoSuggestButton" Style="{ThemeResource NavigationViewPaneSearchButtonStyle}" Visibility="Collapsed" Width="{TemplateBinding CompactPaneLength}"/>
                                             </Grid>
-                                            <ContentControl x:Name="PaneCustomContentBorder" HorizontalContentAlignment="Stretch" IsTabStop="False" Grid.Row="4" VerticalContentAlignment="Stretch"/>
-                                            <NavigationViewList x:Name="MenuItemsHost" HorizontalAlignment="Stretch" ItemContainerStyleSelector="{TemplateBinding MenuItemContainerStyleSelector}" ItemContainerStyle="{TemplateBinding MenuItemContainerStyle}" ItemTemplate="{TemplateBinding MenuItemTemplate}" IsItemClickEnabled="True" ItemTemplateSelector="{TemplateBinding MenuItemTemplateSelector}" Margin="0,0,0,20" Grid.Row="6" SelectionMode="Single" SelectedItem="{TemplateBinding SelectedItem}" SingleSelectionFollowsFocus="{Binding TemplateSettings.SingleSelectionFollowsFocus, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                            <ContentControl x:Name="FooterContentBorder" HorizontalContentAlignment="Stretch" IsTabStop="False" Grid.Row="7" VerticalContentAlignment="Stretch"/>
-                                            <NavigationViewItem x:Name="SettingsNavPaneItem" Icon="Setting" Grid.Row="8"/>
+                                            <ContentControl x:Name="PaneCustomContentBorder"
+                                                            Grid.Row="4"
+                                                            HorizontalContentAlignment="Stretch"
+                                                            IsTabStop="False"
+                                                            VerticalContentAlignment="Stretch"/>
+                                            <NavigationViewList x:Name="MenuItemsHost"
+                                                                Grid.Row="6"
+                                                                HorizontalAlignment="Stretch"
+                                                                ItemContainerStyleSelector="{TemplateBinding MenuItemContainerStyleSelector}"
+                                                                ItemContainerStyle="{TemplateBinding MenuItemContainerStyle}"
+                                                                ItemTemplate="{TemplateBinding MenuItemTemplate}"
+                                                                IsItemClickEnabled="True"
+                                                                ItemTemplateSelector="{TemplateBinding MenuItemTemplateSelector}"
+                                                                Margin="0,0,0,20"
+                                                                SelectionMode="Single"
+                                                                SelectedItem="{TemplateBinding SelectedItem}"
+                                                                SingleSelectionFollowsFocus="{Binding TemplateSettings.SingleSelectionFollowsFocus, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                            <ContentControl x:Name="FooterContentBorder"
+                                                            Grid.Row="7"
+                                                            HorizontalContentAlignment="Stretch"
+                                                            IsTabStop="False"
+                                                            VerticalContentAlignment="Stretch"/>
+                                            <NavigationViewItem x:Name="SettingsNavPaneItem" Grid.Row="8" Icon="Setting"/>
                                         </Grid>
                                     </SplitView.Pane>
                                     <Grid x:Name="ContentGrid">

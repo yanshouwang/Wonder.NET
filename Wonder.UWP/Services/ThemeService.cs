@@ -29,7 +29,7 @@ namespace Wonder.UWP.Services
                       ? ElementTheme.Dark
                       : ElementTheme.Default;
             element.RequestedTheme = theme;
-            SetTitleBarTheme(theme);
+            UpdateTitleBar(theme);
             if (theme == ElementTheme.Default)
             {
                 UISettings.ColorValuesChanged += OnColorValuesChanged;
@@ -40,7 +40,7 @@ namespace Wonder.UWP.Services
             }
         }
 
-        private void SetTitleBarTheme(ElementTheme theme)
+        private void UpdateTitleBar(ElementTheme theme)
         {
             var titleBar = Container.Resolve<ApplicationViewTitleBar>();
             if (theme == ElementTheme.Default)
@@ -75,7 +75,7 @@ namespace Wonder.UWP.Services
 
         private void OnColorValuesChanged(UISettings sender, object args)
         {
-            SetTitleBarTheme(ElementTheme.Default);
+            UpdateTitleBar(ElementTheme.Default);
         }
     }
 }
