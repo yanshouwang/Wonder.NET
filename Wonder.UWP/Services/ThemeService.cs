@@ -1,13 +1,11 @@
 ﻿using Microsoft.Practices.Unity;
-using System;
 using System.Linq;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
+using Wonder.UWP.Extension;
 using Wonder.UWP.Xaml;
 using MTUH = Microsoft.Toolkit.Uwp.Helpers;
-using MUXM = Microsoft.UI.Xaml.Media;
 
 namespace Wonder.UWP.Services
 {
@@ -81,27 +79,40 @@ namespace Wonder.UWP.Services
             UpdateTitleBar(ElementTheme.Default);
         }
 
-        public void SetThemeColor(Color color)
+        public void SetThemeColor(Color themeColor)
         {
-            //var brush1 = Application.Current.Resources["SystemControlHighlightAccentRevealBorderBrush"] as MUXM.RevealBorderBrush;
-            //brush1.Color = brush1.FallbackColor = color;
-            //(Application.Current.Resources["SystemControlHighlightAccentBrush"] as SolidColorBrush).Color = color;
-            //var value = new ResourceDictionary();
-            //value.Source = new Uri("ms-appx:///Xaml/Forest.xaml");
-            //Application.Current.Resources["SystemAccentColor"] = color;
-            var light = FindColorPaletteResourcesForTheme("Light");
-            var dark = FindColorPaletteResourcesForTheme("Default");
-            light.Accent = color;
-            dark.Accent = color;
-            ReloadThemeResources();
+            //var resources0 = FindColorPaletteResourcesForTheme("Default");
+            //var resources1 = FindColorPaletteResourcesForTheme("Light");
+            //resources0.Accent = resources1.Accent = themeColor;
+
+            Application.Current.Resources["SystemAccentColor"] = themeColor;
+            var themeScale = themeColor.GetPaletteScale();
+            var light1 = themeScale.GetPaletteColor(4, 11);
+            var light2 = themeScale.GetPaletteColor(3, 11);
+            var light3 = themeScale.GetPaletteColor(2, 11);
+            var dark1 = themeScale.GetPaletteColor(6, 11);
+            var dark2 = themeScale.GetPaletteColor(7, 11);
+            var dark3 = themeScale.GetPaletteColor(8, 11);
+            Application.Current.Resources["SystemAccentColorLight1"] = light1;
+            Application.Current.Resources["SystemAccentColorLight2"] = light2;
+            Application.Current.Resources["SystemAccentColorLight3"] = light3;
+            Application.Current.Resources["SystemAccentColorDark1"] = dark1;
+            Application.Current.Resources["SystemAccentColorDark2"] = dark2;
+            Application.Current.Resources["SystemAccentColorDark3"] = dark3;
+            ReloadThemeColor(themeColor);
         }
 
-        private void ReloadThemeResources()
+        private void ReloadThemeColor(Color themeColor)
         {
+            // 需要设置 LIGHT1 - DARK3 主题颜色，且深色和浅色主题模式均需要设置
             if (!(Window.Current.Content is FrameworkElement element))
                 return;
             var current = element.RequestedTheme;
             var theme = current == ElementTheme.Light
+                      ? ElementTheme.Dark
+                      : current == ElementTheme.Dark
+                      ? ElementTheme.Light
+                      : UISettings.GetColorValue(UIColorType.Background) == Colors.White
                       ? ElementTheme.Dark
                       : ElementTheme.Light;
             element.RequestedTheme = theme;
@@ -110,7 +121,8 @@ namespace Wonder.UWP.Services
 
         private ColorPaletteResources FindColorPaletteResourcesForTheme(string theme)
         {
-            foreach (var themeDictionary in Application.Current.Resources.ThemeDictionaries)
+            var dictionary = Application.Current.Resources.MergedDictionaries.Single(i => i.Source.AbsoluteUri == "ms-resource:///Files/Xaml/ThemeColors.xaml");
+            foreach (var themeDictionary in dictionary.ThemeDictionaries)
             {
                 if (themeDictionary.Key.ToString() == theme)
                 {

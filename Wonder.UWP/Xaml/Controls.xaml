@@ -21,27 +21,33 @@
     <!--#endregion-->
     <!--#region ACRYLIC_BRUSH -->
     <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
-                          BackgroundSource="HostBackdrop"
-                          TintColor="{ThemeResource SystemChromeMediumColor}"
-                          TintOpacity="0.6"
-                          FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
+                  BackgroundSource="HostBackdrop"
+                  TintColor="{ThemeResource SystemChromeMediumColor}"
+                  TintOpacity="0.6"
+                  FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
     <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
-                          BackgroundSource="HostBackdrop"
-                          TintColor="{ThemeResource SystemChromeMediumColor}"
-                          TintOpacity="0.6"
-                          FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
+                  BackgroundSource="HostBackdrop"
+                  TintColor="{ThemeResource SystemChromeMediumColor}"
+                  TintOpacity="0.6"
+                  FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
     <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
-                          BackgroundSource="HostBackdrop"
-                          TintColor="{ThemeResource SystemChromeMediumColor}"
-                          TintOpacity="0.6"
-                          FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
+                  BackgroundSource="HostBackdrop"
+                  TintColor="{ThemeResource SystemChromeMediumColor}"
+                  TintOpacity="0.6"
+                  FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
     <AcrylicBrush x:Key="TabViewBackground"
                   BackgroundSource="HostBackdrop"
                   TintColor="{ThemeResource SystemChromeMediumColor}"
                   TintOpacity="0.6"
                   FallbackColor="{ThemeResource SystemChromeMediumColor}"/>
+    <StaticResource x:Key="ABC" ResourceKey="SystemControlChromeMediumAcrylicElementMediumBrush"/>
+    <StaticResource x:Key="DEF" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
     <!--#endregion-->
-    <!--#region REVEAL_BORDER_BRUSH-->
+    <!--#region STATIC_RESOURCE-->
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" Color="{ThemeResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedFillPressed" Color="{ThemeResource SystemAccentColorDark1}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" Color="{ThemeResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed" Color="{ThemeResource SystemAccentColorDark1}" />
     <StaticResource x:Key="ListViewItemRevealBorderBrushPointerOver" ResourceKey="SystemControlHighlightAccentRevealBorderBrush" />
     <StaticResource x:Key="ListViewItemRevealBorderBrushPressed" ResourceKey="SystemControlHighlightAccentRevealBorderBrush" />
     <!--#endregion-->
@@ -176,9 +182,9 @@
     <!--#region HEADERED_ITEMS_CONTROL -->
     <Style TargetType="mutc:HeaderedItemsControl">
         <Setter Property="Padding" Value="0,12,0,0"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="mutc:HeaderedItemsControl">
@@ -199,6 +205,7 @@
         <Setter Property="Padding" Value="0,12,0,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="mutc:HeaderedContentControl">

@@ -132,6 +132,12 @@
     <Compile Include="Helpers\Win32Helper.cs" />
     <Compile Include="IO\Serial.cs" />
     <Compile Include="Services\ThemeService.cs" />
+    <Compile Include="Util\ColorBlending.cs" />
+    <Compile Include="Util\ColorScale.cs" />
+    <Compile Include="Util\ColorTypes.cs" />
+    <Compile Include="Util\ColorUtils.cs" />
+    <Compile Include="Extension\ColorExtensions.cs" />
+    <Compile Include="Util\MathUtils.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\SerialDeviceViewModel.cs" />
     <Compile Include="ViewModels\SerialViewModel.cs" />
@@ -222,7 +228,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Xaml\Forest.xaml">
+    <Page Include="Xaml\ThemeColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
