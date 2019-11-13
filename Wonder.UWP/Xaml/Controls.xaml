@@ -49,7 +49,7 @@
     <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" Color="{ThemeResource SystemAccentColorLight1}" />
     <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePressed" Color="{ThemeResource SystemAccentColorDark1}" />
     <StaticResource x:Key="ListViewItemRevealBorderBrushPointerOver" ResourceKey="SystemControlHighlightAccentRevealBorderBrush" />
-    <StaticResource x:Key="ListViewItemRevealBorderBrushPressed" ResourceKey="SystemControlHighlightAccentRevealBorderBrush" />
+    <RevealBorderBrush x:Key="ListViewItemRevealBorderBrushPressed" TargetTheme="Light" Color="{ThemeResource SystemAccentColorDark3}" FallbackColor="{ThemeResource SystemAccentColor}" />
     <!--#endregion-->
     <!--#region BUTTON -->
     <Style x:Key="ButtonRevealStyle" TargetType="Button">
