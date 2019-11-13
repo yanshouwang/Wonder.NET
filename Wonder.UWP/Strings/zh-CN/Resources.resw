@@ -189,6 +189,10 @@
     <value>跟随系统</value>
     <comment>单选按钮：跟随系统</comment>
   </data>
+  <data name="ThemeColorTBK.Text" xml:space="preserve">
+    <value>主题颜色</value>
+    <comment>文本：主题颜色</comment>
+  </data>
   <data name="ThemeModeTBK.Text" xml:space="preserve">
     <value>主题模式</value>
     <comment>文本：主题模式</comment>

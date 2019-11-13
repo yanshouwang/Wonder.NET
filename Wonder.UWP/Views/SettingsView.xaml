@@ -9,7 +9,8 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:xaml="using:Wonder.UWP.Xaml"
-    xmlns:wam="using:Windows.ApplicationModel"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Wonder.UWP.Converters"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
@@ -21,13 +22,16 @@
         <converters:EnumToBoolConverter x:Key="IsLightConverter" Target="{StaticResource Light}"/>
         <converters:EnumToBoolConverter x:Key="IsDarkConverter" Target="{StaticResource Dark}"/>
         <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource System}"/>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        <converters:SelectionChangedEventArgsToSelectedItemConverter x:Key="SelectionChangedEventArgsToSelectedItemConverter"/>
     </Page.Resources>
     <StackPanel Orientation="Vertical" Margin="12" Spacing="32"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
         <mutc:HeaderedItemsControl>
             <mutc:HeaderedItemsControl.Header>
-                <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"/>
+                <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"
+                           Style="{StaticResource SubheaderTextBlockStyle}"/>
             </mutc:HeaderedItemsControl.Header>
             <mutc:HeaderedItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -36,20 +40,69 @@
             </mutc:HeaderedItemsControl.ItemsPanel>
             <RadioButton x:Uid="LightRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource Light}"/>
             <RadioButton x:Uid="DarkRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource Dark}"/>
             <RadioButton x:Uid="SystemRBN" GroupName="Theme"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeCommand}"
+                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource System}"/>
         </mutc:HeaderedItemsControl>
+        <mutc:HeaderedContentControl>
+            <mutc:HeaderedContentControl.Header>
+                <Grid>
+                    <TextBlock x:Uid="ThemeColorTBK" FontSize="20" TextAlignment="Center"
+                               Style="{StaticResource SubheaderTextBlockStyle}"/>
+                </Grid>
+            </mutc:HeaderedContentControl.Header>
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" Width="40" Height="40" Fill="{ThemeResource SystemAccentColor}"/>
+                <ListView x:Name="ColorsLVW" Grid.Column="2" Style="{StaticResource HorizontalListViewStyle}"
+                          Width="200">
+                    <i:Interaction.Behaviors>
+                        <ic:EventTriggerBehavior EventName="SelectionChanged">
+                            <ic:InvokeCommandAction Command="{x:Bind ViewModel.SetThemeColorCommand}"
+                                                    InputConverter="{StaticResource SelectionChangedEventArgsToSelectedItemConverter}"/>
+                        </ic:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="Color">
+                            <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <Color>#ABCDEF</Color>
+                    <Color>#BCDEFA</Color>
+                    <Color>#CDEFAB</Color>
+                    <Color>#DEFABC</Color>
+                    <Color>#EFABCD</Color>
+                    <Color>#FABCDE</Color>
+                    <Color>#ABCDEF</Color>
+                    <Color>#BCDEFA</Color>
+                    <Color>#CDEFAB</Color>
+                    <Color>#DEFABC</Color>
+                    <Color>#EFABCD</Color>
+                    <Color>#FABCDE</Color>
+                    <Color>#ABCDEF</Color>
+                    <Color>#BCDEFA</Color>
+                    <Color>#CDEFAB</Color>
+                    <Color>#DEFABC</Color>
+                    <Color>#EFABCD</Color>
+                    <Color>#FABCDE</Color>
+                </ListView>
+            </Grid>
+        </mutc:HeaderedContentControl>
         <mutc:HeaderedItemsControl>
             <mutc:HeaderedItemsControl.Header>
-                <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"/>
+                <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"
+                           Style="{StaticResource SubheaderTextBlockStyle}"/>
             </mutc:HeaderedItemsControl.Header>
             <mutc:HeaderedItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

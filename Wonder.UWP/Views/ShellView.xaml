@@ -415,6 +415,10 @@
             <muxc:TabViewItem IconSource="{StaticResource Home}"
                               Header="设置"
                               Content="{x:Bind NavFrame}"/>
+            <muxc:TabViewItem IconSource="{StaticResource Home}"
+                              Header="设置"/>
+            <muxc:TabViewItem IconSource="{StaticResource Home}"
+                              Header="设置"/>
         </muxc:TabView.TabItems>
     </muxc:TabView>
 </Page>

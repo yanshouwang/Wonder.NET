@@ -4,13 +4,114 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="using:Prism.Unity.Windows"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:local="using:Wonder.UWP">
+    xmlns:local="using:Wonder.UWP"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:BelowWindows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 7)">
     <mvvm:PrismUnityApplication.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
                 <ResourceDictionary Source="/Xaml/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <ResourceDictionary.MergedDictionaries>
+                        <Windows10version1809:ColorPaletteResources Accent="#FF34854D" AltHigh="#FF000000" AltLow="#FF000000" AltMedium="#FF000000" AltMediumHigh="#FF000000" AltMediumLow="#FF000000" BaseHigh="#FFFFFFFF" BaseLow="#FF784834" BaseMedium="#FFC5A294" BaseMediumHigh="#FFD8B8AC" BaseMediumLow="#FF9E7564" ChromeAltLow="#FFD8B8AC" ChromeBlackHigh="#FF000000" ChromeBlackLow="#FFD8B8AC" ChromeBlackMedium="#FF000000" ChromeBlackMediumLow="#FF000000" ChromeDisabledHigh="#FF784834" ChromeDisabledLow="#FFC5A294" ChromeGray="#FFB28B7C" ChromeHigh="#FFB28B7C" ChromeLow="#FF46150A" ChromeMedium="#FF532215" ChromeMediumLow="#FF6C3B2A" ChromeWhite="#FFFFFFFF" ListLow="#FF532215" ListMedium="#FF784834" />
+                        <ResourceDictionary>
+                            <BelowWindows10version1809:Color x:Key="SystemAccentColor">#FF34854D</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltHighColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltLowColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumHighColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumLowColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseHighColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseLowColor">#FF784834</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumColor">#FFC5A294</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumHighColor">#FFD8B8AC</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumLowColor">#FF9E7564</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeAltLowColor">#FFD8B8AC</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackHighColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackLowColor">#FFD8B8AC</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackMediumColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackMediumLowColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeDisabledHighColor">#FF784834</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeDisabledLowColor">#FFC5A294</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeGrayColor">#FFB28B7C</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeHighColor">#FFB28B7C</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeLowColor">#FF46150A</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeMediumColor">#FF532215</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeMediumLowColor">#FF6C3B2A</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeWhiteColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemListLowColor">#FF532215</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemListMediumColor">#FF784834</BelowWindows10version1809:Color>
+                            <Color x:Key="SystemChromeAltMediumHighColor">#CC353819</Color>
+                            <Color x:Key="SystemChromeAltHighColor">#FF353819</Color>
+                            <Color x:Key="SystemRevealListLowColor">#FF532215</Color>
+                            <Color x:Key="SystemRevealListMediumColor">#FF784834</Color>
+                            <!-- Override system generated accent colors -->
+                            <Color x:Key="SystemAccentColorDark1">#FF4C9562</Color>
+                            <Color x:Key="SystemAccentColorDark2">#FF63A578</Color>
+                            <Color x:Key="SystemAccentColorDark3">#FF7BB58D</Color>
+                            <Color x:Key="SystemAccentColorLight1">#FF2A743E</Color>
+                            <Color x:Key="SystemAccentColorLight2">#FF1F642F</Color>
+                            <Color x:Key="SystemAccentColorLight3">#FF155321</Color>
+                            <Color x:Key="RegionColor">#FF353819</Color>
+                            <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
+                        </ResourceDictionary>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <ResourceDictionary.MergedDictionaries>
+                        <Windows10version1809:ColorPaletteResources Accent="#FF34854D" AltHigh="#FFFFFFFF" AltLow="#FFFFFFFF" AltMedium="#FFFFFFFF" AltMediumHigh="#FFFFFFFF" AltMediumLow="#FFFFFFFF" BaseHigh="#FF000000" BaseLow="#FFC2DB65" BaseMedium="#FF7D9728" BaseMediumHigh="#FF4F6A00" BaseMediumLow="#FF668114" ChromeAltLow="#FF4F6A00" ChromeBlackHigh="#FF000000" ChromeBlackLow="#FFC2DB65" ChromeBlackMedium="#FF4F6A00" ChromeBlackMediumLow="#FF7D9728" ChromeDisabledHigh="#FFC2DB65" ChromeDisabledLow="#FF7D9728" ChromeGray="#FF668114" ChromeHigh="#FFC2DB65" ChromeLow="#FFE6F3BB" ChromeMedium="#FFDFEEAA" ChromeMediumLow="#FFE6F3BB" ChromeWhite="#FFFFFFFF" ListLow="#FFDFEEAA" ListMedium="#FFC2DB65" />
+                        <ResourceDictionary>
+                            <BelowWindows10version1809:Color x:Key="SystemAccentColor">#FF34854D</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltHighColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltLowColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumHighColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemAltMediumLowColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseHighColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseLowColor">#FFC2DB65</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumColor">#FF7D9728</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumHighColor">#FF4F6A00</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemBaseMediumLowColor">#FF668114</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeAltLowColor">#FF4F6A00</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackHighColor">#FF000000</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackLowColor">#FFC2DB65</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackMediumColor">#FF4F6A00</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeBlackMediumLowColor">#FF7D9728</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeDisabledHighColor">#FFC2DB65</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeDisabledLowColor">#FF7D9728</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeGrayColor">#FF668114</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeHighColor">#FFC2DB65</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeLowColor">#FFE6F3BB</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeMediumColor">#FFDFEEAA</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeMediumLowColor">#FFE6F3BB</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemChromeWhiteColor">#FFFFFFFF</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemListLowColor">#FFDFEEAA</BelowWindows10version1809:Color>
+                            <BelowWindows10version1809:Color x:Key="SystemListMediumColor">#FFC2DB65</BelowWindows10version1809:Color>
+                            <Color x:Key="SystemChromeAltMediumHighColor">#CCF7FFFF</Color>
+                            <Color x:Key="SystemChromeAltHighColor">#FFF7FFFF</Color>
+                            <Color x:Key="SystemRevealListLowColor">#FFDFEEAA</Color>
+                            <Color x:Key="SystemRevealListMediumColor">#FFC2DB65</Color>
+                            <!-- Override system generated accent colors -->
+                            <Color x:Key="SystemAccentColorLight1">#FF4C9562</Color>
+                            <Color x:Key="SystemAccentColorLight2">#FF63A578</Color>
+                            <Color x:Key="SystemAccentColorLight3">#FF7BB58D</Color>
+                            <Color x:Key="SystemAccentColorDark1">#FF2A743E</Color>
+                            <Color x:Key="SystemAccentColorDark2">#FF1F642F</Color>
+                            <Color x:Key="SystemAccentColorDark3">#FF155321</Color>
+                            <RevealBackgroundBrush x:Key="SystemControlHighlightListLowRevealBackgroundBrush" TargetTheme="Light" Color="{ThemeResource SystemRevealListMediumColor}" FallbackColor="{ StaticResource SystemListMediumColor}" />
+                            <Color x:Key="RegionColor">#FFF7FFFF</Color>
+                            <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
+                        </ResourceDictionary>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <StaticResource x:Key="RegionColor" ResourceKey="SystemColorWindowColor" />
+                    <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </mvvm:PrismUnityApplication.Resources>
 </mvvm:PrismUnityApplication>

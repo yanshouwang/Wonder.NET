@@ -5,6 +5,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
+using Windows.UI;
 using Wonder.UWP.Constants;
 using Wonder.UWP.Services;
 using Wonder.UWP.Xaml;
@@ -61,16 +62,26 @@ namespace Wonder.UWP.ViewModels
             return displayName;
         }
 
-        private DelegateCommand<object> _setThemeCommand;
-        public DelegateCommand<object> SetThemeCommand =>
-            _setThemeCommand ?? (_setThemeCommand = new DelegateCommand<object>(ExecuteSetThemeCommand));
+        private DelegateCommand<object> _setThemeModeCommand;
+        public DelegateCommand<object> SetThemeModeCommand =>
+            _setThemeModeCommand ?? (_setThemeModeCommand = new DelegateCommand<object>(ExecuteSetThemeModeCommand));
 
-        void ExecuteSetThemeCommand(object obj)
+        void ExecuteSetThemeModeCommand(object obj)
         {
             var mode = (ThemeMode)obj;
             ThemeService.SetThemeMode(mode);
             ThemeMode = mode;
             ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME] = (int)mode;
+        }
+
+        private DelegateCommand<object> _setThemeColorCommand;
+        public DelegateCommand<object> SetThemeColorCommand =>
+            _setThemeColorCommand ?? (_setThemeColorCommand = new DelegateCommand<object>(ExecuteSetThemeColorCommand));
+
+        void ExecuteSetThemeColorCommand(object obj)
+        {
+            var color = (Color)obj;
+            ThemeService.SetThemeColor(color);
         }
     }
 }
