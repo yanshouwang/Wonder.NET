@@ -38,6 +38,11 @@ namespace Wonder.UWP.Views
             NavFrame.NavigationFailed += OnNavFrameNaviagtionFailed;
             NavFrame.NavigationStopped += OnNavFrameNavigationStopped;
 
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
             ExtendTitleBar();
         }
 
@@ -55,13 +60,13 @@ namespace Wonder.UWP.Views
         {
             if (FlowDirection == FlowDirection.LeftToRight)
             {
-                TabStripHeader.Margin = new Thickness(sender.SystemOverlayLeftInset, 0, 0, 0);
-                TabStripFooter.Margin = new Thickness(0, 0, sender.SystemOverlayRightInset, 0);
+                HeaderSpace.MinWidth = sender.SystemOverlayLeftInset;
+                FooterSpace.MinWidth = sender.SystemOverlayRightInset;
             }
             else
             {
-                TabStripHeader.Margin = new Thickness(sender.SystemOverlayRightInset, 0, 0, 0);
-                TabStripFooter.Margin = new Thickness(0, 0, sender.SystemOverlayLeftInset, 0);
+                HeaderSpace.MinWidth = sender.SystemOverlayRightInset;
+                FooterSpace.MinWidth = sender.SystemOverlayLeftInset;
             }
             TabStripHeader.Height = TabStripFooter.Height = sender.Height;
         }

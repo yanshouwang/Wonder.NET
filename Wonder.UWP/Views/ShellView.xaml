@@ -7,14 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:primitiveContract7Present="using:Microsoft.UI.Xaml.Controls.Primitives?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
+    xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:helpers="using:Wonder.UWP.Helpers"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    xmlns:primitiveContract7Present="using:Microsoft.UI.Xaml.Controls.Primitives?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
-    xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <muxc:SymbolIconSource x:Key="Home" Symbol="Home"/>
         <Style x:Name="TabViewButtonStyle" TargetType="Button">
@@ -397,8 +397,12 @@
     <muxc:TabView Style="{StaticResource TabViewStyle}">
         <muxc:TabView.TabStripHeader>
             <Grid x:Name="TabStripHeader">
-                <Button Style="{StaticResource TabViewButtonStyle}"
-                        Content="&#xEC52;" Width="40"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="HeaderSpace" Width="0"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Style="{StaticResource TabViewButtonStyle}"
+                        Content="&#xEC52;" Visibility="Collapsed"/>
             </Grid>
         </muxc:TabView.TabStripHeader>
         <muxc:TabView.TabStripFooter>
@@ -406,6 +410,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition x:Name="FooterSpace" Width="0"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" x:Name="TitleBar" Background="Transparent"/>
                 <Button Grid.Column="1" Style="{StaticResource TabViewButtonStyle}" Content="&#xE713;"/>
