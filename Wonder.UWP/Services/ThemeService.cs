@@ -81,30 +81,25 @@ namespace Wonder.UWP.Services
 
         public void SetThemeColor(Color themeColor)
         {
-            //var resources0 = FindColorPaletteResourcesForTheme("Default");
-            //var resources1 = FindColorPaletteResourcesForTheme("Light");
-            //resources0.Accent = resources1.Accent = themeColor;
-
+            var themeScale = themeColor.GetColorScale();
+            var light1 = themeScale.GetColor(0.4);
+            var light2 = themeScale.GetColor(0.3);
+            var light3 = themeScale.GetColor(0.2);
+            var dark1 = themeScale.GetColor(0.6);
+            var dark2 = themeScale.GetColor(0.7);
+            var dark3 = themeScale.GetColor(0.8);
             Application.Current.Resources["SystemAccentColor"] = themeColor;
-            var themeScale = themeColor.GetPaletteScale();
-            var light1 = themeScale.GetPaletteColor(4, 11);
-            var light2 = themeScale.GetPaletteColor(3, 11);
-            var light3 = themeScale.GetPaletteColor(2, 11);
-            var dark1 = themeScale.GetPaletteColor(6, 11);
-            var dark2 = themeScale.GetPaletteColor(7, 11);
-            var dark3 = themeScale.GetPaletteColor(8, 11);
             Application.Current.Resources["SystemAccentColorLight1"] = light1;
             Application.Current.Resources["SystemAccentColorLight2"] = light2;
             Application.Current.Resources["SystemAccentColorLight3"] = light3;
             Application.Current.Resources["SystemAccentColorDark1"] = dark1;
             Application.Current.Resources["SystemAccentColorDark2"] = dark2;
             Application.Current.Resources["SystemAccentColorDark3"] = dark3;
-            ReloadThemeColor(themeColor);
+            ReloadTheme();
         }
 
-        private void ReloadThemeColor(Color themeColor)
+        private void ReloadTheme()
         {
-            // 需要设置 LIGHT1 - DARK3 主题颜色，且深色和浅色主题模式均需要设置
             if (!(Window.Current.Content is FrameworkElement element))
                 return;
             var current = element.RequestedTheme;
@@ -117,32 +112,6 @@ namespace Wonder.UWP.Services
                       : ElementTheme.Light;
             element.RequestedTheme = theme;
             element.RequestedTheme = current;
-        }
-
-        private ColorPaletteResources FindColorPaletteResourcesForTheme(string theme)
-        {
-            var dictionary = Application.Current.Resources.MergedDictionaries.Single(i => i.Source.AbsoluteUri == "ms-resource:///Files/Xaml/ThemeColors.xaml");
-            foreach (var themeDictionary in dictionary.ThemeDictionaries)
-            {
-                if (themeDictionary.Key.ToString() == theme)
-                {
-                    if (themeDictionary.Value is ColorPaletteResources)
-                    {
-                        return themeDictionary.Value as ColorPaletteResources;
-                    }
-                    else if (themeDictionary.Value is ResourceDictionary targetDictionary)
-                    {
-                        foreach (var mergedDictionary in targetDictionary.MergedDictionaries)
-                        {
-                            if (mergedDictionary is ColorPaletteResources)
-                            {
-                                return mergedDictionary as ColorPaletteResources;
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
         }
     }
 }

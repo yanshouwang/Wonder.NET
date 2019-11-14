@@ -10,14 +10,13 @@ namespace Wonder.UWP.Extension
 {
     public static class ColorExtensions
     {
-        public static Color GetPaletteColor(this ColorScale scale, int i, int steps)
+        public static Color GetColor(this ColorScale scale, double position)
         {
-            var interpolationMode = ColorScaleInterpolationMode.RGB;
-            var color = scale.GetColor(i / (double)(steps - 1), interpolationMode);
+            var color = scale.GetColor(position, ColorScaleInterpolationMode.RGB);
             return color;
         }
 
-        public static ColorScale GetPaletteScale(this Color baseColorRGB)
+        public static ColorScale GetColorScale(this Color baseColorRGB)
         {
             var baseColorHSL = ColorUtils.RGBToHSL(baseColorRGB);
             var baseColorNormalized = new NormalizedRGB(baseColorRGB);

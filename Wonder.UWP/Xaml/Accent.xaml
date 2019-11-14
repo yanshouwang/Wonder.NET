@@ -1,0 +1,46 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wonder.UWP.Xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{ThemeResource SystemAccentColorLight1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{ThemeResource SystemAccentColorLight2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="SystemAccentColorDark3Brush"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{ThemeResource SystemAccentColorLight1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{ThemeResource SystemAccentColorLight2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="SystemAccentColorDark3Brush"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="HighContrast">
+            <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{ThemeResource SystemAccentColorLight1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{ThemeResource SystemAccentColorLight2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
+            <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPressed" ResourceKey="SystemAccentColorDark3Brush"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>
