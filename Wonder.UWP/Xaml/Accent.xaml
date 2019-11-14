@@ -11,6 +11,7 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
@@ -24,6 +25,7 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
@@ -37,6 +39,7 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedFillPointerOver" ResourceKey="SystemAccentColorLight3Brush"/>

@@ -5,8 +5,8 @@
     xmlns:muxm="using:Microsoft.UI.Xaml.Media"
     xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Accent.xaml"/>
         <ResourceDictionary Source="Theme.xaml"/>
+        <ResourceDictionary Source="Accent.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <!--#region DOUBLE -->
     <x:Double x:Key="ListViewItemMinWidth">0</x:Double>
