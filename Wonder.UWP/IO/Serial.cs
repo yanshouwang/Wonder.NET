@@ -1,6 +1,6 @@
 ﻿using System;
 using Wonder.UWP.Constants;
-using Wonder.UWP.Helpers;
+using Wonder.UWP.Util;
 
 namespace Wonder.UWP.IO
 {
@@ -18,7 +18,7 @@ namespace Wonder.UWP.IO
             int error;
             try
             {
-                error = Win32Helper.GetCommPorts(portNumbers, out portNumbersFound);
+                error = Win32Utils.GetCommPorts(portNumbers, out portNumbersFound);
             }
             catch (Exception ex) when (ex is EntryPointNotFoundException || ex is DllNotFoundException)
             {
@@ -27,7 +27,7 @@ namespace Wonder.UWP.IO
             while (error == Win32Errors.ERROR_MORE_DATA)
             {
                 portNumbers = new uint[portNumbersFound];
-                error = Win32Helper.GetCommPorts(portNumbers, out portNumbersFound);
+                error = Win32Utils.GetCommPorts(portNumbers, out portNumbersFound);
             }
             if (error != Win32Errors.ERROR_SUCCESS)
             {

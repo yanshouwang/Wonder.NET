@@ -2,9 +2,9 @@
 using System;
 using Wonder.UWP.Constants;
 
-namespace Wonder.UWP.Helpers
+namespace Wonder.UWP.Util
 {
-    internal static class Win32Helper
+    internal static class Win32Utils
     {
         [DllImport(Win32Libraries.CoreComm_L1_1_2, SetLastError = true)]
         private static unsafe extern int GetCommPorts(

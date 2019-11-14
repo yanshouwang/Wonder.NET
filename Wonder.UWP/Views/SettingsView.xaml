@@ -97,7 +97,6 @@
                                         <ResourceDictionary x:Key="HighContrast">
                                             <StaticResource x:Key="ListViewItemRevealBorderBrushPointerOver" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
                                             <StaticResource x:Key="ListViewItemRevealBorderBrushPressed" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
-                                            <StaticResource x:Key="ListViewItemBorderBrushPressed" ResourceKey="SystemAccentColorDark3Brush"/>
                                         </ResourceDictionary>
                                     </ResourceDictionary.ThemeDictionaries>
                                 </ResourceDictionary>
@@ -107,7 +106,7 @@
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="Selected">
                                         <VisualState.Setters>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemBorderBrushPressed}"/>
+                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="PointerOver">

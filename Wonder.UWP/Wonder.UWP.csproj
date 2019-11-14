@@ -129,7 +129,7 @@
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\SelectionChangedEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
-    <Compile Include="Helpers\Win32Helper.cs" />
+    <Compile Include="Util\Win32Utils.cs" />
     <Compile Include="IO\Serial.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="Util\ColorBlending.cs" />
@@ -280,9 +280,7 @@
   <ItemGroup>
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Behaviors\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
