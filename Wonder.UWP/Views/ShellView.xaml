@@ -130,7 +130,7 @@
             </Setter>
         </Style>
         <Style x:Key="TabViewListViewStyle" TargetType="primitives:TabViewListView">
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="{ThemeResource TabViewHeaderPadding}"/>
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="TabNavigation" Value="Once"/>
@@ -165,9 +165,28 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="primitives:TabViewListView">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
-                            <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" Grid.Column="1" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" Style="{StaticResource TabScrollViewerStyle}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
-                                <ItemsPresenter x:Name="TabsItemsPresenter" Padding="{TemplateBinding Padding}"/>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ScrollViewer x:Name="ScrollViewer"
+                                          AutomationProperties.AccessibilityView="Raw"
+                                          BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                          Grid.Column="1"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                          Style="{StaticResource TabScrollViewerStyle}"
+                                          TabNavigation="{TemplateBinding TabNavigation}"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter x:Name="TabsItemsPresenter"
+                                                Padding="{TemplateBinding Padding}"/>
                             </ScrollViewer>
                         </Border>
                     </ControlTemplate>
@@ -180,7 +199,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="muxc:TabViewItem">
-                        <Grid x:Name="LayoutRoot" Margin="-1,0,0,0" Padding="{TemplateBinding Padding}">
+                        <Grid x:Name="LayoutRoot"
+                              Margin="-1,0,0,0"
+                              Padding="{TemplateBinding Padding}">
                             <Grid.RenderTransform>
                                 <ScaleTransform x:Name="LayoutRootScale"/>
                             </Grid.RenderTransform>
@@ -305,17 +326,45 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="TabSeparator" BorderThickness="1" BorderBrush="{ThemeResource TabViewItemSeparator}" HorizontalAlignment="Right" Margin="0,6,0,6" Width="1"/>
-                            <Grid x:Name="TabContainer" Background="{ThemeResource TabViewItemHeaderBackground}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{Binding Converter={StaticResource TopCornerRadiusFilterConverter}, Source={ThemeResource OverlayCornerRadius}}" Grid.Column="1" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" Control.IsTemplateFocusTarget="True" Padding="{ThemeResource TabViewItemHeaderPadding}">
+                            <Border x:Name="TabSeparator"
+                                    BorderThickness="1"
+                                    BorderBrush="{ThemeResource TabViewItemSeparator}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,6,0,6"
+                                    Width="1"/>
+                            <Grid x:Name="TabContainer"
+                                  Background="{ThemeResource TabViewItemHeaderBackground}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  CornerRadius="{Binding Converter={StaticResource TopCornerRadiusFilterConverter}, Source={ThemeResource OverlayCornerRadius}}"
+                                  Grid.Column="1"
+                                  FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                                  Control.IsTemplateFocusTarget="True"
+                                  Padding="{ThemeResource TabViewItemHeaderPadding}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Viewbox x:Name="IconBox" MaxHeight="{ThemeResource TabViewItemHeaderIconSize}" Margin="{ThemeResource TabViewItemHeaderIconMargin}" MaxWidth="{ThemeResource TabViewItemHeaderIconSize}">
-                                    <ContentControl x:Name="IconControl" Content="{Binding TabViewTemplateSettings.IconElement, RelativeSource={RelativeSource Mode=TemplatedParent}}" Foreground="{ThemeResource TabViewItemIconForeground}" IsTabStop="False"/>
+                                <Viewbox x:Name="IconBox"
+                                         MaxHeight="{ThemeResource TabViewItemHeaderIconSize}"
+                                         Margin="{ThemeResource TabViewItemHeaderIconMargin}"
+                                         MaxWidth="{ThemeResource TabViewItemHeaderIconSize}">
+                                    <ContentControl x:Name="IconControl"
+                                                    Content="{Binding TabViewTemplateSettings.IconElement, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    Foreground="{ThemeResource TabViewItemIconForeground}"
+                                                    IsTabStop="False"/>
                                 </Viewbox>
-                                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTransitions="{TemplateBinding ContentTransitions}" Grid.Column="1" FontWeight="{TemplateBinding FontWeight}" FontSize="{ThemeResource TabViewItemHeaderFontSize}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" OpticalMarginAlignment="TrimSideBearings" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                  Grid.Column="1"
+                                                  FontWeight="{TemplateBinding FontWeight}"
+                                                  FontSize="{ThemeResource TabViewItemHeaderFontSize}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  OpticalMarginAlignment="TrimSideBearings"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 <Button x:Name="CloseButton"
                                         Grid.Column="2"
                                         Style="{StaticResource ButtonRevealStyle}"
@@ -420,10 +469,6 @@
             <muxc:TabViewItem IconSource="{StaticResource Home}"
                               Header="设置"
                               Content="{x:Bind NavFrame}"/>
-            <muxc:TabViewItem IconSource="{StaticResource Home}"
-                              Header="设置"/>
-            <muxc:TabViewItem IconSource="{StaticResource Home}"
-                              Header="设置"/>
         </muxc:TabView.TabItems>
     </muxc:TabView>
 </Page>

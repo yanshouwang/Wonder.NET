@@ -1,6 +1,9 @@
-﻿using Prism.Commands;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Prism.Commands;
 using Prism.Windows.Navigation;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
@@ -72,6 +75,8 @@ namespace Wonder.UWP.ViewModels
             ThemeService.SetThemeMode(mode);
             ThemeMode = mode;
             ApplicationData.Current.LocalSettings.Values[SettingsKeys.THEME] = (int)mode;
+            var properties = new Dictionary<string, string> { ["ThemeMode"] = mode.ToString() };
+            Analytics.TrackEvent("Settings", properties);
         }
 
         private DelegateCommand<object> _setThemeColorCommand;
@@ -82,6 +87,8 @@ namespace Wonder.UWP.ViewModels
         {
             var color = (Color)obj;
             ThemeService.SetThemeColor(color);
+            var properties = new Dictionary<string, string> { ["ThemeColor"] = color.ToString() };
+            Analytics.TrackEvent("Settings", properties);
         }
     }
 }

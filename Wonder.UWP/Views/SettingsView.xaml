@@ -27,9 +27,9 @@
         <converters:SelectionChangedEventArgsToSelectedItemConverter x:Key="SelectionChangedEventArgsToSelectedItemConverter"/>
         <Style x:Name="HorizontalListViewRepeatButtonStyle" TargetType="RepeatButton"
                BasedOn="{StaticResource RepeatButtonRevealStyle}">
-            <Setter Property="Background" Value="{ThemeResource TabViewItemHeaderBackground}"/>
-            <Setter Property="Padding" Value="{ThemeResource TabViewItemScrollButtonPadding}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{ThemeResource SystemControlTransparentRevealBackgroundBrush}"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Delay" Value="50"/>
@@ -255,6 +255,12 @@
                 </Grid>
             </mutc:HeaderedContentControl.Header>
             <Grid HorizontalAlignment="Center">
+                <Grid.Resources>
+                    <StaticResource x:Key="RepeatButtonRevealBackgroundPointerOver"
+                                    ResourceKey="SystemControlTransparentRevealBackgroundBrush"/>
+                    <StaticResource x:Key="RepeatButtonRevealBackgroundPressed"
+                                    ResourceKey="SystemControlTransparentRevealBackgroundBrush"/>
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -274,24 +280,25 @@
                             <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <Color>#ABCDEF</Color>
-                    <Color>#BCDEFA</Color>
-                    <Color>#CDEFAB</Color>
-                    <Color>#DEFABC</Color>
-                    <Color>#EFABCD</Color>
-                    <Color>#FABCDE</Color>
-                    <Color>#ABCDEF</Color>
-                    <Color>#BCDEFA</Color>
-                    <Color>#CDEFAB</Color>
-                    <Color>#DEFABC</Color>
-                    <Color>#EFABCD</Color>
-                    <Color>#FABCDE</Color>
-                    <Color>#ABCDEF</Color>
-                    <Color>#BCDEFA</Color>
-                    <Color>#CDEFAB</Color>
-                    <Color>#DEFABC</Color>
-                    <Color>#EFABCD</Color>
-                    <Color>#FABCDE</Color>
+                    <Color>#F44336</Color>
+                    <Color>#E91E63</Color>
+                    <Color>#9C27B0</Color>
+                    <Color>#673AB7</Color>
+                    <Color>#3F51B5</Color>
+                    <Color>#2196F3</Color>
+                    <Color>#03A9F4</Color>
+                    <Color>#00BCD4</Color>
+                    <Color>#009688</Color>
+                    <Color>#4CAF50</Color>
+                    <Color>#8BC34A</Color>
+                    <Color>#CDDC39</Color>
+                    <Color>#FFEB3B</Color>
+                    <Color>#FFC107</Color>
+                    <Color>#FF9800</Color>
+                    <Color>#FF5722</Color>
+                    <Color>#795548</Color>
+                    <Color>#9E9E9E</Color>
+                    <Color>#607D8B</Color>
                 </ListView>
                 <RepeatButton Grid.Column="2" Content="&#xE76C;" Style="{StaticResource HorizontalListViewRepeatButtonStyle}"/>
             </Grid>
