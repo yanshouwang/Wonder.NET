@@ -13,6 +13,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Wonder.UWP.Converters"
+    xmlns:adv="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -25,301 +26,129 @@
         <converters:EnumToBoolConverter x:Key="IsSystemConverter" Target="{StaticResource System}"/>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <converters:SelectionChangedEventArgsToSelectedItemConverter x:Key="SelectionChangedEventArgsToSelectedItemConverter"/>
-        <Style x:Name="HorizontalListViewRepeatButtonStyle" TargetType="RepeatButton"
-               BasedOn="{StaticResource RepeatButtonRevealStyle}">
-            <Setter Property="Background" Value="{ThemeResource SystemControlTransparentRevealBackgroundBrush}"/>
-            <Setter Property="Padding" Value="4"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Delay" Value="50"/>
-            <Setter Property="Interval" Value="100"/>
-        </Style>
-        <Style x:Key="HorizontalListViewItemContainerStyle" TargetType="ListViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="Background" Value="{ThemeResource ListViewItemBackground}"/>
-            <Setter Property="Foreground" Value="{ThemeResource ListViewItemForeground}"/>
-            <Setter Property="TabNavigation" Value="Local"/>
-            <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
-            <Setter Property="AllowDrop" Value="False"/>
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-            <Setter Property="FocusVisualMargin" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter x:Name="Root"
-                                           CheckBrush="{ThemeResource ListViewItemCheckBrush}"
-                                           ContentMargin="{TemplateBinding Padding}"
-                                           CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
-                                           ContentTransitions="{TemplateBinding ContentTransitions}"
-                                           CheckMode="{ThemeResource ListViewItemCheckMode}"
-                                           DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
-                                           DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                                           DragBackground="{ThemeResource ListViewItemDragBackground}"
-                                           DragForeground="{ThemeResource ListViewItemDragForeground}"
-                                           FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
-                                           FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
-                                           FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
-                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                           Control.IsTemplateFocusTarget="True"
-                                           PressedBackground="{ThemeResource ListViewItemBackgroundPressed}"
-                                           PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}"
-                                           PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
-                                           PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}"
-                                           RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
-                                           ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                                           RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"
-                                           RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                                           SelectedForeground="{ThemeResource ListViewItemForegroundSelected}"
-                                           SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
-                                           SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}"
-                                           SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}"
-                                           SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}"
-                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <ListViewItemPresenter.Resources>
-                                <ResourceDictionary>
-                                    <ResourceDictionary.ThemeDictionaries>
-                                        <ResourceDictionary x:Key="Default">
-                                            <muxm:RevealBorderBrush x:Key="SystemControlHighlightAccentRevealBorderBrush"
-                                                                TargetTheme="Light"
-                                                                Color="{ThemeResource SystemAccentColorDark3}"
-                                                                FallbackColor="{ThemeResource SystemAccentColorDark3}"/>
-                                            <StaticResource x:Key="ListViewItemRevealBorderBrushPointerOver" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
-                                            <StaticResource x:Key="ListViewItemRevealBorderBrushPressed" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
-                                            <StaticResource x:Key="ListViewItemBorderBrushPressed" ResourceKey="SystemAccentColorDark3Brush"/>
-                                        </ResourceDictionary>
-                                        <ResourceDictionary x:Key="HighContrast">
-                                            <StaticResource x:Key="ListViewItemRevealBorderBrushPointerOver" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
-                                            <StaticResource x:Key="ListViewItemRevealBorderBrushPressed" ResourceKey="SystemControlHighlightAccentRevealBorderBrush"/>
-                                        </ResourceDictionary>
-                                    </ResourceDictionary.ThemeDictionaries>
-                                </ResourceDictionary>
-                            </ListViewItemPresenter.Resources>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOverSelected">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOverPressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PressedSelected">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
-                                            <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DisabledStates">
-                                    <VisualState x:Name="Enabled"/>
-                                    <VisualState x:Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Target="Root.RevealBorderThickness" Value="0"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </ListViewItemPresenter>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="HorizontalListViewStyle" TargetType="ListView">
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="TabNavigation" Value="Once"/>
-            <Setter Property="IsSwipeEnabled" Value="True"/>
-            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="True"/>
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False"/>
-            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
-            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource HorizontalListViewItemContainerStyle}"/>
-            <Setter Property="ItemContainerTransitions">
-                <Setter.Value>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition/>
-                        <ContentThemeTransition/>
-                        <ReorderThemeTransition/>
-                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
-                    </TransitionCollection>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListView">
-                        <Border Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                            <ScrollViewer x:Name="ScrollViewer"
-                                      AutomationProperties.AccessibilityView="Raw"
-                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
-                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
-                                      TabNavigation="{TemplateBinding TabNavigation}"
-                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
-                                <ItemsPresenter Footer="{TemplateBinding Footer}"
-                                            FooterTransitions="{TemplateBinding FooterTransitions}"
-                                            FooterTemplate="{TemplateBinding FooterTemplate}"
-                                            Header="{TemplateBinding Header}"
-                                            HeaderTransitions="{TemplateBinding HeaderTransitions}"
-                                            HeaderTemplate="{TemplateBinding HeaderTemplate}"
-                                            Padding="{TemplateBinding Padding}"/>
-                            </ScrollViewer>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Page.Resources>
-    <StackPanel Orientation="Vertical" Margin="12" Spacing="32"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <mutc:HeaderedItemsControl>
-            <mutc:HeaderedItemsControl.Header>
-                <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"
+    <Grid MaxWidth="484" Margin="40,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <RepeatButton Visibility="{Binding ElementName=ScrollViewer, Path=ComputedVerticalScrollBarVisibility}">
+            <RepeatButton.Style>
+                <Style TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonRevealStyle}">
+                    <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundTransparentRevealBorderBrush}"/>
+                    <Setter Property="Margin" Value="0,16,0,0"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                </Style>
+            </RepeatButton.Style>
+        </RepeatButton>
+        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1"
+                      VerticalScrollMode="Enabled"
+                      VerticalScrollBarVisibility="Auto"
+                      IsVerticalRailEnabled="True"
+                      HorizontalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Disabled"
+                      IsHorizontalRailEnabled="False">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ScrollViewer">
+                                <ScrollContentPresenter x:Name="ScrollContentPresenter"
+                                                        Grid.Column="1"
+                                                        TabFocusNavigation="Once"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ScrollViewer.Style>
+            <StackPanel Orientation="Vertical" Spacing="32">
+                <mutc:HeaderedContentControl>
+                    <mutc:HeaderedContentControl.Header>
+                        <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"
                            Style="{StaticResource SubheaderTextBlockStyle}"/>
-            </mutc:HeaderedItemsControl.Header>
-            <mutc:HeaderedItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40"/>
-                </ItemsPanelTemplate>
-            </mutc:HeaderedItemsControl.ItemsPanel>
-            <RadioButton x:Uid="LightRBN" GroupName="Theme"
+                    </mutc:HeaderedContentControl.Header>
+                    <RelativePanel>
+                        <RadioButton x:Uid="LightRBN" GroupName="Theme"
+                             RelativePanel.AlignLeftWithPanel="True"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
                          Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource Light}"/>
-            <RadioButton x:Uid="DarkRBN" GroupName="Theme"
+                        <RadioButton x:Uid="DarkRBN" GroupName="Theme"
+                             RelativePanel.AlignHorizontalCenterWithPanel="True"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
                          Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource Dark}"/>
-            <RadioButton x:Uid="SystemRBN" GroupName="Theme"
+                        <RadioButton x:Uid="SystemRBN" GroupName="Theme"
+                             RelativePanel.AlignRightWithPanel="True"
                          IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
                          Command="{x:Bind ViewModel.SetThemeModeCommand}"
                          CommandParameter="{StaticResource System}"/>
-        </mutc:HeaderedItemsControl>
-        <mutc:HeaderedContentControl>
-            <mutc:HeaderedContentControl.Header>
-                <Grid>
-                    <TextBlock x:Uid="ThemeColorTBK" FontSize="20" TextAlignment="Center"
+                    </RelativePanel>
+                </mutc:HeaderedContentControl>
+                <mutc:HeaderedContentControl>
+                    <mutc:HeaderedContentControl.Header>
+                        <Grid>
+                            <TextBlock x:Uid="ThemeColorTBK" FontSize="20" TextAlignment="Center"
                                Style="{StaticResource SubheaderTextBlockStyle}"/>
-                </Grid>
-            </mutc:HeaderedContentControl.Header>
-            <Grid HorizontalAlignment="Center">
-                <Grid.Resources>
-                    <StaticResource x:Key="RepeatButtonRevealBackgroundPointerOver"
-                                    ResourceKey="SystemControlTransparentRevealBackgroundBrush"/>
-                    <StaticResource x:Key="RepeatButtonRevealBackgroundPressed"
-                                    ResourceKey="SystemControlTransparentRevealBackgroundBrush"/>
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <RepeatButton Grid.Column="0" Content="&#xE76B;" Style="{StaticResource HorizontalListViewRepeatButtonStyle}"/>
-                <ListView x:Name="ColorsLVW" Grid.Column="1" Style="{StaticResource HorizontalListViewStyle}"
-                          Width="200">
-                    <i:Interaction.Behaviors>
-                        <ic:EventTriggerBehavior EventName="SelectionChanged">
-                            <ic:InvokeCommandAction Command="{x:Bind ViewModel.SetThemeColorCommand}"
-                                                    InputConverter="{StaticResource SelectionChangedEventArgsToSelectedItemConverter}"/>
-                        </ic:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="Color">
-                            <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <Color>#F44336</Color>
-                    <Color>#E91E63</Color>
-                    <Color>#9C27B0</Color>
-                    <Color>#673AB7</Color>
-                    <Color>#3F51B5</Color>
-                    <Color>#2196F3</Color>
-                    <Color>#03A9F4</Color>
-                    <Color>#00BCD4</Color>
-                    <Color>#009688</Color>
-                    <Color>#4CAF50</Color>
-                    <Color>#8BC34A</Color>
-                    <Color>#CDDC39</Color>
-                    <Color>#FFEB3B</Color>
-                    <Color>#FFC107</Color>
-                    <Color>#FF9800</Color>
-                    <Color>#FF5722</Color>
-                    <Color>#795548</Color>
-                    <Color>#9E9E9E</Color>
-                    <Color>#607D8B</Color>
-                </ListView>
-                <RepeatButton Grid.Column="2" Content="&#xE76C;" Style="{StaticResource HorizontalListViewRepeatButtonStyle}"/>
-            </Grid>
-        </mutc:HeaderedContentControl>
-        <mutc:HeaderedItemsControl>
-            <mutc:HeaderedItemsControl.Header>
-                <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"
+                        </Grid>
+                    </mutc:HeaderedContentControl.Header>
+                    <local:HorizontalListView HorizontalAlignment="Left">
+                        <i:Interaction.Behaviors>
+                            <ic:EventTriggerBehavior EventName="SelectionChanged">
+                                <ic:InvokeCommandAction Command="{x:Bind ViewModel.SetThemeColorCommand}"
+                                                InputConverter="{StaticResource SelectionChangedEventArgsToSelectedItemConverter}"/>
+                            </ic:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="Color">
+                                <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <Color>#F44336</Color>
+                        <Color>#E91E63</Color>
+                        <Color>#9C27B0</Color>
+                        <Color>#673AB7</Color>
+                        <Color>#3F51B5</Color>
+                        <Color>#2196F3</Color>
+                        <Color>#03A9F4</Color>
+                        <Color>#00BCD4</Color>
+                        <Color>#009688</Color>
+                        <Color>#4CAF50</Color>
+                        <Color>#8BC34A</Color>
+                        <Color>#CDDC39</Color>
+                        <Color>#FFEB3B</Color>
+                        <Color>#FFC107</Color>
+                        <Color>#FF9800</Color>
+                        <Color>#FF5722</Color>
+                        <Color>#795548</Color>
+                        <Color>#9E9E9E</Color>
+                        <Color>#607D8B</Color>
+                    </local:HorizontalListView>
+                </mutc:HeaderedContentControl>
+                <mutc:HeaderedItemsControl>
+                    <mutc:HeaderedItemsControl.Header>
+                        <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"
                            Style="{StaticResource SubheaderTextBlockStyle}"/>
-            </mutc:HeaderedItemsControl.Header>
-            <mutc:HeaderedItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" Spacing="8"/>
-                </ItemsPanelTemplate>
-            </mutc:HeaderedItemsControl.ItemsPanel>
-            <TextBlock TextAlignment="Center">
+                    </mutc:HeaderedItemsControl.Header>
+                    <mutc:HeaderedItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" Spacing="8"/>
+                        </ItemsPanelTemplate>
+                    </mutc:HeaderedItemsControl.ItemsPanel>
+                    <TextBlock TextAlignment="Center">
                 <Run Text="{x:Bind ViewModel.DisplayName}"/>
                 <Run Text="-"/>
                 <Run Text="{x:Bind ViewModel.Version}"/>
-            </TextBlock>
-            <TextBlock x:Uid="DescriptionTBK" TextAlignment="Center" TextWrapping="Wrap"/>
-            <TextBlock TextAlignment="Center">
+                    </TextBlock>
+                    <TextBlock x:Uid="DescriptionTBK" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock TextAlignment="Center">
                 <Hyperlink x:Uid="SourceHLK">
                     <Run x:Uid="SourceRUN"/>
                 </Hyperlink>
@@ -327,7 +156,25 @@
                 <Hyperlink x:Uid="LicenseHLK">
                     <Run x:Uid="LicenseRUN"/>
                 </Hyperlink>
-            </TextBlock>
-        </mutc:HeaderedItemsControl>
-    </StackPanel>
+                    </TextBlock>
+                </mutc:HeaderedItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <Path Grid.Row="2" Fill="{ThemeResource SystemControlHighlightTransparentRevealBorderBrush}"
+              Stretch="Uniform"
+              Data="M0,0 L1,1 L2,0 Z" Margin="0,8,0,24"
+              Visibility="{Binding ElementName=ScrollViewer, Path=ComputedVerticalScrollBarVisibility}"/>
+        <Grid Grid.Row="3">
+            <adv:AdControl x:Name="ADV" Height="100"
+                           ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
+                           AdUnitId="test"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"/>
+            <Border BorderThickness="4" BorderBrush="{ThemeResource SystemBaseLowColor}"/>
+            <Border BorderThickness="4" BorderBrush="{ThemeResource SystemControlTransparentRevealBorderBrush}"/>
+            <TextBlock Text="广告" FontSize="16" Margin="0,4,8,0"
+                       HorizontalAlignment="Right" VerticalAlignment="Top"
+                       Foreground="{ThemeResource  SystemControlTransparentRevealBorderBrush}"/>
+        </Grid>
+    </Grid>
 </Page>

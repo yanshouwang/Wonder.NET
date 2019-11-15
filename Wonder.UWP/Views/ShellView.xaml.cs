@@ -38,11 +38,6 @@ namespace Wonder.UWP.Views
             NavFrame.NavigationFailed += OnNavFrameNaviagtionFailed;
             NavFrame.NavigationStopped += OnNavFrameNavigationStopped;
 
-            this.Loaded += OnLoaded;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
             ExtendTitleBar();
         }
 
