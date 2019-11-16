@@ -29,6 +29,21 @@ namespace Wonder.UWP.Views
         public SettingsView()
         {
             this.InitializeComponent();
+
+            UpArrowBTN.Click += UpArrowBTN_Click;
+            DownArrowBTN.Click += DownArrowBTN_Click;
+        }
+
+        private void DownArrowBTN_Click(object sender, RoutedEventArgs e)
+        {
+            var verticalOffset = Math.Min(SettingsSCV.ScrollableHeight, SettingsSCV.VerticalOffset + SettingsSCV.ActualHeight / 2);
+            SettingsSCV.ChangeView(null, verticalOffset, null);
+        }
+
+        private void UpArrowBTN_Click(object sender, RoutedEventArgs e)
+        {
+            var verticalOffset = Math.Max(0.0, SettingsSCV.VerticalOffset - SettingsSCV.ActualHeight / 2);
+            SettingsSCV.ChangeView(null, verticalOffset, null);
         }
     }
 }

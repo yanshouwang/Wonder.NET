@@ -35,20 +35,10 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <RepeatButton Visibility="{Binding ElementName=ScrollViewer, Path=ComputedVerticalScrollBarVisibility}">
-            <RepeatButton.Style>
-                <Style TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonRevealStyle}">
-                    <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundTransparentRevealBorderBrush}"/>
-                    <Setter Property="Margin" Value="0,16,0,0"/>
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="BorderThickness" Value="2"/>
-                    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-                    <Setter Property="FontSize" Value="16"/>
-                    <Setter Property="BorderThickness" Value="0,0,0,2"/>
-                </Style>
-            </RepeatButton.Style>
-        </RepeatButton>
-        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1"
+        <RepeatButton x:Name="UpArrowBTN" Grid.Row="0" Margin="0,24,0,8" Content="M0,1 L1,0 L2,1 Z"
+                      Style="{StaticResource RepeatButtonPathStyle}"
+                      Visibility="{Binding ElementName=SettingsSCV, Path=ComputedVerticalScrollBarVisibility}"/>
+        <ScrollViewer x:Name="SettingsSCV" Grid.Row="1"
                       VerticalScrollMode="Enabled"
                       VerticalScrollBarVisibility="Auto"
                       IsVerticalRailEnabled="True"
@@ -68,7 +58,7 @@
                     </Setter>
                 </Style>
             </ScrollViewer.Style>
-            <StackPanel Orientation="Vertical" Spacing="32">
+            <StackPanel Orientation="Vertical" Spacing="32" Background="Transparent">
                 <mutc:HeaderedContentControl>
                     <mutc:HeaderedContentControl.Header>
                         <TextBlock x:Uid="ThemeModeTBK" FontSize="20" TextAlignment="Center"
@@ -99,38 +89,48 @@
                                Style="{StaticResource SubheaderTextBlockStyle}"/>
                         </Grid>
                     </mutc:HeaderedContentControl.Header>
-                    <local:HorizontalListView HorizontalAlignment="Left">
-                        <i:Interaction.Behaviors>
-                            <ic:EventTriggerBehavior EventName="SelectionChanged">
-                                <ic:InvokeCommandAction Command="{x:Bind ViewModel.SetThemeColorCommand}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Width="44" Height="44" BorderThickness="2" ToolTipService.ToolTip="跟随系统"
+                                Background="{ThemeResource SystemAccentColorBrush}"
+                                BorderBrush="{ThemeResource SystemControlBackgroundTransparentRevealBorderBrush}"/>
+                        <local:HorizontalListView Grid.Column="2">
+                            <i:Interaction.Behaviors>
+                                <ic:EventTriggerBehavior EventName="SelectionChanged">
+                                    <ic:InvokeCommandAction Command="{x:Bind ViewModel.SetThemeColorCommand}"
                                                 InputConverter="{StaticResource SelectionChangedEventArgsToSelectedItemConverter}"/>
-                            </ic:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="Color">
-                                <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <Color>#F44336</Color>
-                        <Color>#E91E63</Color>
-                        <Color>#9C27B0</Color>
-                        <Color>#673AB7</Color>
-                        <Color>#3F51B5</Color>
-                        <Color>#2196F3</Color>
-                        <Color>#03A9F4</Color>
-                        <Color>#00BCD4</Color>
-                        <Color>#009688</Color>
-                        <Color>#4CAF50</Color>
-                        <Color>#8BC34A</Color>
-                        <Color>#CDDC39</Color>
-                        <Color>#FFEB3B</Color>
-                        <Color>#FFC107</Color>
-                        <Color>#FF9800</Color>
-                        <Color>#FF5722</Color>
-                        <Color>#795548</Color>
-                        <Color>#9E9E9E</Color>
-                        <Color>#607D8B</Color>
-                    </local:HorizontalListView>
+                                </ic:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="Color">
+                                    <Rectangle Width="40" Height="40" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <Color>#F44336</Color>
+                            <Color>#E91E63</Color>
+                            <Color>#9C27B0</Color>
+                            <Color>#673AB7</Color>
+                            <Color>#3F51B5</Color>
+                            <Color>#2196F3</Color>
+                            <Color>#03A9F4</Color>
+                            <Color>#00BCD4</Color>
+                            <Color>#009688</Color>
+                            <Color>#4CAF50</Color>
+                            <Color>#8BC34A</Color>
+                            <Color>#CDDC39</Color>
+                            <Color>#FFEB3B</Color>
+                            <Color>#FFC107</Color>
+                            <Color>#FF9800</Color>
+                            <Color>#FF5722</Color>
+                            <Color>#795548</Color>
+                            <Color>#9E9E9E</Color>
+                            <Color>#607D8B</Color>
+                        </local:HorizontalListView>
+                    </Grid>
                 </mutc:HeaderedContentControl>
                 <mutc:HeaderedItemsControl>
                     <mutc:HeaderedItemsControl.Header>
@@ -160,12 +160,11 @@
                 </mutc:HeaderedItemsControl>
             </StackPanel>
         </ScrollViewer>
-        <Path Grid.Row="2" Fill="{ThemeResource SystemControlHighlightTransparentRevealBorderBrush}"
-              Stretch="Uniform"
-              Data="M0,0 L1,1 L2,0 Z" Margin="0,8,0,24"
-              Visibility="{Binding ElementName=ScrollViewer, Path=ComputedVerticalScrollBarVisibility}"/>
+        <RepeatButton x:Name="DownArrowBTN" Grid.Row="2" Margin="0,8,0,24" Content="M0,0 L1,1 L2,0 Z"
+                      Style="{StaticResource RepeatButtonPathStyle}"
+                      Visibility="{Binding ElementName=SettingsSCV, Path=ComputedVerticalScrollBarVisibility}"/>
         <Grid Grid.Row="3">
-            <adv:AdControl x:Name="ADV" Height="100"
+            <adv:AdControl x:Name="ADC" Height="100"
                            ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
                            AdUnitId="test"
                            HorizontalAlignment="Stretch"

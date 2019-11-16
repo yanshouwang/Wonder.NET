@@ -3,14 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:muxm="using:Microsoft.UI.Xaml.Media"
-    xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    xmlns:mutc="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Wonder.UWP.Converters">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Theme.xaml"/>
         <ResourceDictionary Source="Accent.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+    <!--#region CONVERTER -->
+    <converters:StringToGeometryConverter x:Key="StringToGeometryConverter"/>
+    <!--#endregion-->
     <!--#region DOUBLE -->
     <x:Double x:Key="ListViewItemMinWidth">0</x:Double>
     <x:Double x:Key="ListViewItemMinHeight">0</x:Double>
+    <x:Double x:Key="RepeatButtonPathStrokeThickness">2</x:Double>
     <!--#endregion-->
     <!--#region THICKNESS -->
     <Thickness x:Key="TabViewHeaderPadding">0</Thickness>
@@ -150,6 +155,52 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Padding="{TemplateBinding Padding}"/>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="RepeatButtonPathStyle" TargetType="RepeatButton">
+        <Setter Property="Background" Value="{ThemeResource RepeatButtonRevealBackground}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource RepeatButtonRevealBorderBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+        <Setter Property="FocusVisualMargin" Value="-3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Path x:Name="Arrow"
+                          Fill="{TemplateBinding Background}"
+                          Stroke="{TemplateBinding BorderBrush}"
+                          StrokeThickness="{ThemeResource RepeatButtonPathStrokeThickness}"
+                          Data="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource StringToGeometryConverter}}"
+                          Stretch="Uniform">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Arrow.(RevealBrush.State)" Value="PointerOver"/>
+                                        <Setter Target="Arrow.Fill" Value="{ThemeResource RepeatButtonRevealBackgroundPointerOver}"/>
+                                        <Setter Target="Arrow.Stroke" Value="{ThemeResource RepeatButtonRevealBorderBrushPointerOver}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="Arrow.(RevealBrush.State)" Value="Pressed"/>
+                                        <Setter Target="Arrow.Fill" Value="{ThemeResource RepeatButtonRevealBackgroundPressed}"/>
+                                        <Setter Target="Arrow.Stroke" Value="{ThemeResource RepeatButtonRevealBorderBrushPressed}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="Arrow.Fill" Value="{ThemeResource RepeatButtonRevealBackgroundDisabled}"/>
+                                        <Setter Target="Arrow.Stroke" Value="{ThemeResource RepeatButtonRevealBorderBrushDisabled}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Path>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

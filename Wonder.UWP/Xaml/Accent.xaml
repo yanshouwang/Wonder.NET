@@ -11,6 +11,62 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorRevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColor}"
+                                   FallbackColor="{ThemeResource SystemAccentColor}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight1RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight1}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight2RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight2}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight3RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight3}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark1RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark1}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark2RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark2}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark3RevealBackgroundBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark3}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorRevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColor}"
+                                   FallbackColor="{ThemeResource SystemAccentColor}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight1RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight1}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight2RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight2}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight3RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorLight3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight3}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark1RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark1}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark2RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark2}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark3RevealBorderBrush"
+                                   TargetTheme="Light"
+                                   Color="{ThemeResource SystemAccentColorDark3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark3}"/>
             <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
@@ -25,6 +81,62 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorRevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColor}"
+                                   FallbackColor="{ThemeResource SystemAccentColor}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight1RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight1}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight2RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight2}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorLight3RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight3}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark1RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark1}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark2RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark2}"/>
+            <RevealBackgroundBrush x:Key="SystemAccentColorDark3RevealBackgroundBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark3}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorRevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColor}"
+                                   FallbackColor="{ThemeResource SystemAccentColor}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight1RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight1}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight2RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight2}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorLight3RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorLight3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorLight3}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark1RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark1}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark1}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark2RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark2}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark2}"/>
+            <RevealBorderBrush x:Key="SystemAccentColorDark3RevealBorderBrush"
+                                   TargetTheme="Dark"
+                                   Color="{ThemeResource SystemAccentColorDark3}"
+                                   FallbackColor="{ThemeResource SystemAccentColorDark3}"/>
             <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
@@ -39,6 +151,20 @@
             <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="{ThemeResource SystemAccentColorDark1}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="{ThemeResource SystemAccentColorDark2}"/>
             <SolidColorBrush x:Key="SystemAccentColorDark3Brush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorRevealBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight1RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorLight1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight2RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorLight2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight3RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark1RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark2RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorDark2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark3RevealBackgroundBrush" Color="{ThemeResource SystemAccentColorDark3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorRevealBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight1RevealBorderBrush" Color="{ThemeResource SystemAccentColorLight1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight2RevealBorderBrush" Color="{ThemeResource SystemAccentColorLight2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorLight3RevealBorderBrush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark1RevealBorderBrush" Color="{ThemeResource SystemAccentColorDark1}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark2RevealBorderBrush" Color="{ThemeResource SystemAccentColorDark2}"/>
+            <SolidColorBrush x:Key="SystemAccentColorDark3RevealBorderBrush" Color="{ThemeResource SystemAccentColorDark3}"/>
             <StaticResource x:Key="TabViewBackground" ResourceKey="SystemControlChromeMediumAcrylicWindowMediumBrush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" ResourceKey="SystemAccentColorLight3Brush"/>
             <StaticResource x:Key="RadioButtonOuterEllipseCheckedStrokePressed" ResourceKey="SystemAccentColorDark3Brush"/>
