@@ -65,21 +65,21 @@
                            Style="{StaticResource SubheaderTextBlockStyle}"/>
                     </mutc:HeaderedContentControl.Header>
                     <RelativePanel>
-                        <RadioButton x:Uid="LightRBN" GroupName="Theme"
-                             RelativePanel.AlignLeftWithPanel="True"
-                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
-                         CommandParameter="{StaticResource Light}"/>
-                        <RadioButton x:Uid="DarkRBN" GroupName="Theme"
-                             RelativePanel.AlignHorizontalCenterWithPanel="True"
-                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
-                         CommandParameter="{StaticResource Dark}"/>
                         <RadioButton x:Uid="SystemRBN" GroupName="Theme"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
+                             Command="{x:Bind ViewModel.SetThemeModeCommand}"
+                             CommandParameter="{StaticResource System}"/>
+                        <RadioButton x:Uid="LightRBN" GroupName="Theme"
+                             RelativePanel.AlignHorizontalCenterWithPanel="True"
+                             IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsLightConverter}}"
+                             Command="{x:Bind ViewModel.SetThemeModeCommand}"
+                             CommandParameter="{StaticResource Light}"/>
+                        <RadioButton x:Uid="DarkRBN" GroupName="Theme"
                              RelativePanel.AlignRightWithPanel="True"
-                         IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsSystemConverter}}"
-                         Command="{x:Bind ViewModel.SetThemeModeCommand}"
-                         CommandParameter="{StaticResource System}"/>
+                             IsChecked="{x:Bind ViewModel.ThemeMode, Mode=OneWay, Converter={StaticResource IsDarkConverter}}"
+                             Command="{x:Bind ViewModel.SetThemeModeCommand}"
+                             CommandParameter="{StaticResource Dark}"/>
                     </RelativePanel>
                 </mutc:HeaderedContentControl>
                 <mutc:HeaderedContentControl>
@@ -132,32 +132,29 @@
                         </local:HorizontalListView>
                     </Grid>
                 </mutc:HeaderedContentControl>
-                <mutc:HeaderedItemsControl>
-                    <mutc:HeaderedItemsControl.Header>
+                <mutc:HeaderedContentControl>
+                    <mutc:HeaderedContentControl.Header>
                         <TextBlock x:Uid="AboutTBK" FontSize="20" TextAlignment="Center"
-                           Style="{StaticResource SubheaderTextBlockStyle}"/>
-                    </mutc:HeaderedItemsControl.Header>
-                    <mutc:HeaderedItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" Spacing="8"/>
-                        </ItemsPanelTemplate>
-                    </mutc:HeaderedItemsControl.ItemsPanel>
-                    <TextBlock TextAlignment="Center">
-                <Run Text="{x:Bind ViewModel.DisplayName}"/>
-                <Run Text="-"/>
-                <Run Text="{x:Bind ViewModel.Version}"/>
-                    </TextBlock>
-                    <TextBlock x:Uid="DescriptionTBK" TextAlignment="Center" TextWrapping="Wrap"/>
-                    <TextBlock TextAlignment="Center">
-                <Hyperlink x:Uid="SourceHLK">
-                    <Run x:Uid="SourceRUN"/>
-                </Hyperlink>
-                <Run Text="-"/>
-                <Hyperlink x:Uid="LicenseHLK">
-                    <Run x:Uid="LicenseRUN"/>
-                </Hyperlink>
-                    </TextBlock>
-                </mutc:HeaderedItemsControl>
+                                   Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    </mutc:HeaderedContentControl.Header>
+                    <StackPanel Orientation="Vertical" Spacing="8">
+                        <TextBlock TextAlignment="Center">
+                            <Run Text="{x:Bind ViewModel.DisplayName}"/>
+                            <Run Text="-"/>
+                            <Run Text="{x:Bind ViewModel.Version}"/>
+                        </TextBlock>
+                        <TextBlock x:Uid="DescriptionTBK" TextAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock TextAlignment="Center">
+                            <Hyperlink x:Uid="SourceHLK">
+                                <Run x:Uid="SourceRUN"/>
+                            </Hyperlink>
+                            <Run Text="-"/>
+                            <Hyperlink x:Uid="LicenseHLK">
+                                <Run x:Uid="LicenseRUN"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </mutc:HeaderedContentControl>
             </StackPanel>
         </ScrollViewer>
         <RepeatButton x:Name="DownArrowBTN" Grid.Row="2" Margin="0,8,0,24" Content="M0,0 L1,1 L2,0 Z"
