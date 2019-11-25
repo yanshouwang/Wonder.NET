@@ -49,32 +49,21 @@ namespace Wonder.UWP.ViewModels
         {
             State = LEDeviceState.Connecting;
             _device = await BluetoothLEDevice.FromBluetoothAddressAsync(Address);
-            _device.ConnectionStatusChanged += OnConnectionStatusChanged;
             var sr = await _device.GetGattServicesAsync();
-            if (sr.Status != GattCommunicationStatus.Success)
+            if (sr.Status == GattCommunicationStatus.Success)
             {
-                State = LEDeviceState.Disconnected;
-                return;
-            }
-            foreach (var service in sr.Services)
-            {
-                var cr = await service.GetCharacteristicsAsync();
-                if (cr.Status != GattCommunicationStatus.Success)
+                foreach (var service in sr.Services)
                 {
-                    State = LEDeviceState.Disconnected;
-                    return;
+                    var cr = await service.GetCharacteristicsAsync();
+                    if (cr.Status == GattCommunicationStatus.Success)
+                    {
+
+                    }
                 }
             }
-        }
-
-        private async void OnConnectionStatusChanged(BluetoothLEDevice sender, object args)
-        {
-            await DispatcherRunAsync(() =>
-            {
-                State = sender.ConnectionStatus == BluetoothConnectionStatus.Connected
-                      ? LEDeviceState.Connected
-                      : LEDeviceState.Disconnected;
-            });
+            State = _device.ConnectionStatus == BluetoothConnectionStatus.Connected
+                  ? LEDeviceState.Connected
+                  : LEDeviceState.Disconnected;
         }
     }
 }
