@@ -121,14 +121,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\ContainerNames.cs" />
+    <Compile Include="Constants\SCPICommands.cs" />
     <Compile Include="Constants\SettingsKeys.cs" />
+    <Compile Include="Constants\UUIDStrings.cs" />
     <Compile Include="Constants\ViewTokens.cs" />
     <Compile Include="Constants\Win32Errors.cs" />
     <Compile Include="Constants\Win32Libraries.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\ItemClickEventArgsToClickedItemConverter.cs" />
     <Compile Include="Converters\SelectionChangedEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
+    <Compile Include="Converters\UlongToMACConverter.cs" />
     <Compile Include="Extension\FrameworkElementExtensions.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Util\Win32Utils.cs" />
@@ -140,12 +144,31 @@
     <Compile Include="Util\ColorUtils.cs" />
     <Compile Include="Extension\ColorExtensions.cs" />
     <Compile Include="Util\MathUtils.cs" />
+    <Compile Include="ViewModels\BLEDeviceState.cs" />
+    <Compile Include="ViewModels\BLEDeviceViewModel.cs" />
+    <Compile Include="ViewModels\BLEViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\LECharacteristicViewModel.cs" />
+    <Compile Include="ViewModels\LEDeviceState.cs" />
+    <Compile Include="ViewModels\LEDeviceViewModel.cs" />
+    <Compile Include="ViewModels\LENode.cs" />
+    <Compile Include="ViewModels\LEServiceViewModel.cs" />
+    <Compile Include="ViewModels\LEViewModel.cs" />
     <Compile Include="ViewModels\SerialDeviceViewModel.cs" />
     <Compile Include="ViewModels\SerialViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\BLEDeviceView.xaml.cs">
+      <DependentUpon>BLEDeviceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BLEView.xaml.cs">
+      <DependentUpon>BLEView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HorizontalListView.cs" />
+    <Compile Include="Views\LEDataTemplateSelector.cs" />
+    <Compile Include="Views\LEView.xaml.cs">
+      <DependentUpon>LEView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SerialView.xaml.cs">
       <DependentUpon>SerialView.xaml</DependentUpon>
     </Compile>
@@ -230,6 +253,18 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BLEDeviceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BLEView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LEView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

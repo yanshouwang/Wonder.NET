@@ -75,7 +75,7 @@ namespace Wonder.UWP
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             InitializeTheme();
-            NavigationService.Navigate(ViewTokens.SETTINGS, null);
+            NavigationService.Navigate(ViewTokens.LE, null);
             return Task.CompletedTask;
         }
 
