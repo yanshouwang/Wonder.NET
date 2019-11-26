@@ -15,7 +15,7 @@ namespace Wonder.UWP.ViewModels
     {
         private readonly BluetoothLEAdvertisementWatcher _watcher;
 
-        public ObservableCollection<LENode> Devices { get; }
+        public ObservableCollection<LEDeviceViewModel> Devices { get; }
 
         public bool IsScanning
             => _watcher.Status == BluetoothLEAdvertisementWatcherStatus.Started;
@@ -26,23 +26,21 @@ namespace Wonder.UWP.ViewModels
             _watcher = new BluetoothLEAdvertisementWatcher();
             _watcher.Received += OnWatcherReceived;
 
-            Devices = new ObservableCollection<LENode>();
+            Devices = new ObservableCollection<LEDeviceViewModel>();
         }
 
         private async void OnWatcherReceived(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
         {
             await DispatcherRunAsync(() =>
             {
-                var node = Devices.FirstOrDefault(i => i.Item is LEDeviceViewModel j && j.Address == args.BluetoothAddress);
-                if (node == null)
+                var device = Devices.FirstOrDefault(i => i.Address == args.BluetoothAddress);
+                if (device == null)
                 {
-                    var device = new LEDeviceViewModel(NavigationService, args.BluetoothAddress, args.Advertisement.LocalName, args.RawSignalStrengthInDBm);
-                    node = new LENode(device);
-                    Devices.Add(node);
+                    device = new LEDeviceViewModel(NavigationService, args.BluetoothAddress, args.Advertisement.LocalName, args.RawSignalStrengthInDBm);
+                    Devices.Add(device);
                 }
                 else
                 {
-                    var device = (LEDeviceViewModel)node.Item;
                     device.RSSI = args.RawSignalStrengthInDBm;
                 }
             });

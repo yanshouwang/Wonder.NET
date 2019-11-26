@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace Wonder.UWP.ViewModels
 
         public ulong Address { get; set; }
         public string Name { get; set; }
+        public ObservableCollection<LEServiceViewModel> Services { get; }
+
         private int _rssi;
         public int RSSI
         {
@@ -36,6 +39,7 @@ namespace Wonder.UWP.ViewModels
             Address = address;
             Name = name;
             RSSI = rssi;
+            Services = new ObservableCollection<LEServiceViewModel>();
         }
 
         private DelegateCommand _connectCommand;
@@ -57,7 +61,14 @@ namespace Wonder.UWP.ViewModels
                     var cr = await service.GetCharacteristicsAsync();
                     if (cr.Status == GattCommunicationStatus.Success)
                     {
-
+                        var items = cr.Characteristics.Select(i => new LECharacteristicViewModel(NavigationService, i)).ToList();
+                        var item = new LEServiceViewModel(NavigationService, service, items);
+                        Services.Add(item);
+                    }
+                    else
+                    {
+                        var item = new LEServiceViewModel(NavigationService, service);
+                        Services.Add(item);
                     }
                 }
             }

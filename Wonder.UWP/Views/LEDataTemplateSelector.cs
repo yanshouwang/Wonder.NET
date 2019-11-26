@@ -19,11 +19,11 @@ namespace Wonder.UWP.Views
         {
             if (!(item is LENode node))
                 return base.SelectTemplateCore(item);
-            else if (node.Item is LEDeviceViewModel)
+            else if (node.Value is LEDeviceViewModel)
                 return Device;
-            else if (node.Item is LEServiceViewModel)
+            else if (node.Value is LEServiceViewModel)
                 return Service;
-            else if (node.Item is LECharacteristicViewModel)
+            else if (node.Value is LECharacteristicViewModel)
                 return Characteristic;
             else
                 return base.SelectTemplateCore(item);

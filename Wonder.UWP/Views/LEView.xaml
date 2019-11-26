@@ -5,6 +5,7 @@
     xmlns:local="using:Wonder.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:vm="using:Wonder.UWP.ViewModels"
     xmlns:converters="using:Wonder.UWP.Converters"
@@ -13,6 +14,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <converters:UlongToMACConverter x:Key="UlongToMACConverter"/>
+        <converters:GUIDToStringConverter x:Key="GUIDToStringConverter"/>
         <Style x:Key="TreeViewItemContainerStyle" TargetType="ListViewItem">
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
@@ -336,23 +338,39 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="DeviceTemplate" x:DataType="vm:LENode">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Item.Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <TextBlock Grid.Row="1" Text="{Binding Item.Address, Converter={StaticResource UlongToMACConverter}}" Foreground="Gray"/>
-                <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Item.RSSI}" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center"/>
-            </Grid>
+        <DataTemplate x:Key="DeviceTemplate" x:DataType="local:LENode">
+            <muxc:TreeViewItem ItemsSource="{Binding Nodes}" HorizontalContentAlignment="Stretch">
+                <muxc:TreeViewItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Value.Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Value.Address, Converter={StaticResource UlongToMACConverter}}" Foreground="Gray"/>
+                        <TextBlock Grid.Column="1" Grid.RowSpan="2" Text="{Binding Value.RSSI}" Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center"/>
+                    </Grid>
+                </muxc:TreeViewItem.Content>
+            </muxc:TreeViewItem>
+        </DataTemplate>
+        <DataTemplate x:Key="ServiceTemplate" x:DataType="local:LENode">
+            <muxc:TreeViewItem ItemsSource="{Binding Nodes}"
+                               Content="{Binding Value.UUID, Converter={StaticResource GUIDToStringConverter}}"
+                               HorizontalContentAlignment="Stretch"/>
+        </DataTemplate>
+        <DataTemplate x:Key="CharacteristicTemplate" x:DataType="local:LENode">
+            <muxc:TreeViewItem ItemsSource="{Binding Nodes}"
+                               Content="{Binding Value.UUID, Converter={StaticResource GUIDToStringConverter}}"
+                               HorizontalContentAlignment="Stretch"/>
         </DataTemplate>
         <local:LEDataTemplateSelector x:Key="LEDataTemplateSelector"
-                                      Device="{StaticResource DeviceTemplate}"/>
+                                      Device="{StaticResource DeviceTemplate}"
+                                      Service="{StaticResource ServiceTemplate}"
+                                      Characteristic="{StaticResource CharacteristicTemplate}"/>
     </Page.Resources>
     <Grid ColumnSpacing="12" Margin="12">
         <Grid.ColumnDefinitions>
@@ -368,12 +386,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <TreeView x:Name="DevicesTVW" Grid.Row="0" SelectionMode="Single"
-                      ItemsSource="{x:Bind ViewModel.Devices}"
-                      ItemTemplateSelector="{StaticResource LEDataTemplateSelector}"
-                      ItemContainerStyle="{StaticResource TreeViewItemContainerStyle}"
-                      ItemInvoked="DevicesTVW_ItemInvoked">
-            </TreeView>
+            <muxc:TreeView x:Name="DevicesTVW" Grid.Row="0" SelectionMode="Single"
+                           ItemsSource="{x:Bind Nodes}"
+                           ItemTemplateSelector="{StaticResource LEDataTemplateSelector}"
+                           ItemInvoked="DevicesTVW_ItemInvoked"/>
             <Grid Grid.Row="1" ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

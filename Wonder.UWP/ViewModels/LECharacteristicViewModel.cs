@@ -12,10 +12,14 @@ namespace Wonder.UWP.ViewModels
     {
         private readonly GattCharacteristic _characteristic;
 
+        public Guid UUID
+            => _characteristic.Uuid;
+
         public LECharacteristicViewModel(INavigationService navigationService, GattCharacteristic characteristic)
             : base(navigationService)
         {
             _characteristic = characteristic;
+            characteristic.CharacteristicProperties
         }
     }
 }

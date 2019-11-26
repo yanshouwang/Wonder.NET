@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,18 @@ namespace Wonder.UWP.ViewModels
     {
         private readonly GattDeviceService _service;
 
-        public IList<LECharacteristicViewModel> Characteristics { get; }
+        public Guid UUID
+            => _service.Uuid;
 
-        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics)
+        public ObservableCollection<LECharacteristicViewModel> Characteristics { get; }
+
+        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics = null)
             : base(navigationService)
         {
             _service = service;
-            Characteristics = characteristics;
+            Characteristics = characteristics == null
+                            ? new ObservableCollection<LECharacteristicViewModel>()
+                            : new ObservableCollection<LECharacteristicViewModel>(characteristics);
         }
     }
 }

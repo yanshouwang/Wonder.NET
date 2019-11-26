@@ -129,6 +129,7 @@
     <Compile Include="Constants\Win32Libraries.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\GUIDToStringConverter.cs" />
     <Compile Include="Converters\ItemClickEventArgsToClickedItemConverter.cs" />
     <Compile Include="Converters\SelectionChangedEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
@@ -151,7 +152,7 @@
     <Compile Include="ViewModels\LECharacteristicViewModel.cs" />
     <Compile Include="ViewModels\LEDeviceState.cs" />
     <Compile Include="ViewModels\LEDeviceViewModel.cs" />
-    <Compile Include="ViewModels\LENode.cs" />
+    <Compile Include="Views\LENode.cs" />
     <Compile Include="ViewModels\LEServiceViewModel.cs" />
     <Compile Include="ViewModels\LEViewModel.cs" />
     <Compile Include="ViewModels\SerialDeviceViewModel.cs" />
