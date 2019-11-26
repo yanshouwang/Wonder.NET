@@ -14,12 +14,15 @@ namespace Wonder.UWP.ViewModels
 
         public Guid UUID
             => _characteristic.Uuid;
+        public bool CanWrite
+            => _characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write);
+        public bool CanNotify
+            => _characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Notify);
 
         public LECharacteristicViewModel(INavigationService navigationService, GattCharacteristic characteristic)
             : base(navigationService)
         {
             _characteristic = characteristic;
-            characteristic.CharacteristicProperties
         }
     }
 }

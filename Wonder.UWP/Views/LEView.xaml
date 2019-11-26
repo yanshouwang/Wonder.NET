@@ -364,8 +364,14 @@
         </DataTemplate>
         <DataTemplate x:Key="CharacteristicTemplate" x:DataType="local:LENode">
             <muxc:TreeViewItem ItemsSource="{Binding Nodes}"
-                               Content="{Binding Value.UUID, Converter={StaticResource GUIDToStringConverter}}"
-                               HorizontalContentAlignment="Stretch"/>
+                               HorizontalContentAlignment="Stretch">
+                <muxc:TreeViewItem.Content>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Value.UUID, Converter={StaticResource GUIDToStringConverter}}"/>
+                        <ToggleSwitch Header="通知开关" IsEnabled="{Binding Value.CanNotify}"/>
+                    </StackPanel>
+                </muxc:TreeViewItem.Content>
+            </muxc:TreeViewItem>
         </DataTemplate>
         <local:LEDataTemplateSelector x:Key="LEDataTemplateSelector"
                                       Device="{StaticResource DeviceTemplate}"
