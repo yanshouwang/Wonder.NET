@@ -131,6 +131,7 @@
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\GUIDToStringConverter.cs" />
     <Compile Include="Converters\ItemClickEventArgsToClickedItemConverter.cs" />
+    <Compile Include="Converters\LEDeviceStateToBoolStateConverter.cs" />
     <Compile Include="Converters\SelectionChangedEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\UlongToMACConverter.cs" />
@@ -152,6 +153,12 @@
     <Compile Include="ViewModels\LECharacteristicViewModel.cs" />
     <Compile Include="ViewModels\LEDeviceState.cs" />
     <Compile Include="ViewModels\LEDeviceViewModel.cs" />
+    <Compile Include="Views\LECharacteristicView.xaml.cs">
+      <DependentUpon>LECharacteristicView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LEDeviceView.xaml.cs">
+      <DependentUpon>LEDeviceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LENode.cs" />
     <Compile Include="ViewModels\LEServiceViewModel.cs" />
     <Compile Include="ViewModels\LEViewModel.cs" />
@@ -167,6 +174,9 @@
     </Compile>
     <Compile Include="Views\HorizontalListView.cs" />
     <Compile Include="Views\LEDataTemplateSelector.cs" />
+    <Compile Include="Views\LEServiceView.xaml.cs">
+      <DependentUpon>LEServiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LEView.xaml.cs">
       <DependentUpon>LEView.xaml</DependentUpon>
     </Compile>
@@ -260,6 +270,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BLEView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LECharacteristicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LEDeviceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LEServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

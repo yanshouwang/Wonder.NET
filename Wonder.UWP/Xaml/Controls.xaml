@@ -11,6 +11,7 @@
     </ResourceDictionary.MergedDictionaries>
     <!--#region CONVERTER -->
     <converters:StringToGeometryConverter x:Key="StringToGeometryConverter"/>
+    <converters:GUIDToStringConverter x:Key="GUIDToStringConverter"/>
     <!--#endregion-->
     <!--#region DOUBLE -->
     <x:Double x:Key="ListViewItemMinWidth">0</x:Double>
@@ -92,6 +93,16 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style x:Key="CircleButtonRevealStyle" TargetType="Button"
+               BasedOn="{StaticResource ButtonRevealStyle}">
+        <Style.Setters>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style.Setters>
     </Style>
     <!--#endregion-->
     <!--#region REPEAT_BUTTON -->
@@ -456,6 +467,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <!--#endregion-->
+    <!--#region COMBOBOX-->
+    <Style TargetType="ComboBox">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
     <!--#endregion-->
 </ResourceDictionary>

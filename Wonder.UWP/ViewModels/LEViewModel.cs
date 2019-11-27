@@ -71,5 +71,21 @@ namespace Wonder.UWP.ViewModels
             _watcher.Stop();
             RaisePropertyChanged(nameof(IsScanning));
         }
+
+        private DelegateCommand _switchScanStateCommand;
+        public DelegateCommand SwitchScanStateCommand =>
+            _switchScanStateCommand ?? (_switchScanStateCommand = new DelegateCommand(ExecuteSwitchScanStateCommand));
+
+        void ExecuteSwitchScanStateCommand()
+        {
+            if (IsScanning)
+            {
+                ExecuteStopScanCommand();
+            }
+            else
+            {
+                ExecuteStartScanCommand();
+            }
+        }
     }
 }

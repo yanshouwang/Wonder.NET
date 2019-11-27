@@ -26,11 +26,11 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _rssi, value); }
         }
 
-        private LEDeviceState _state;
-        public LEDeviceState State
+        private LEDeviceState _connectionState;
+        public LEDeviceState ConnectionState
         {
-            get { return _state; }
-            set { SetProperty(ref _state, value); }
+            get { return _connectionState; }
+            set { SetProperty(ref _connectionState, value); }
         }
 
         public LEDeviceViewModel(INavigationService navigationService, ulong address, string name, int rssi)
@@ -44,15 +44,16 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _connectCommand;
         public DelegateCommand ConnectComamnd =>
-            _connectCommand ?? (_connectCommand = new DelegateCommand(ExecuteConnectComamnd, CanExecuteConnectCommand).ObservesProperty(() => State));
+            _connectCommand ?? (_connectCommand = new DelegateCommand(ExecuteConnectComamnd, CanExecuteConnectCommand).ObservesProperty(() => ConnectionState));
 
         private bool CanExecuteConnectCommand()
-            => State == LEDeviceState.Disconnected;
+            => ConnectionState == LEDeviceState.Disconnected;
 
         async void ExecuteConnectComamnd()
         {
-            State = LEDeviceState.Connecting;
+            ConnectionState = LEDeviceState.Connecting;
             _device = await BluetoothLEDevice.FromBluetoothAddressAsync(Address);
+            _device.ConnectionStatusChanged += OnConnectionStatusChanged;
             var sr = await _device.GetGattServicesAsync();
             if (sr.Status == GattCommunicationStatus.Success)
             {
@@ -72,9 +73,63 @@ namespace Wonder.UWP.ViewModels
                     }
                 }
             }
-            State = _device.ConnectionStatus == BluetoothConnectionStatus.Connected
-                  ? LEDeviceState.Connected
-                  : LEDeviceState.Disconnected;
+        }
+
+        private async void OnConnectionStatusChanged(BluetoothLEDevice sender, object args)
+        {
+            await DispatcherRunAsync(() =>
+            {
+                switch (sender.ConnectionStatus)
+                {
+                    case BluetoothConnectionStatus.Disconnected:
+                        {
+                            ConnectionState = LEDeviceState.Disconnected;
+                            Services.Clear();
+                            break;
+                        }
+                    case BluetoothConnectionStatus.Connected:
+                        {
+                            ConnectionState = LEDeviceState.Connected;
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+            });
+        }
+
+        private DelegateCommand _disconnectCommand;
+        public DelegateCommand DisconnectCommand =>
+            _disconnectCommand ?? (_disconnectCommand = new DelegateCommand(ExecuteDisconnectCommand, CanExecuteDisconnectCommand).ObservesProperty(() => ConnectionState));
+
+        private bool CanExecuteDisconnectCommand()
+            => ConnectionState == LEDeviceState.Connected;
+
+        void ExecuteDisconnectCommand()
+        {
+            ConnectionState = LEDeviceState.Disconnecting;
+            _device.Dispose();
+        }
+
+        private DelegateCommand _switchConnectionStateCommand;
+        public DelegateCommand SwitchConnectionStateCommand =>
+            _switchConnectionStateCommand ?? (_switchConnectionStateCommand = new DelegateCommand(ExecuteSwitchConnectionStateCommand, CanExecuteSwitchConnectionStateCommand).ObservesProperty(() => ConnectionState));
+
+        private bool CanExecuteSwitchConnectionStateCommand()
+            => ConnectionState != LEDeviceState.Connecting && ConnectionState != LEDeviceState.Disconnecting;
+
+        void ExecuteSwitchConnectionStateCommand()
+        {
+            if (ConnectionState == LEDeviceState.Disconnected)
+            {
+                ExecuteConnectComamnd();
+            }
+            else
+            {
+                ExecuteDisconnectCommand();
+            }
         }
     }
 }

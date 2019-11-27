@@ -10,6 +10,7 @@ namespace Wonder.UWP.ViewModels
     {
         Disconnected,
         Connecting,
-        Connected
+        Connected,
+        Disconnecting
     }
 }
