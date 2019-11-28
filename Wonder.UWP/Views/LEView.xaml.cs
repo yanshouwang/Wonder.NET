@@ -27,7 +27,7 @@ namespace Wonder.UWP.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class LEView : Page, INotifyPropertyChanged
+    public sealed partial class LEView : Page
     {
         public LEViewModel ViewModel
             => DataContext as LEViewModel;
@@ -37,34 +37,18 @@ namespace Wonder.UWP.Views
             this.InitializeComponent();
         }
 
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (object.Equals(storage, value)) return false;
-
-            storage = value;
-            this.OnPropertyChanged(propertyName);
-
-            return true;
-        }
-
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
         private void DevicesCBX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count < 1)
             {
                 DeviceView.Content = new LEDeviceView();
+                LoggerView.Content = new LELoggerView();
             }
             else
             {
-                DeviceView.Content = new LEDeviceView() { DataContext = e.AddedItems[0] };
+                var device = (LEDeviceViewModel)e.AddedItems[0];
+                DeviceView.Content = new LEDeviceView() { DataContext = device };
+                LoggerView.Content = new LELoggerView() { DataContext = device.LoggerX };
             }
         }
     }

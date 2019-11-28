@@ -127,6 +127,7 @@
     <Compile Include="Constants\ViewTokens.cs" />
     <Compile Include="Constants\Win32Errors.cs" />
     <Compile Include="Constants\Win32Libraries.cs" />
+    <Compile Include="Converters\BoolReverseConverter.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\GUIDToStringConverter.cs" />
@@ -137,6 +138,11 @@
     <Compile Include="Converters\UlongToMACConverter.cs" />
     <Compile Include="Extension\FrameworkElementExtensions.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
+    <Compile Include="Logger\ILELoggerX.cs" />
+    <Compile Include="Logger\Log.cs" />
+    <Compile Include="Logger\FileLELogger.cs" />
+    <Compile Include="Logger\ILELogger.cs" />
+    <Compile Include="Logger\MemoryLELoggerX.cs" />
     <Compile Include="Util\Win32Utils.cs" />
     <Compile Include="IO\Serial.cs" />
     <Compile Include="Services\ThemeService.cs" />
@@ -179,6 +185,9 @@
     </Compile>
     <Compile Include="Views\LEView.xaml.cs">
       <DependentUpon>LEView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LELoggerView.xaml.cs">
+      <DependentUpon>LELoggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SerialView.xaml.cs">
       <DependentUpon>SerialView.xaml</DependentUpon>
@@ -286,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LEView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LELoggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

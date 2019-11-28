@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Windows.Navigation;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
+using Wonder.UWP.Logger;
 
 namespace Wonder.UWP.ViewModels
 {
@@ -15,16 +16,17 @@ namespace Wonder.UWP.ViewModels
 
         public Guid UUID
             => _service.Uuid;
-
         public ObservableCollection<LECharacteristicViewModel> Characteristics { get; }
+        public ILELoggerX LoggerX { get; }
 
-        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics = null)
+        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics, ILELoggerX loggerX)
             : base(navigationService)
         {
             _service = service;
             Characteristics = characteristics == null
                             ? new ObservableCollection<LECharacteristicViewModel>()
                             : new ObservableCollection<LECharacteristicViewModel>(characteristics);
+            LoggerX = loggerX;
         }
     }
 }

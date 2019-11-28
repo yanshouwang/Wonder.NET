@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Wonder.UWP.ViewModels;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -19,9 +20,24 @@ namespace Wonder.UWP.Views
 {
     public sealed partial class LEServiceView : UserControl
     {
+        public LEServiceViewModel ViewModel
+            => DataContext as LEServiceViewModel;
+
         public LEServiceView()
         {
             this.InitializeComponent();
+        }
+
+        private void CharacteristicsCBX_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count < 1)
+            {
+                CharacteristicView.Content = new LECharacteristicView();
+            }
+            else
+            {
+                CharacteristicView.Content = new LECharacteristicView() { DataContext = e.AddedItems[0] };
+            }
         }
     }
 }

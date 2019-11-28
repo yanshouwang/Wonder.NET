@@ -4,10 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Windows.Navigation;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
+using Wonder.UWP.Logger;
 
 namespace Wonder.UWP.ViewModels
 {
@@ -18,12 +21,19 @@ namespace Wonder.UWP.ViewModels
         public ulong Address { get; set; }
         public string Name { get; set; }
         public ObservableCollection<LEServiceViewModel> Services { get; }
+        public ILELoggerX LoggerX { get; }
 
         private int _rssi;
         public int RSSI
         {
             get { return _rssi; }
-            set { SetProperty(ref _rssi, value); }
+            set
+            {
+                SetProperty(ref _rssi, value);
+                if (!IsLogRSSIEnabled)
+                    return;
+                LoggerX.LogRSSI(value);
+            }
         }
 
         private LEDeviceState _connectionState;
@@ -33,6 +43,13 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _connectionState, value); }
         }
 
+        private bool _isLogRSSIEnabled;
+        public bool IsLogRSSIEnabled
+        {
+            get { return _isLogRSSIEnabled; }
+            set { SetProperty(ref _isLogRSSIEnabled, value); }
+        }
+
         public LEDeviceViewModel(INavigationService navigationService, ulong address, string name, int rssi)
             : base(navigationService)
         {
@@ -40,6 +57,9 @@ namespace Wonder.UWP.ViewModels
             Name = name;
             RSSI = rssi;
             Services = new ObservableCollection<LEServiceViewModel>();
+            var array = BitConverter.GetBytes(address).Take(6).Reverse().ToArray();
+            var mac = BitConverter.ToString(array).Replace("-", string.Empty);
+            LoggerX = new MemoryLELoggerX(mac);
         }
 
         private DelegateCommand _connectCommand;
@@ -57,21 +77,33 @@ namespace Wonder.UWP.ViewModels
             var sr = await _device.GetGattServicesAsync();
             if (sr.Status == GattCommunicationStatus.Success)
             {
-                foreach (var service in sr.Services)
+                try
                 {
-                    var cr = await service.GetCharacteristicsAsync();
-                    if (cr.Status == GattCommunicationStatus.Success)
+                    foreach (var service in sr.Services)
                     {
-                        var items = cr.Characteristics.Select(i => new LECharacteristicViewModel(NavigationService, i)).ToList();
-                        var item = new LEServiceViewModel(NavigationService, service, items);
-                        Services.Add(item);
-                    }
-                    else
-                    {
-                        var item = new LEServiceViewModel(NavigationService, service);
-                        Services.Add(item);
+                        var cr = await service.GetCharacteristicsAsync();
+                        if (cr.Status == GattCommunicationStatus.Success)
+                        {
+                            var items = cr.Characteristics.Select(i => new LECharacteristicViewModel(NavigationService, i, LoggerX)).ToList();
+                            var item = new LEServiceViewModel(NavigationService, service, items, LoggerX);
+                            Services.Add(item);
+                        }
+                        else
+                        {
+                            var item = new LEServiceViewModel(NavigationService, service, null, LoggerX);
+                            Services.Add(item);
+                        }
                     }
                 }
+                catch (ObjectDisposedException ex)
+                {
+                    Crashes.TrackError(ex);
+                }
+                ConnectionState = LEDeviceState.Connected;
+            }
+            else
+            {
+                ConnectionState = LEDeviceState.Disconnected;
             }
         }
 
@@ -83,13 +115,16 @@ namespace Wonder.UWP.ViewModels
                 {
                     case BluetoothConnectionStatus.Disconnected:
                         {
+                            if (_device == null)
+                                return;
+                            ClearServices();
+                            _device.Dispose();
+                            _device = null;
                             ConnectionState = LEDeviceState.Disconnected;
-                            Services.Clear();
                             break;
                         }
                     case BluetoothConnectionStatus.Connected:
                         {
-                            ConnectionState = LEDeviceState.Connected;
                             break;
                         }
                     default:
@@ -98,6 +133,23 @@ namespace Wonder.UWP.ViewModels
                         }
                 }
             });
+        }
+
+        private void ClearServices()
+        {
+            var characteristics = Services.SelectMany(i => i.Characteristics);
+            foreach (var characteristic in characteristics)
+            {
+                if (characteristic.StopNotificationCommand.CanExecute())
+                {
+                    characteristic.StopNotificationCommand.Execute();
+                }
+                if (characteristic.StopLoopWriteCommand.CanExecute())
+                {
+                    characteristic.StopLoopWriteCommand.Execute();
+                }
+            }
+            Services.Clear();
         }
 
         private DelegateCommand _disconnectCommand;
@@ -109,8 +161,13 @@ namespace Wonder.UWP.ViewModels
 
         void ExecuteDisconnectCommand()
         {
+            if (_device == null)
+                return;
             ConnectionState = LEDeviceState.Disconnecting;
+            ClearServices();
             _device.Dispose();
+            _device = null;
+            ConnectionState = LEDeviceState.Disconnected;
         }
 
         private DelegateCommand _switchConnectionStateCommand;
