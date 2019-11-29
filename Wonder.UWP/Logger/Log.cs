@@ -8,9 +8,9 @@ namespace Wonder.UWP.Logger
 {
     public class Log
     {
-        public Log(DateTime time, string message)
+        public Log(string message)
         {
-            Time = time;
+            Time = DateTime.Now;
             Message = message;
         }
 

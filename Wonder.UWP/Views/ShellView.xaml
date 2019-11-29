@@ -446,7 +446,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-    <muxc:TabView Style="{StaticResource TabViewStyle}">
+    <muxc:TabView x:Name="ViewsTVW" Style="{StaticResource TabViewStyle}">
         <muxc:TabView.TabStripHeader>
             <Grid x:Name="TabStripHeader">
                 <Grid.ColumnDefinitions>
@@ -465,12 +465,13 @@
                     <ColumnDefinition x:Name="FooterSpace" Width="0"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" x:Name="TitleBar" Background="Transparent"/>
-                <Button Grid.Column="1" Style="{StaticResource TabViewButtonStyle}" Content="&#xE713;"/>
+                <Button x:Name="SettingsBTN" Grid.Column="1" Style="{StaticResource TabViewButtonStyle}" Content="&#xE713;"
+                        Click="SettingsBTN_Click"/>
             </Grid>
         </muxc:TabView.TabStripFooter>
         <muxc:TabView.TabItems>
             <muxc:TabViewItem IconSource="{StaticResource Home}"
-                              Header="设置"
+                              Header="LE"
                               Content="{x:Bind NavFrame}"/>
         </muxc:TabView.TabItems>
     </muxc:TabView>

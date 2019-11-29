@@ -18,6 +18,8 @@ namespace Wonder.UWP.ViewModels
         private readonly GattCharacteristic _characteristic;
         private readonly DispatcherTimer _timer;
 
+        private string _stressStr = "ABCDEFGHIJKLMNOPQRST";
+
         private bool _isNotifying;
         public bool IsNotifying
         {
@@ -56,6 +58,13 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _interval, value); }
         }
 
+        private bool _isStressWriting;
+        public bool IsStressWriting
+        {
+            get { return _isStressWriting; }
+            set { SetProperty(ref _isStressWriting, value); }
+        }
+
         private string _value;
         public string Value
         {
@@ -72,15 +81,60 @@ namespace Wonder.UWP.ViewModels
             LoggerX = loggerX;
         }
 
-        private void OnTimerTick(object sender, object e)
+        private async void OnTimerTick(object sender, object e)
         {
-            WriteCommand.Execute();
+            var buffer = CryptographicBuffer.ConvertStringToBinary(Value, BinaryStringEncoding.Utf8);
+            GattCommunicationStatus status;
+            if (_characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write))
+            {
+                status = await _characteristic.WriteValueAsync(buffer);
+            }
+            else
+            {
+                var result = await _characteristic.WriteValueWithResultAsync(buffer);
+                status = result.Status;
+            }
+            var array = Encoding.UTF8.GetBytes(Value);
+            var result1 = status == GattCommunicationStatus.Success ? true : false;
+            LoggerX.LogSend(array, result1);
         }
 
-        private void OnValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
+        private async void OnValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
             CryptographicBuffer.CopyToByteArray(args.CharacteristicValue, out var value);
-            LoggerX.LogReceived(value);
+            if (LoggerX.IsStressWriting)
+            {
+                // 校验
+                var str = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, args.CharacteristicValue);
+                var result = str == _stressStr;
+                LoggerX.LogReceived(value, result);
+                if (IsStressWriting)
+                {
+                    _stressStr = _stressStr.Length == 20 ? "ABCDEFGHIJKLMNOPQRS" : "ABCDEFGHIJKLMNOPQRST";
+                    var buffer = CryptographicBuffer.ConvertStringToBinary(_stressStr, BinaryStringEncoding.Utf8);
+                    GattCommunicationStatus status;
+                    if (_characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write))
+                    {
+                        status = await _characteristic.WriteValueAsync(buffer);
+                    }
+                    else
+                    {
+                        var result1 = await _characteristic.WriteValueWithResultAsync(buffer);
+                        status = result1.Status;
+                    }
+                    var array = Encoding.UTF8.GetBytes(_stressStr);
+                    var result2 = status == GattCommunicationStatus.Success ? true : false;
+                    LoggerX.LogSend(array, result2);
+                }
+                else
+                {
+                    LoggerX.LogStressWriteStopped();
+                }
+            }
+            else
+            {
+                LoggerX.LogReceived(value);
+            }
         }
 
         private DelegateCommand _startNotificationCommand;
@@ -101,10 +155,10 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _stopNotificationCommand;
         public DelegateCommand StopNotificationCommand =>
-            _stopNotificationCommand ?? (_stopNotificationCommand = new DelegateCommand(ExecuteStopNotificationCommand, CanExecuteStopNotificationCommand).ObservesProperty(() => IsNotifying));
+            _stopNotificationCommand ?? (_stopNotificationCommand = new DelegateCommand(ExecuteStopNotificationCommand, CanExecuteStopNotificationCommand).ObservesProperty(() => IsNotifying).ObservesProperty(() => IsStressWriting));
 
         private bool CanExecuteStopNotificationCommand()
-            => CanNotify && IsNotifying;
+            => CanNotify && IsNotifying && !IsStressWriting;
 
         async void ExecuteStopNotificationCommand()
         {
@@ -117,41 +171,33 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _writeCommand;
         public DelegateCommand WriteCommand =>
-            _writeCommand ?? (_writeCommand = new DelegateCommand(ExecuteWriteCommand, CanExecuteWriteCommand).ObservesProperty(() => CanWrite));
+            _writeCommand ?? (_writeCommand = new DelegateCommand(ExecuteWriteCommand, CanExecuteWriteCommand).ObservesProperty(() => CanWrite).ObservesProperty(() => IsLoopWriting).ObservesProperty(() => IsStressWriting));
 
         private bool CanExecuteWriteCommand()
-            => CanWrite;
+            => CanWrite && !IsStressWriting;
 
         async void ExecuteWriteCommand()
         {
-            var buffer = CryptographicBuffer.ConvertStringToBinary(Value, BinaryStringEncoding.Utf8);
-            GattCommunicationStatus status;
-            if (_characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write))
-            {
-                status = await _characteristic.WriteValueAsync(buffer);
-            }
-            else
-            {
-                var result = await _characteristic.WriteValueWithResultAsync(buffer);
-                status = result.Status;
-            }
-            var array = Encoding.UTF8.GetBytes(Value);
-            var isSuccess = status == GattCommunicationStatus.Success ? true : false;
-            LoggerX.LogSend(array, isSuccess);
+            var value = Encoding.UTF8.GetBytes(Value);
+            var result = await WriteAsync(value);
+            LoggerX.LogSend(value, result);
         }
 
         private DelegateCommand _startLoopWriteCommand;
         public DelegateCommand StartLoopWriteCommand =>
-            _startLoopWriteCommand ?? (_startLoopWriteCommand = new DelegateCommand(ExecuteStartLoopWriteCommand, CanExecuteStartLoopWriteCommand).ObservesProperty(() => CanWrite).ObservesProperty(() => IsLoopWriteEnabled).ObservesProperty(() => IsLoopWriting).ObservesProperty(() => Interval));
+            _startLoopWriteCommand ?? (_startLoopWriteCommand = new DelegateCommand(ExecuteStartLoopWriteCommand, CanExecuteStartLoopWriteCommand).ObservesProperty(() => CanWrite).ObservesProperty(() => IsLoopWriteEnabled).ObservesProperty(() => IsLoopWriting).ObservesProperty(() => Interval).ObservesProperty(() => IsStressWriting));
 
         private bool CanExecuteStartLoopWriteCommand()
-            => CanWrite && IsLoopWriteEnabled && !IsLoopWriting && Interval > 0;
+            => CanWrite && IsLoopWriteEnabled && !IsLoopWriting && Interval > 0 && !IsStressWriting;
 
-        void ExecuteStartLoopWriteCommand()
+        async void ExecuteStartLoopWriteCommand()
         {
+            IsLoopWriting = true;
+            var value = Encoding.UTF8.GetBytes(Value);
+            var result = await WriteAsync(value);
+            LoggerX.LogSend(value, result);
             _timer.Interval = TimeSpan.FromMilliseconds(Interval);
             _timer.Start();
-            IsLoopWriting = true;
         }
 
         private DelegateCommand _stopLoopWriteCommand;
@@ -165,6 +211,71 @@ namespace Wonder.UWP.ViewModels
         {
             _timer.Stop();
             IsLoopWriting = false;
+        }
+
+        private DelegateCommand _switchLoopWriteCommand;
+        public DelegateCommand SwitchLoopWriteCommand =>
+            _switchLoopWriteCommand ?? (_switchLoopWriteCommand = new DelegateCommand(ExecuteSwitchLoopWriteCommand, CanExecuteSwitchLoopWriteCommand).ObservesProperty(() => CanWrite).ObservesProperty(() => IsLoopWriteEnabled).ObservesProperty(() => Interval).ObservesProperty(() => IsStressWriting));
+
+        private bool CanExecuteSwitchLoopWriteCommand()
+            => StartLoopWriteCommand.CanExecute() || StopLoopWriteCommand.CanExecute();
+
+        void ExecuteSwitchLoopWriteCommand()
+        {
+            if (StartLoopWriteCommand.CanExecute())
+            {
+                StartLoopWriteCommand.Execute();
+            }
+            else
+            {
+                StopLoopWriteCommand.Execute();
+            }
+        }
+
+        private DelegateCommand _startStressWriteCommand;
+        public DelegateCommand StartStressWriteCommand =>
+            _startStressWriteCommand ?? (_startStressWriteCommand = new DelegateCommand(ExecuteStartStressWriteCommand, CanExecuteStartStressWriteCommand).ObservesProperty(() => CanWrite).ObservesProperty(() => IsStressWriting).ObservesProperty(() => IsLoopWriting).ObservesProperty(() => IsNotifying));
+
+        private bool CanExecuteStartStressWriteCommand()
+            => CanWrite && !IsStressWriting && !IsLoopWriting && IsNotifying;
+
+        async void ExecuteStartStressWriteCommand()
+        {
+            IsStressWriting = true;
+            LoggerX.LogStressWriteStarted();
+            var value = Encoding.UTF8.GetBytes(_stressStr);
+            var result = await WriteAsync(value);
+            LoggerX.LogSend(value, result);
+        }
+
+        private async Task<bool> WriteAsync(byte[] array)
+        {
+            var value = CryptographicBuffer.CreateFromByteArray(array);
+            if (_characteristic.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write))
+            {
+                var status = await _characteristic.WriteValueAsync(value);
+                var isWritten = status == GattCommunicationStatus.Success;
+                return isWritten;
+            }
+            else
+            {
+                var result = await _characteristic.WriteValueWithResultAsync(value);
+                var status = result.Status;
+                var isWritten = status == GattCommunicationStatus.Success;
+                return isWritten;
+            }
+        }
+
+        private DelegateCommand _stopStressWriteCommand;
+        public DelegateCommand StopStressWriteCommand =>
+            _stopStressWriteCommand ?? (_stopStressWriteCommand = new DelegateCommand(ExecuteStopStressWriteCommand, CanExecuteStopStressWriteCommand).ObservesProperty(() => IsStressWriting));
+
+        private bool CanExecuteStopStressWriteCommand()
+            => IsStressWriting;
+
+        void ExecuteStopStressWriteCommand()
+        {
+            IsStressWriting = false;
         }
     }
 }

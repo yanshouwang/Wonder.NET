@@ -80,5 +80,27 @@ namespace Wonder.UWP.Views
         {
 
         }
+
+        private void SettingsBTN_Click(object sender, RoutedEventArgs e)
+        {
+            var item = ViewsTVW.TabItems.FirstOrDefault(i => i is MUXC.TabViewItem j && j.Content is Frame k && k.Content is SettingsView);
+            if (item == null)
+            {
+                var frame = new Frame();
+                frame.Navigate(typeof(SettingsView));
+                item = new MUXC.TabViewItem()
+                {
+                    IconSource = new MUXC.SymbolIconSource() { Symbol = Symbol.Setting },
+                    Header = "设置",
+                    Content = frame
+                };
+                ViewsTVW.TabItems.Add(item);
+                ViewsTVW.SelectedItem = item;
+            }
+            else
+            {
+                ViewsTVW.SelectedItem = item;
+            }
+        }
     }
 }

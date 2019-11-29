@@ -14,7 +14,7 @@ using Wonder.UWP.Logger;
 
 namespace Wonder.UWP.ViewModels
 {
-    public class LEDeviceViewModel : BaseViewModel
+    public class LEDeviceViewModel : BaseViewModel, IDisposable
     {
         private BluetoothLEDevice _device;
 
@@ -59,7 +59,7 @@ namespace Wonder.UWP.ViewModels
             Services = new ObservableCollection<LEServiceViewModel>();
             var array = BitConverter.GetBytes(address).Take(6).Reverse().ToArray();
             var mac = BitConverter.ToString(array).Replace("-", string.Empty);
-            LoggerX = new MemoryLELoggerX(mac);
+            LoggerX = new FileLELoggerX(mac);
         }
 
         private DelegateCommand _connectCommand;
@@ -115,12 +115,13 @@ namespace Wonder.UWP.ViewModels
                 {
                     case BluetoothConnectionStatus.Disconnected:
                         {
-                            if (_device == null)
-                                return;
-                            ClearServices();
-                            _device.Dispose();
-                            _device = null;
                             ConnectionState = LEDeviceState.Disconnected;
+                            if (_device != null)
+                            {
+                                ClearServices();
+                                _device.Dispose();
+                                _device = null;
+                            }
                             break;
                         }
                     case BluetoothConnectionStatus.Connected:
@@ -137,17 +138,9 @@ namespace Wonder.UWP.ViewModels
 
         private void ClearServices()
         {
-            var characteristics = Services.SelectMany(i => i.Characteristics);
-            foreach (var characteristic in characteristics)
+            foreach (var service in Services)
             {
-                if (characteristic.StopNotificationCommand.CanExecute())
-                {
-                    characteristic.StopNotificationCommand.Execute();
-                }
-                if (characteristic.StopLoopWriteCommand.CanExecute())
-                {
-                    characteristic.StopLoopWriteCommand.Execute();
-                }
+                service.Dispose();
             }
             Services.Clear();
         }
@@ -167,7 +160,6 @@ namespace Wonder.UWP.ViewModels
             ClearServices();
             _device.Dispose();
             _device = null;
-            ConnectionState = LEDeviceState.Disconnected;
         }
 
         private DelegateCommand _switchConnectionStateCommand;
@@ -188,5 +180,46 @@ namespace Wonder.UWP.ViewModels
                 ExecuteDisconnectCommand();
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // 要检测冗余调用
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: 释放托管状态(托管对象)。
+                    if (_device != null)
+                    {
+                        ClearServices();
+                        _device.Dispose();
+                    }
+                }
+
+                // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
+                // TODO: 将大型字段设置为 null。
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
+        // ~LEDeviceViewModel()
+        // {
+        //   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+        //   Dispose(false);
+        // }
+
+        // 添加此代码以正确实现可处置模式。
+        public void Dispose()
+        {
+            // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+            Dispose(true);
+            // TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

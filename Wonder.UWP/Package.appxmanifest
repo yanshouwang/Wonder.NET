@@ -8,8 +8,8 @@
 
   <Identity
     Name="873f6928-62e2-4201-804c-d35f6344ac00"
-    Publisher="CN=YSW"
-    Version="1.0.0.0" />
+    Publisher="CN=Additel"
+    Version="1.0.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="873f6928-62e2-4201-804c-d35f6344ac00" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -47,10 +47,20 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#FFA000"/>
         <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText"/>
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name=".txt">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.txt</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
+    <uap:Capability Name="documentsLibrary"/>
     <Capability Name="internetClient" />
     <DeviceCapability Name="serialcommunication" />
     <DeviceCapability Name="bluetooth"/>

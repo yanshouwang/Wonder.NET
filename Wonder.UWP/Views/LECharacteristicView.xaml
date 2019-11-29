@@ -5,6 +5,8 @@
     xmlns:local="using:Wonder.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Wonder.UWP.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -31,7 +33,6 @@
         <Button Grid.Row="1" Content="&#xE76D;"
                 FontFamily="Segoe MDL2 Assets"
                 FontSize="24"
-                Style="{StaticResource ButtonRevealStyle}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Margin="12"
@@ -39,18 +40,48 @@
                 Height="40"
                 CornerRadius="20"
                 Padding="0"
-                Command="{x:Bind ViewModel.WriteCommand}"/>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <CheckBox Grid.Column="0" Content="循环发送" CornerRadius="0"
+                Command="{x:Bind ViewModel.WriteCommand}">
+            <i:Interaction.Behaviors>
+                <ic:DataTriggerBehavior Binding="{x:Bind LoopWriteCBX.IsChecked, Mode=OneWay}" Value="True">
+                    <ic:ChangePropertyAction PropertyName="Visibility" Value="Collapsed"/>
+                </ic:DataTriggerBehavior>
+                <ic:DataTriggerBehavior Binding="{x:Bind LoopWriteCBX.IsChecked, Mode=OneWay}" Value="False">
+                    <ic:ChangePropertyAction PropertyName="Visibility" Value="Visible"/>
+                </ic:DataTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+        <Button Grid.Row="1" Content="&#xE768;"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="24"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="12"
+                Width="40"
+                Height="40"
+                CornerRadius="20"
+                Padding="0"
+                Command="{x:Bind ViewModel.WriteCommand}"
+                Visibility="{x:Bind LoopWriteCBX.IsChecked, Mode=OneWay}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </Button.Style>
+            <i:Interaction.Behaviors>
+                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting}" Value="True">
+                    <ic:ChangePropertyAction PropertyName="Content" Value="&#xE71A;"/>
+                </ic:DataTriggerBehavior>
+                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting}" Value="False">
+                    <ic:ChangePropertyAction PropertyName="Content" Value="&#xE768;"/>
+                </ic:DataTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </Button>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
+            <CheckBox x:Name="LoopWriteCBX" Grid.Column="0" Content="循环发送" CornerRadius="0"
                       IsChecked="{x:Bind ViewModel.IsLoopWriteEnabled, Mode=TwoWay}"
                       IsEnabled="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay, Converter={StaticResource BoolReverseConverter}}"/>
             <TextBlock Grid.Column="1" Text="发送间隔（ms）" VerticalAlignment="Center"/>
-            <TextBox x:Name="IntervalTBX" Grid.Column="2" CornerRadius="0" VerticalAlignment="Center"
+            <TextBox x:Name="IntervalTBX" Grid.Column="2" CornerRadius="0" Width="120" VerticalAlignment="Center"
                      InputScope="Number"
                      Text="{x:Bind ViewModel.Interval, Mode=TwoWay}"
                      IsEnabled="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay, Converter={StaticResource BoolReverseConverter}}">
@@ -59,16 +90,12 @@
                     <Thickness x:Key="TextControlBorderThemeThicknessFocused">0,0,0,1</Thickness>
                 </TextBox.Resources>
             </TextBox>
-        </Grid>
-        <Grid Grid.Row="3" ColumnSpacing="12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="开始发送" Style="{StaticResource ButtonRevealStyle}"
-                    Command="{x:Bind ViewModel.StartLoopWriteCommand}"/>
-            <Button Grid.Column="1" Content="停止发送" Style="{StaticResource ButtonRevealStyle}"
-                    Command="{x:Bind ViewModel.StopLoopWriteCommand}"/>
-        </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
+            <Button Grid.Column="0" Content="开始测试"
+                    Command="{x:Bind ViewModel.StartStressWriteCommand}"/>
+            <Button Grid.Column="1" Content="停止测试"
+                    Command="{x:Bind ViewModel.StopStressWriteCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

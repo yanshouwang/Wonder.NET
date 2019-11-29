@@ -9,15 +9,15 @@ using MTUH = Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Wonder.UWP.Services
 {
-    public class ThemeService
+    public class ThemeService : IThemeService
     {
         public IUnityContainer Container { get; }
         public UISettings UISettings { get; }
 
-        public ThemeService(IUnityContainer container, UISettings uiSettings)
+        public ThemeService(IUnityContainer container)
         {
             Container = container;
-            UISettings = uiSettings;
+            UISettings = new UISettings();
         }
 
         public void SetThemeMode(ThemeMode mode)

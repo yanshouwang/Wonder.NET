@@ -39,31 +39,76 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12">
             <Rectangle Width="20" Height="20" Fill="HotPink"/>
-            <TextBlock Text="发送："/>
+            <TextBlock Text="统计："/>
             <TextBlock>
-                <Run Text="成功"/>
+                <Run Text="发送成功"/>
                 <Run Text="{Binding SendCount}"/>
                 <Run Text="包，"/>
                 <Run Text="{Binding SendLength}"/>
                 <Run Text="字节"/>
             </TextBlock>
             <TextBlock>
-                <Run Text="失败"/>
+                <Run Text="发送失败"/>
                 <Run Text="{Binding FailedCount}"/>
                 <Run Text="包，"/>
                 <Run Text="{Binding FailedLength}"/>
                 <Run Text="字节"/>
             </TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
-            <Rectangle Width="20" Height="20" Fill="Green"/>
-            <TextBlock Text="接收："/>
             <TextBlock>
+                <Run Text="接收成功"/>
                 <Run Text="{Binding ReceivedCount}"/>
                 <Run Text="包，"/>
                 <Run Text="{Binding ReceivedLength}"/>
                 <Run Text="字节"/>
             </TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
+            <Rectangle Width="20" Height="20" Fill="Purple"/>
+            <StackPanel Spacing="4">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="测试："/>
+                    <TextBlock>
+                        <Run Text="{Binding StartStressWriteTime}"/>
+                        <Run Text="-"/>
+                        <Run Text="{Binding StopStressWriteTime}"/>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock>
+                        <Run Text="发送成功"/>
+                        <Run Text="{Binding StressSendCount}"/>
+                        <Run Text="包，"/>
+                        <Run Text="{Binding StressSendLength}"/>
+                        <Run Text="字节"/>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="发送失败"/>
+                        <Run Text="{Binding StressFailedCount}"/>
+                        <Run Text="包，"/>
+                        <Run Text="{Binding StressFailedLength}"/>
+                        <Run Text="字节"/>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="校验成功"/>
+                        <Run Text="{Binding StressReceivedCount}"/>
+                        <Run Text="包，"/>
+                        <Run Text="{Binding StressReceivedLength}"/>
+                        <Run Text="字节"/>
+                    </TextBlock>
+                    <TextBlock>
+                        <Run Text="校验失败"/>
+                        <Run Text="{Binding CheckFailedCount}"/>
+                        <Run Text="包，"/>
+                        <Run Text="{Binding CheckFailedLength}"/>
+                        <Run Text="字节"/>
+                    </TextBlock>
+                </StackPanel>
+                <TextBlock>
+                    <Run Text="平均速度"/>
+                    <Run Text="{Binding StressWriteSpeed}"/>
+                    <Run Text="字节/秒"/>
+                </TextBlock>
+            </StackPanel>
         </StackPanel>
         <ListView Grid.Row="3" ItemsSource="{Binding Logs}">
             <ListView.ItemTemplate>

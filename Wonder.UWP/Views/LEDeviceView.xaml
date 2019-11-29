@@ -18,11 +18,9 @@
         </Grid.RowDefinitions>
         <ToggleSwitch Header="RSSI 记录开关" IsOn="{Binding IsLogRSSIEnabled, Mode=TwoWay}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12">
-            <Button Style="{StaticResource ButtonRevealStyle}"
-                    Content="连接设备"
+            <Button Content="连接设备"
                     Command="{Binding ConnectComamnd}"/>
-            <Button Style="{StaticResource ButtonRevealStyle}"
-                    Content="断开设备"
+            <Button Content="断开设备"
                     Command="{Binding DisconnectCommand}"/>
         </StackPanel>
         <ComboBox x:Name="ServicesCBX" Grid.Row="2"

@@ -39,8 +39,7 @@ namespace Wonder.UWP
         {
             base.ConfigureContainer();
             Container.RegisterInstance(Container);
-            var themeService = Container.Resolve<ThemeService>();
-            Container.RegisterInstance(themeService);
+            Container.RegisterType<IThemeService, ThemeService>();
         }
 
         protected override IDeviceGestureService OnCreateDeviceGestureService()

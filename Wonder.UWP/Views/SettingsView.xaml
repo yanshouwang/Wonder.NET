@@ -13,7 +13,6 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Wonder.UWP.Converters"
-    xmlns:adv="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -160,7 +159,8 @@
         <RepeatButton x:Name="DownArrowBTN" Grid.Row="2" Margin="0,8,0,24" Content="M0,0 L1,1 L2,0 Z"
                       Style="{StaticResource RepeatButtonPathStyle}"
                       Visibility="{Binding ElementName=SettingsSCV, Path=ComputedVerticalScrollBarVisibility}"/>
-        <Grid Grid.Row="3">
+        <!--xmlns:adv="using:Microsoft.Advertising.WinRT.UI"-->
+        <!--<Grid Grid.Row="3">
             <adv:AdControl x:Name="ADC" Height="100"
                            ApplicationId="3f83fe91-d6be-434d-a0ae-7351c5a997f1"
                            AdUnitId="test"
@@ -171,6 +171,6 @@
             <TextBlock Text="广告" FontSize="16" Margin="0,4,8,0"
                        HorizontalAlignment="Right" VerticalAlignment="Top"
                        Foreground="{ThemeResource  SystemControlTransparentRevealBorderBrush}"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Page>

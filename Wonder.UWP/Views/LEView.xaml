@@ -150,6 +150,7 @@
                                       Device="{StaticResource DeviceTemplate}"
                                       Service="{StaticResource ServiceTemplate}"
                                       Characteristic="{StaticResource CharacteristicTemplate}"/>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}"/>
     </Page.Resources>
     <Grid ColumnSpacing="12" Margin="12">
         <Grid.ColumnDefinitions>
@@ -163,9 +164,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12">
-                <Button Content="开始搜索" Style="{StaticResource ButtonRevealStyle}"
+                <Button Content="开始搜索"
                         Command="{Binding StartScanCommand}"/>
-                <Button Content="停止搜索" Style="{StaticResource ButtonRevealStyle}"
+                <Button Content="停止搜索"
                         Command="{Binding StopScanCommand}"/>
             </StackPanel>
             <ComboBox x:Name="DevicesCBX" Grid.Row="1"

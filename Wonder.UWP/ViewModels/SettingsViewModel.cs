@@ -17,7 +17,7 @@ namespace Wonder.UWP.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public ThemeService ThemeService { get; }
+        public IThemeService ThemeService { get; }
 
         private ThemeMode _themeMode;
         public ThemeMode ThemeMode
@@ -40,7 +40,7 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _version, value); }
         }
 
-        public SettingsViewModel(INavigationService navigationService, ThemeService themeService)
+        public SettingsViewModel(INavigationService navigationService, IThemeService themeService)
             : base(navigationService)
         {
             ThemeService = themeService;
