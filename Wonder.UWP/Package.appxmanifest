@@ -15,7 +15,7 @@
 
   <Properties>
     <DisplayName>Wonder.UWP</DisplayName>
-    <PublisherDisplayName>YSW</PublisherDisplayName>
+    <PublisherDisplayName>iDotNET</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
