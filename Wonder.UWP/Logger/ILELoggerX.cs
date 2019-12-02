@@ -12,12 +12,19 @@ namespace Wonder.UWP.Logger
         int AverageRSSI { get; }
         int MinimumRSSI { get; }
         int MaximumRSSI { get; }
-        int SendCount { get; }
-        int FailedCount { get; }
-        int ReceivedCount { get; }
-        long SendLength { get; }
-        long FailedLength { get; }
-        long ReceivedLength { get; }
+        int WriteSucceedCount { get; }
+        long WriteSucceedLength { get; }
+        int WriteFailedCount { get; }
+        long WriteFailedLength { get; }
+        int ValueChangedCount { get; }
+        long ValueChangedLength { get; }
+        DateTime LoopWriteStartedTime { get; }
+        DateTime LoopWriteStoppedTime { get; }
+        int LoopWriteSucceedCount { get; }
+        long LoopWriteSucceedLength { get; }
+        int LoopWriteFailedCount { get; }
+        long LoopWriteFailedLength { get; }
+        int LoopWriteSpeed { get; }
         IList<Log> Logs { get; }
     }
 }

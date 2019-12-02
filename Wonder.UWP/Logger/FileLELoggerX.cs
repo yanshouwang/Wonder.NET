@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Streams;
 
 namespace Wonder.UWP.Logger
 {
@@ -40,29 +36,36 @@ namespace Wonder.UWP.Logger
             await CensusAsync();
         }
 
-        protected override async void HandleReceived(byte[] value, bool result)
+        protected override async void HandleValueChanged(byte[] value)
         {
-            base.HandleReceived(value, result);
+            base.HandleValueChanged(value);
             await LogAsync();
             await CensusAsync();
         }
 
-        protected override async void HandleSend(byte[] value, bool result)
+        protected override async void HandleWrite(byte[] value, bool result)
         {
-            base.HandleSend(value, result);
+            base.HandleWrite(value, result);
             await LogAsync();
             await CensusAsync();
         }
 
-        protected override async void HandleStressWriteStarted()
+        protected override async void HandleLoopWriteStarted()
         {
-            base.HandleStressWriteStarted();
+            base.HandleLoopWriteStarted();
             await LogAsync();
         }
 
-        protected override async void HandleStressWriteStopped()
+        protected override async void HandleLoopWrite(byte[] value, bool result)
         {
-            base.HandleStressWriteStopped();
+            base.HandleLoopWrite(value, result);
+            await LogAsync();
+            await CensusAsync();
+        }
+
+        protected override async void HandleLoopWriteStopped()
+        {
+            base.HandleLoopWriteStopped();
             await LogAsync();
         }
 
@@ -109,16 +112,14 @@ namespace Wonder.UWP.Logger
                 var content = $"***RSSI***\r\n" +
                               $"平均值->{AverageRSSI} 最大值->{MaximumRSSI} 最小值->{MinimumRSSI}\r\n" +
                               $"***统计***\r\n" +
-                              $"发送成功：{SendCount}包 {SendLength}字节\r\n" +
-                              $"发送失败：{FailedCount}包 {FailedLength}字节\r\n" +
-                              $"接收成功：{ReceivedCount}包 {ReceivedLength}字节\r\n" +
+                              $"发送成功：{WriteSucceedCount}包 {WriteSucceedLength}字节\r\n" +
+                              $"发送失败：{WriteFailedCount}包 {WriteFailedLength}字节\r\n" +
+                              $"接收成功：{ValueChangedCount}包 {ValueChangedLength}字节\r\n" +
                               $"***测试***\r\n" +
-                              $"起止时间：{StartStressWriteTime} - {StopStressWriteTime}\r\n" +
-                              $"发送成功：{StressSendCount}包 {StressSendLength}字节\r\n" +
-                              $"发送失败：{StressFailedCount}包 {StressFailedLength}字节\r\n" +
-                              $"校验成功：{StressReceivedCount}包 {StressReceivedLength}字节\r\n" +
-                              $"校验失败：{CheckFailedCount}包 {CheckFailedLength}字节\r\n" +
-                              $"平均速度：{StressWriteSpeed}字节/秒";
+                              $"起止时间：{LoopWriteStartedTime} - {LoopWriteStoppedTime}\r\n" +
+                              $"发送成功：{LoopWriteSucceedCount}包 {LoopWriteSucceedLength}字节\r\n" +
+                              $"发送失败：{LoopWriteFailedCount}包 {LoopWriteFailedLength}字节\r\n" +
+                              $"平均速度：{LoopWriteSpeed}字节/秒";
                 var retryAttempts = RETRY_ATTEMPTS;
                 while (retryAttempts > 0)
                 {

@@ -41,10 +41,6 @@ namespace Wonder.UWP.ViewModels
                     // TODO: 释放托管状态(托管对象)。
                     foreach (var characteristic in Characteristics)
                     {
-                        if (characteristic.StopStressWriteCommand.CanExecute())
-                        {
-                            characteristic.StopStressWriteCommand.Execute();
-                        }
                         if (characteristic.StopLoopWriteCommand.CanExecute())
                         {
                             characteristic.StopLoopWriteCommand.Execute();

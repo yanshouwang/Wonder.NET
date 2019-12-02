@@ -14,14 +14,6 @@ namespace Wonder.UWP.Logger
     {
         private readonly IList<int> _rssis;
 
-        public bool IsStressWriting { get; private set; }
-
-        public MemoryLELoggerX()
-        {
-            _rssis = new List<int>();
-            Logs = new ObservableCollection<Log>();
-        }
-
         #region RSSI
         private int _currentRSSI;
         public int CurrentRSSI
@@ -53,129 +45,107 @@ namespace Wonder.UWP.Logger
         #endregion
 
         #region CENSUS
-        private int _sendCount;
-        public int SendCount
+        private int _writeSucceedCount;
+        public int WriteSucceedCount
         {
-            get { return _sendCount; }
-            set { SetProperty(ref _sendCount, value); }
+            get { return _writeSucceedCount; }
+            set { SetProperty(ref _writeSucceedCount, value); }
         }
 
-        private int _failedCount;
-        public int FailedCount
+        private long _writeSucceedLength;
+        public long WriteSucceedLength
         {
-            get { return _failedCount; }
-            set { SetProperty(ref _failedCount, value); }
+            get { return _writeSucceedLength; }
+            set { SetProperty(ref _writeSucceedLength, value); }
         }
 
-        private int _receivedCount;
-        public int ReceivedCount
+        private int _writeFailedCount;
+        public int WriteFailedCount
         {
-            get { return _receivedCount; }
-            set { SetProperty(ref _receivedCount, value); }
+            get { return _writeFailedCount; }
+            set { SetProperty(ref _writeFailedCount, value); }
         }
 
-        private long _sendLength;
-        public long SendLength
+        private long _writeFailedLength;
+        public long WriteFailedLength
         {
-            get { return _sendLength; }
-            set { SetProperty(ref _sendLength, value); }
+            get { return _writeFailedLength; }
+            set { SetProperty(ref _writeFailedLength, value); }
         }
 
-        private long _failedLength;
-        public long FailedLength
+        private int _valueChangedCount;
+        public int ValueChangedCount
         {
-            get { return _failedLength; }
-            set { SetProperty(ref _failedLength, value); }
+            get { return _valueChangedCount; }
+            set { SetProperty(ref _valueChangedCount, value); }
         }
 
-        private long _receivedLength;
-        public long ReceivedLength
+        private long _valueChangedLength;
+        public long ValueChangedLength
         {
-            get { return _receivedLength; }
-            set { SetProperty(ref _receivedLength, value); }
+            get { return _valueChangedLength; }
+            set { SetProperty(ref _valueChangedLength, value); }
         }
         #endregion
 
-        #region STRESS WRITE
-        private DateTime _startStressWriteTime;
-        public DateTime StartStressWriteTime
+        #region LOOP WRITE
+        private DateTime _loopWriteStartedTime;
+        public DateTime LoopWriteStartedTime
         {
-            get { return _startStressWriteTime; }
-            set { SetProperty(ref _startStressWriteTime, value); }
+            get { return _loopWriteStartedTime; }
+            set { SetProperty(ref _loopWriteStartedTime, value); }
         }
 
-        private DateTime _stopStressWriteTime;
-        public DateTime StopStressWriteTime
+        private DateTime _loopWriteStoppedTime;
+        public DateTime LoopWriteStoppedTime
         {
-            get { return _stopStressWriteTime; }
-            set { SetProperty(ref _stopStressWriteTime, value); }
+            get { return _loopWriteStoppedTime; }
+            set { SetProperty(ref _loopWriteStoppedTime, value); }
         }
 
-        private int _stressSendCount;
-        public int StressSendCount
+        private int _loopWriteSucceedCount;
+        public int LoopWriteSucceedCount
         {
-            get { return _stressSendCount; }
-            set { SetProperty(ref _stressSendCount, value); }
+            get { return _loopWriteSucceedCount; }
+            set { SetProperty(ref _loopWriteSucceedCount, value); }
         }
 
-        private int _stressFailedCount;
-        public int StressFailedCount
+        private long _loopWriteSucceedLength;
+        public long LoopWriteSucceedLength
         {
-            get { return _stressFailedCount; }
-            set { SetProperty(ref _stressFailedCount, value); }
+            get { return _loopWriteSucceedLength; }
+            set { SetProperty(ref _loopWriteSucceedLength, value); }
         }
 
-        private int _stressReceivedCount;
-        public int StressReceivedCount
+        private int _loopWriteFailedCount;
+        public int LoopWriteFailedCount
         {
-            get { return _stressReceivedCount; }
-            set { SetProperty(ref _stressReceivedCount, value); }
+            get { return _loopWriteFailedCount; }
+            set { SetProperty(ref _loopWriteFailedCount, value); }
         }
 
-        private long _stressSendLength;
-        public long StressSendLength
+        private long _loopWriteFailedLength;
+        public long LoopWriteFailedLength
         {
-            get { return _stressSendLength; }
-            set { SetProperty(ref _stressSendLength, value); }
+            get { return _loopWriteFailedLength; }
+            set { SetProperty(ref _loopWriteFailedLength, value); }
         }
 
-        private long _stressFailedLength;
-        public long StressFailedLength
+        private int _loopWriteSpeed;
+        public int LoopWriteSpeed
         {
-            get { return _stressFailedLength; }
-            set { SetProperty(ref _stressFailedLength, value); }
-        }
-
-        private long _stressReceivedLength;
-        public long StressReceivedLength
-        {
-            get { return _stressReceivedLength; }
-            set { SetProperty(ref _stressReceivedLength, value); }
-        }
-
-        private long _checkFailedCount;
-        public long CheckFailedCount
-        {
-            get { return _checkFailedCount; }
-            set { SetProperty(ref _checkFailedCount, value); }
-        }
-
-        private long _checkFailedLength;
-        public long CheckFailedLength
-        {
-            get { return _checkFailedLength; }
-            set { SetProperty(ref _checkFailedLength, value); }
-        }
-
-        private int _stessWriteSpeed;
-        public int StressWriteSpeed
-        {
-            get { return _stessWriteSpeed; }
-            set { SetProperty(ref _stessWriteSpeed, value); }
+            get { return _loopWriteSpeed; }
+            set { SetProperty(ref _loopWriteSpeed, value); }
         }
         #endregion
 
         public IList<Log> Logs { get; }
+
+        public MemoryLELoggerX()
+        {
+            _rssis = new List<int>();
+            Logs = new ObservableCollection<Log>();
+        }
 
         public async void LogRSSI(int rssi)
         {
@@ -195,124 +165,103 @@ namespace Wonder.UWP.Logger
             Logs.Insert(0, log);
         }
 
-        public async void LogReceived(byte[] value, bool result = true)
+        public async void LogValueChanged(byte[] value)
         {
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                    CoreDispatcherPriority.Normal,
-                   () => HandleReceived(value, result));
+                   () => HandleValueChanged(value));
         }
 
-        protected virtual void HandleReceived(byte[] value, bool result)
+        protected virtual void HandleValueChanged(byte[] value)
         {
-            if (IsStressWriting)
+            ValueChangedCount++;
+            ValueChangedLength += value.Length;
+            var log = new Log($"接收成功：{BitConverter.ToString(value)}");
+            Logs.Insert(0, log);
+        }
+
+        public async void LogWrite(byte[] value, bool result)
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                   CoreDispatcherPriority.Normal,
+                   () => HandleWrite(value, result));
+        }
+
+        protected virtual void HandleWrite(byte[] value, bool result)
+        {
+            if (result)
             {
-                if (result)
-                {
-                    StressReceivedCount++;
-                    StressReceivedLength += value.Length;
-                    var log = new Log($"校验成功：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-                else
-                {
-                    CheckFailedCount++;
-                    CheckFailedLength += value.Length;
-                    var log = new Log($"校验失败：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-                StressWriteSpeed = (int)((StressSendLength + StressReceivedLength + CheckFailedLength) / (DateTime.Now - StartStressWriteTime).TotalSeconds);
+                WriteSucceedCount++;
+                WriteSucceedLength += value.Length;
+                var log = new Log($"发送成功：{BitConverter.ToString(value)}");
+                Logs.Insert(0, log);
             }
             else
             {
-                ReceivedCount++;
-                ReceivedLength += value.Length;
-                var log = new Log($"接收成功：{BitConverter.ToString(value)}");
+                WriteFailedCount++;
+                WriteFailedLength += value.Length;
+                var log = new Log($"发送失败：{BitConverter.ToString(value)}");
                 Logs.Insert(0, log);
             }
         }
 
-        public async void LogSend(byte[] value, bool result)
+        public async void LogLoopWriteStarted()
         {
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                    CoreDispatcherPriority.Normal,
-                   () => HandleSend(value, result));
+                   () => HandleLoopWriteStarted());
         }
 
-        protected virtual void HandleSend(byte[] value, bool result)
+        protected virtual void HandleLoopWriteStarted()
         {
-            if (IsStressWriting)
-            {
-                if (result)
-                {
-                    StressSendCount++;
-                    StressSendLength += value.Length;
-                    StressWriteSpeed = (int)((StressSendLength + StressReceivedLength + CheckFailedLength) / (DateTime.Now - StartStressWriteTime).TotalSeconds);
-                    var log = new Log($"发送成功：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-                else
-                {
-                    StressFailedCount++;
-                    StressFailedLength += value.Length;
-                    var log = new Log($"发送失败：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-            }
-            else
-            {
-                if (result)
-                {
-                    SendCount++;
-                    SendLength += value.Length;
-                    var log = new Log($"发送成功：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-                else
-                {
-                    FailedCount++;
-                    FailedLength += value.Length;
-                    var log = new Log($"发送失败：{BitConverter.ToString(value)}");
-                    Logs.Insert(0, log);
-                }
-            }
-        }
-
-        public async void LogStressWriteStarted()
-        {
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                   CoreDispatcherPriority.Normal,
-                   () => HandleStressWriteStarted());
-        }
-
-        protected virtual void HandleStressWriteStarted()
-        {
-            IsStressWriting = true;
-            StartStressWriteTime = DateTime.Now;
-            StopStressWriteTime = default;
-            CheckFailedCount = 0;
-            StressFailedCount = 0;
-            StressFailedLength = 0;
-            StressReceivedCount = 0;
-            StressReceivedLength = 0;
-            StressSendCount = 0;
-            StressSendLength = 0;
-            StressWriteSpeed = 0;
-            var log = new Log("压力测试开始");
+            LoopWriteStartedTime = DateTime.Now;
+            LoopWriteStoppedTime = default;
+            LoopWriteSucceedCount = 0;
+            LoopWriteSucceedLength = 0;
+            LoopWriteFailedCount = 0;
+            LoopWriteFailedLength = 0;
+            LoopWriteSpeed = 0;
+            var log = new Log("循环写入开始");
             Logs.Insert(0, log);
         }
 
-        public async void LogStressWriteStopped()
+        public async void LogLoopWrite(byte[] value, bool result)
         {
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                    CoreDispatcherPriority.Normal,
-                   () => HandleStressWriteStopped());
+                   () => HandleLoopWrite(value, result));
         }
 
-        protected virtual void HandleStressWriteStopped()
+        protected virtual void HandleLoopWrite(byte[] value, bool result)
         {
-            IsStressWriting = false;
-            StopStressWriteTime = DateTime.Now;
-            var log = new Log("压力测试结束");
+            if (result)
+            {
+                LoopWriteSucceedCount++;
+                LoopWriteSucceedLength += value.Length;
+                LoopWriteSpeed = (int)(LoopWriteSucceedLength / (DateTime.Now - LoopWriteStartedTime).TotalSeconds);
+                var log = new Log($"发送成功：{BitConverter.ToString(value)}");
+                Logs.Insert(0, log);
+            }
+            else
+            {
+                LoopWriteFailedCount++;
+                LoopWriteFailedLength += value.Length;
+                var log = new Log($"发送失败：{BitConverter.ToString(value)}");
+                Logs.Insert(0, log);
+            }
+        }
+
+        public async void LogLoopWriteStopped()
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                   CoreDispatcherPriority.Normal,
+                   () => HandleLoopWriteStopped());
+        }
+
+        protected virtual void HandleLoopWriteStopped()
+        {
+            _loopWriteStoppedTime = DateTime.Now;
+            var log = new Log("循环写入结束");
             Logs.Insert(0, log);
         }
     }

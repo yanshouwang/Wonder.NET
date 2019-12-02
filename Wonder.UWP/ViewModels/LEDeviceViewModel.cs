@@ -115,6 +115,7 @@ namespace Wonder.UWP.ViewModels
                 {
                     case BluetoothConnectionStatus.Disconnected:
                         {
+                            sender.ConnectionStatusChanged -= OnConnectionStatusChanged;
                             ConnectionState = LEDeviceState.Disconnected;
                             if (_device != null)
                             {
