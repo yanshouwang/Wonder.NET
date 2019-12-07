@@ -139,6 +139,71 @@ namespace Wonder.UWP.Logger
         }
         #endregion
 
+        #region SYNC WRITE
+        private DateTime _syncWriteStartedTime;
+        public DateTime SyncWriteStartedTime
+        {
+            get { return _syncWriteStartedTime; }
+            set { SetProperty(ref _syncWriteStartedTime, value); }
+        }
+
+        private DateTime _syncWriteStoppedTime;
+        public DateTime SyncWriteStoppedTime
+        {
+            get { return _syncWriteStoppedTime; }
+            set { SetProperty(ref _syncWriteStoppedTime, value); }
+        }
+
+        private int _syncWriteSucceedCount;
+        public int SyncWriteSucceedCount
+        {
+            get { return _syncWriteSucceedCount; }
+            set { SetProperty(ref _syncWriteSucceedCount, value); }
+        }
+
+        private long _syncWriteSucceedLength;
+        public long SyncWriteSucceedLength
+        {
+            get { return _syncWriteSucceedLength; }
+            set { SetProperty(ref _syncWriteSucceedLength, value); }
+        }
+
+        private int _syncWriteFailedCount;
+        public int SyncWriteFailedCount
+        {
+            get { return _syncWriteFailedCount; }
+            set { SetProperty(ref _syncWriteFailedCount, value); }
+        }
+
+        private long _syncReceivedLength;
+        public long SyncReceivedLength
+        {
+            get { return _syncReceivedLength; }
+            set { SetProperty(ref _syncReceivedLength, value); }
+        }
+
+        private int _syncReceivedCount;
+        public int SyncReceivedCount
+        {
+            get { return _syncReceivedCount; }
+            set { SetProperty(ref _syncReceivedCount, value); }
+        }
+
+        private long _syncWriteFailedLength;
+        public long SyncWriteFailedLength
+        {
+            get { return _syncWriteFailedLength; }
+            set { SetProperty(ref _syncWriteFailedLength, value); }
+        }
+
+        private int _syncWriteSpeed;
+        public int SyncWriteSpeed
+        {
+            get { return _syncWriteSpeed; }
+            set { SetProperty(ref _syncWriteSpeed, value); }
+        }
+        #endregion
+
         public IList<Log> Logs { get; }
 
         public MemoryLELoggerX()
@@ -260,8 +325,85 @@ namespace Wonder.UWP.Logger
 
         protected virtual void HandleLoopWriteStopped()
         {
-            _loopWriteStoppedTime = DateTime.Now;
+            LoopWriteStoppedTime = DateTime.Now;
             var log = new Log("循环写入结束");
+            Logs.Insert(0, log);
+        }
+
+        public async void LogSyncWriteStarted()
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                   CoreDispatcherPriority.Normal,
+                   () => HandleSyncWriteStarted());
+        }
+
+        protected virtual void HandleSyncWriteStarted()
+        {
+            SyncWriteStartedTime = DateTime.Now;
+            SyncWriteStoppedTime = default;
+            SyncWriteSucceedCount = 0;
+            SyncWriteSucceedLength = 0;
+            SyncWriteFailedCount = 0;
+            SyncWriteFailedLength = 0;
+            SyncReceivedCount = 0;
+            SyncReceivedLength = 0;
+            SyncWriteSpeed = 0;
+            var log = new Log("同步写入开始");
+            Logs.Insert(0, log);
+        }
+
+        public async void LogSyncWrite(byte[] send, byte[] received)
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                   CoreDispatcherPriority.Normal,
+                   () => HandleSyncWrite(send, received));
+        }
+
+        protected virtual void HandleSyncWrite(byte[] send, byte[] received)
+        {
+            SyncReceivedCount++;
+            SyncReceivedLength += received.Length;
+            var isWritten = send.Length == received.Length;
+            if (isWritten)
+            {
+                for (int i = 0; i < send.Length; i++)
+                {
+                    if (send[i] != received[i])
+                    {
+                        isWritten = false;
+                        break;
+                    }
+                }
+            }
+            if (isWritten)
+            {
+                SyncWriteSucceedCount++;
+                SyncWriteSucceedLength += send.Length;
+                SyncWriteSpeed = (int)((SyncWriteSucceedLength + SyncWriteFailedLength + SyncReceivedLength) / (DateTime.Now - SyncWriteStartedTime).TotalSeconds);
+                var log = new Log($"校验成功：{BitConverter.ToString(received)}");
+                Logs.Insert(0, log);
+            }
+            else
+            {
+                SyncWriteFailedCount++;
+                SyncWriteFailedLength += send.Length;
+                SyncWriteSpeed = (int)((SyncWriteSucceedLength + SyncWriteFailedLength + SyncReceivedLength) / (DateTime.Now - SyncWriteStartedTime).TotalSeconds);
+                var log = new Log($"校验失败：{BitConverter.ToString(received)}");
+                Logs.Insert(0, log);
+            }
+        }
+
+        public async void LogSyncWriteStopped()
+        {
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                   CoreDispatcherPriority.Normal,
+                   () => HandleSyncWriteStopped());
+        }
+
+        protected virtual void HandleSyncWriteStopped()
+        {
+            SyncWriteStoppedTime = DateTime.Now;
+            var log = new Log("同步写入结束");
             Logs.Insert(0, log);
         }
     }

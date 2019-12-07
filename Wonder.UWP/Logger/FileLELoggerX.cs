@@ -69,6 +69,25 @@ namespace Wonder.UWP.Logger
             await LogAsync();
         }
 
+        protected override async void HandleSyncWriteStarted()
+        {
+            base.HandleSyncWriteStarted();
+            await LogAsync();
+        }
+
+        protected override async void HandleSyncWrite(byte[] send, byte[] received)
+        {
+            base.HandleSyncWrite(send, received);
+            await LogAsync();
+            await CensusAsync();
+        }
+
+        protected override async void HandleSyncWriteStopped()
+        {
+            base.HandleSyncWriteStopped();
+            await LogAsync();
+        }
+
         private async Task LogAsync()
         {
             var log = Logs[0];

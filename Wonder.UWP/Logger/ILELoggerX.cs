@@ -25,6 +25,15 @@ namespace Wonder.UWP.Logger
         int LoopWriteFailedCount { get; }
         long LoopWriteFailedLength { get; }
         int LoopWriteSpeed { get; }
+        DateTime SyncWriteStartedTime { get; }
+        DateTime SyncWriteStoppedTime { get; }
+        int SyncWriteSucceedCount { get; }
+        long SyncWriteSucceedLength { get; }
+        int SyncWriteFailedCount { get; }
+        long SyncWriteFailedLength { get; }
+        int SyncReceivedCount { get; }
+        long SyncReceivedLength { get; }
+        int SyncWriteSpeed { get; }
         IList<Log> Logs { get; }
     }
 }

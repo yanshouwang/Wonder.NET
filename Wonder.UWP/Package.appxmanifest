@@ -9,7 +9,7 @@
   <Identity
     Name="873f6928-62e2-4201-804c-d35f6344ac00"
     Publisher="CN=Additel"
-    Version="1.0.3.0" />
+    Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="873f6928-62e2-4201-804c-d35f6344ac00" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

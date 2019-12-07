@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Wonder.UWP.ViewModels
 {
-    public enum BLEDeviceState
+    public enum LEWriteState
     {
-        Disconnected,
-        Connecting,
-        Connected,
-        ConnectFailed
+        NotWriting,
+        Writing,
+        StopWriting,
     }
 }

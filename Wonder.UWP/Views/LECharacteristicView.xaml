@@ -13,6 +13,7 @@
     d:DesignWidth="400">
     <UserControl.Resources>
         <converters:BoolReverseConverter x:Key="BoolReverseConverter"/>
+        <converters:LEWriteStateToIsNotWritingConverter x:Key="LEWriteStateToIsNotWritingConverter"/>
         <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
             <Setter Property="Background" Value="{ThemeResource TextControlBackground}"/>
@@ -183,6 +184,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12">
             <Button Content="打开通知" Style="{StaticResource ButtonRevealStyle}"
@@ -192,7 +194,8 @@
         </StackPanel>
         <TextBox x:Name="ValueTBX" Grid.Row="1" CornerRadius="0"
                  TextWrapping="Wrap"
-                 Text="{x:Bind ViewModel.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{x:Bind ViewModel.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{x:Bind ViewModel.SyncWriteState, Mode=OneWay, Converter={StaticResource LEWriteStateToIsNotWritingConverter}}"/>
         <Button Grid.Row="1" Content="&#xE76D;"
                 FontFamily="Segoe MDL2 Assets"
                 FontSize="24"
@@ -232,26 +235,17 @@
                 </Style>
             </Button.Style>
             <i:Interaction.Behaviors>
-                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay}" Value="True">
-                    <ic:ChangePropertyAction PropertyName="Content" Value="&#xE71A;"/>
-                </ic:DataTriggerBehavior>
-                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay}" Value="False">
+                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.LoopWriteState, Converter={StaticResource LEWriteStateToIsNotWritingConverter}, Mode=OneWay}" Value="True">
                     <ic:ChangePropertyAction PropertyName="Content" Value="&#xE768;"/>
+                </ic:DataTriggerBehavior>
+                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.LoopWriteState, Converter={StaticResource LEWriteStateToIsNotWritingConverter}, Mode=OneWay}" Value="False">
+                    <ic:ChangePropertyAction PropertyName="Content" Value="&#xE71A;"/>
                 </ic:DataTriggerBehavior>
             </i:Interaction.Behaviors>
         </Button>
         <CheckBox Grid.Row="2" CornerRadius="0" Content="无响应写入"
                   IsEnabled="{x:Bind ViewModel.IsWriteOptionAvailable}"
-                  IsChecked="{x:Bind ViewModel.IsWriteWithoutResponse, Mode=TwoWay}">
-            <i:Interaction.Behaviors>
-                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay}" Value="True">
-                    <ic:ChangePropertyAction PropertyName="IsEnabled" Value="False"/>
-                </ic:DataTriggerBehavior>
-                <ic:DataTriggerBehavior Binding="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay}" Value="False">
-                    <ic:ChangePropertyAction PropertyName="IsEnabled" Value="{x:Bind ViewModel.IsWriteOptionAvailable}"/>
-                </ic:DataTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </CheckBox>
+                  IsChecked="{x:Bind ViewModel.IsWriteWithoutResponse, Mode=TwoWay}"/>
         <Grid Grid.Row="3" ColumnSpacing="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -259,17 +253,27 @@
             </Grid.ColumnDefinitions>
             <CheckBox x:Name="LoopWriteCBX" Grid.Column="0" Content="循环发送" CornerRadius="0"
                       IsChecked="{x:Bind ViewModel.IsLoopWrite, Mode=TwoWay}"
-                      IsEnabled="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay, Converter={StaticResource BoolReverseConverter}}"/>
+                      IsEnabled="{x:Bind ViewModel.LoopWriteState, Mode=OneWay, Converter={StaticResource LEWriteStateToIsNotWritingConverter}}"/>
             <TextBox x:Name="IntervalTBX" Grid.Column="1" Style="{StaticResource TextBoxStyle}"
                      CornerRadius="0" MinWidth="100" VerticalAlignment="Center"
                      InputScope="Number" Header="间隔（ms）"
                      Text="{x:Bind ViewModel.Interval, Mode=TwoWay}"
-                     IsEnabled="{x:Bind ViewModel.IsLoopWriting, Mode=OneWay, Converter={StaticResource BoolReverseConverter}}">
+                     IsEnabled="{x:Bind ViewModel.LoopWriteState, Mode=OneWay, Converter={StaticResource LEWriteStateToIsNotWritingConverter}}">
                 <TextBox.Resources>
                     <Thickness x:Key="TextControlBorderThemeThickness">0,0,0,1</Thickness>
                     <Thickness x:Key="TextControlBorderThemeThicknessFocused">0,0,0,1</Thickness>
                 </TextBox.Resources>
             </TextBox>
+        </Grid>
+        <Grid Grid.Row="4" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="开始测试" Style="{StaticResource ButtonRevealStyle}"
+                    Command="{x:Bind ViewModel.StartSyncWriteCommand}"/>
+            <Button Grid.Column="1" Content="停止测试" Style="{StaticResource ButtonRevealStyle}"
+                    Command="{x:Bind ViewModel.StopSyncWriteCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

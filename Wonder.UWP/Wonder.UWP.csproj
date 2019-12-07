@@ -21,10 +21,10 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <PackageCertificateThumbprint>11993F008D9D394B66F0F9AD10D03F9FC214ADB3</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -145,6 +145,8 @@
     <Compile Include="Converters\GUIDToStringConverter.cs" />
     <Compile Include="Converters\ItemClickEventArgsToClickedItemConverter.cs" />
     <Compile Include="Converters\LEDeviceStateToBoolStateConverter.cs" />
+    <Compile Include="Converters\LEWriteStateToIsWritingConverter - 复制.cs" />
+    <Compile Include="Converters\LEWriteStateToIsNotWritingConverter.cs" />
     <Compile Include="Converters\SelectionChangedEventArgsToSelectedItemConverter.cs" />
     <Compile Include="Converters\StringToGeometryConverter.cs" />
     <Compile Include="Converters\UlongToMACConverter.cs" />
@@ -165,13 +167,11 @@
     <Compile Include="Util\ColorUtils.cs" />
     <Compile Include="Extension\ColorExtensions.cs" />
     <Compile Include="Util\MathUtils.cs" />
-    <Compile Include="ViewModels\BLEDeviceState.cs" />
-    <Compile Include="ViewModels\BLEDeviceViewModel.cs" />
-    <Compile Include="ViewModels\BLEViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LECharacteristicViewModel.cs" />
     <Compile Include="ViewModels\LEDeviceState.cs" />
     <Compile Include="ViewModels\LEDeviceViewModel.cs" />
+    <Compile Include="ViewModels\LEWriteState.cs" />
     <Compile Include="Views\LECharacteristicView.xaml.cs">
       <DependentUpon>LECharacteristicView.xaml</DependentUpon>
     </Compile>
@@ -185,12 +185,6 @@
     <Compile Include="ViewModels\SerialViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\BLEDeviceView.xaml.cs">
-      <DependentUpon>BLEDeviceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\BLEView.xaml.cs">
-      <DependentUpon>BLEView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\HorizontalListView.cs" />
     <Compile Include="Views\LEDataTemplateSelector.cs" />
     <Compile Include="Views\LEServiceView.xaml.cs">
@@ -286,14 +280,6 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\BLEDeviceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BLEView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LECharacteristicView.xaml">
       <SubType>Designer</SubType>
