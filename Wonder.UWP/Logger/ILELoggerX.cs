@@ -34,6 +34,11 @@ namespace Wonder.UWP.Logger
         int SyncReceivedCount { get; }
         long SyncReceivedLength { get; }
         int SyncWriteSpeed { get; }
+        DateTime ContinuousUploadStartedTime { get; }
+        DateTime ContinuousUploadStoppedTime { get; }
+        int ContinuousUploadCount { get; }
+        long ContinuousUploadLength { get; }
+        int ContinuousUploadSpeed { get; }
         IList<Log> Logs { get; }
     }
 }

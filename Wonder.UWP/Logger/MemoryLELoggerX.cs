@@ -204,6 +204,18 @@ namespace Wonder.UWP.Logger
         }
         #endregion
 
+        #region CONTINUOUS UPLOAD
+        public DateTime ContinuousUploadStartedTime => throw new NotImplementedException();
+
+        public DateTime ContinuousUploadStoppedTime => throw new NotImplementedException();
+
+        public int ContinuousUploadCount => throw new NotImplementedException();
+
+        public long ContinuousUploadLength => throw new NotImplementedException();
+
+        public int ContinuousUploadSpeed => throw new NotImplementedException();
+        #endregion
+
         public IList<Log> Logs { get; }
 
         public MemoryLELoggerX()
@@ -405,6 +417,21 @@ namespace Wonder.UWP.Logger
             SyncWriteStoppedTime = DateTime.Now;
             var log = new Log("同步写入结束");
             Logs.Insert(0, log);
+        }
+
+        public void LogContinuousUploadStarted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogContinuousUpload(byte[] value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogContinuousUploadStopped()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Wonder.UWP.Constants
         public const string SERIAL = nameof(SerialView);
         public const string SETTINGS = nameof(SettingsView);
         public const string LE = nameof(LEView);
+        public const string MONITOR = nameof(MonitorView);
     }
 }

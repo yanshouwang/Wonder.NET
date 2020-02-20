@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -47,8 +48,19 @@ namespace Wonder.UWP.ViewModels
             => CanWrite || CanWriteWithoutResponse;
         public bool IsWriteOptionAvailable
             => CanWrite && CanWriteWithoutResponse && !IsWriting && LoopWriteState == LEWriteState.NotWriting && SyncWriteState == LEWriteState.NotWriting;
+        public bool IsContinuousUploadable
+            => IsNotifying && !IsWriting && LoopWriteState == LEWriteState.NotWriting && SyncWriteState == LEWriteState.NotWriting;
 
         public ILELoggerX LoggerX { get; }
+
+        public ObservableCollection<EndSymbol> EndSymbols { get; }
+
+        private EndSymbol _endSymbol;
+        public EndSymbol EndSymbol
+        {
+            get { return _endSymbol; }
+            set { SetProperty(ref _endSymbol, value); }
+        }
 
         private bool _isWriting;
         public bool IsWriting
@@ -99,6 +111,20 @@ namespace Wonder.UWP.ViewModels
             set { SetProperty(ref _syncWriteState, value); }
         }
 
+        private bool _isContinuousUpload;
+        public bool IsContinuousUpload
+        {
+            get { return _isContinuousUpload; }
+            set { SetProperty(ref _isContinuousUpload, value); }
+        }
+
+        private bool _isContinuousUploading;
+        public bool IsContinuousUploading
+        {
+            get { return _isContinuousUploading; }
+            set { SetProperty(ref _isContinuousUploading, value); }
+        }
+
         public LECharacteristicViewModel(INavigationService navigationService, GattCharacteristic characteristic, ILELoggerX loggerX)
             : base(navigationService)
         {
@@ -106,6 +132,8 @@ namespace Wonder.UWP.ViewModels
             _receivedSyncValues = new List<byte>();
             LoggerX = loggerX;
             IsWriteWithoutResponse = CanWriteWithoutResponse && !CanWrite;
+            var symbols = Enum.GetValues(typeof(EndSymbol)).Cast<EndSymbol>();
+            EndSymbols = new ObservableCollection<EndSymbol>(symbols);
         }
 
         private DelegateCommand _startNotificationCommand;
@@ -122,26 +150,48 @@ namespace Wonder.UWP.ViewModels
                 return;
             _characteristic.ValueChanged += OnValueChanged;
             IsNotifying = true;
+            RaisePropertyChanged(nameof(IsContinuousUploadable));
         }
 
         private void OnValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
             CryptographicBuffer.CopyToByteArray(args.CharacteristicValue, out var value);
-            if (SyncWriteState == LEWriteState.NotWriting)
+            if (IsContinuousUploadable)
+            {
+                if (!IsContinuousUploading)
+                {
+                    IsContinuousUploading = true;
+                    LoggerX.LogContinuousUploadStarted();
+                }
+                LoggerX.LogContinuousUpload(value);
+            }
+            else if (IsContinuousUploading)
+            {
+                LoggerX.LogContinuousUpload(value);
+                IsContinuousUploading = false;
+                LoggerX.LogContinuousUploadStopped();
+            }
+            else if (SyncWriteState == LEWriteState.NotWriting)
             {
                 LoggerX.LogValueChanged(value);
             }
             else
             {
                 _receivedSyncValues.AddRange(value);
-                var count = _receivedSyncValues.Count;
-                if (count < 2)
+                var i = 0;
+                while (i < _receivedSyncValues.Count - 1)
+                {
+                    var j = i + 1;
+                    if (_receivedSyncValues[i] == 0x0D &&
+                        _receivedSyncValues[j] == 0x0A)
+                        break;
+                    i++;
+                }
+                var count = i + 2;
+                if (count > _receivedSyncValues.Count)
                     return;
-                if (_receivedSyncValues[count - 2] != 0x0D ||
-                    _receivedSyncValues[count - 1] != 0x0A)
-                    return;
-                var received = _receivedSyncValues.ToArray();
-                _receivedSyncValues.Clear();
+                var received = _receivedSyncValues.Take(count).ToArray();
+                _receivedSyncValues.RemoveRange(0, count);
                 _syncTCS.SetResult(received);
             }
         }
@@ -160,19 +210,22 @@ namespace Wonder.UWP.ViewModels
                 return;
             _characteristic.ValueChanged -= OnValueChanged;
             IsNotifying = false;
+            RaisePropertyChanged(nameof(IsContinuousUploadable));
         }
 
         private DelegateCommand _writeCommand;
         public DelegateCommand WriteCommand =>
-            _writeCommand ?? (_writeCommand = new DelegateCommand(ExecuteWriteCommand, CanExecuteWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => SyncWriteState));
+            _writeCommand ?? (_writeCommand = new DelegateCommand(ExecuteWriteCommand, CanExecuteWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => LoopWriteState).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsContinuousUploading));
 
         private bool CanExecuteWriteCommand()
-            => IsWritable && !string.IsNullOrWhiteSpace(Value) && !IsWriting && SyncWriteState == LEWriteState.NotWriting;
+            => IsWritable && !string.IsNullOrWhiteSpace(Value) && !IsWriting && LoopWriteState == LEWriteState.NotWriting && SyncWriteState == LEWriteState.NotWriting && !IsContinuousUploading;
 
         async void ExecuteWriteCommand()
         {
             IsWriting = true;
-            var value = Encoding.UTF8.GetBytes(Value);
+            var value = EndSymbol == EndSymbol.None
+                      ? Encoding.UTF8.GetBytes($"{Value}")
+                      : Encoding.UTF8.GetBytes($"{Value}{EndSymbol.ToValue()}");
             var result = await WriteAsync(value);
             LoggerX.LogWrite(value, result);
             IsWriting = false;
@@ -212,15 +265,16 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _startLoopWriteCommand;
         public DelegateCommand StartLoopWriteCommand =>
-            _startLoopWriteCommand ?? (_startLoopWriteCommand = new DelegateCommand(ExecuteStartLoopWriteCommand, CanExecuteStartLoopWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsLoopWrite).ObservesProperty(() => LoopWriteState).ObservesProperty(() => Interval));
+            _startLoopWriteCommand ?? (_startLoopWriteCommand = new DelegateCommand(ExecuteStartLoopWriteCommand, CanExecuteStartLoopWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => LoopWriteState).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsContinuousUploading).ObservesProperty(() => IsLoopWrite).ObservesProperty(() => Interval));
 
         private bool CanExecuteStartLoopWriteCommand()
-            => WriteCommand.CanExecute() && IsLoopWrite && LoopWriteState == LEWriteState.NotWriting && Interval >= 0;
+            => WriteCommand.CanExecute() && IsLoopWrite && Interval >= 0;
 
         async void ExecuteStartLoopWriteCommand()
         {
             LoopWriteState = LEWriteState.Writing;
             RaisePropertyChanged(nameof(IsWriteOptionAvailable));
+            RaisePropertyChanged(nameof(IsContinuousUploadable));
             LoggerX.LogLoopWriteStarted();
             using (var loopCTS = new CancellationTokenSource())
             {
@@ -235,6 +289,7 @@ namespace Wonder.UWP.ViewModels
                 LoggerX.LogLoopWriteStopped();
                 LoopWriteState = LEWriteState.NotWriting;
                 RaisePropertyChanged(nameof(IsWriteOptionAvailable));
+                RaisePropertyChanged(nameof(IsContinuousUploadable));
             }
         }
 
@@ -254,7 +309,7 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _switchLoopWriteCommand;
         public DelegateCommand SwitchLoopWriteCommand =>
-            _switchLoopWriteCommand ?? (_switchLoopWriteCommand = new DelegateCommand(ExecuteSwitchLoopWriteCommand, CanExecuteSwitchLoopWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsLoopWrite).ObservesProperty(() => Interval));
+            _switchLoopWriteCommand ?? (_switchLoopWriteCommand = new DelegateCommand(ExecuteSwitchLoopWriteCommand, CanExecuteSwitchLoopWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => LoopWriteState).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsContinuousUploading).ObservesProperty(() => IsLoopWrite).ObservesProperty(() => Interval));
 
         private bool CanExecuteSwitchLoopWriteCommand()
             => StartLoopWriteCommand.CanExecute() || StopLoopWriteCommand.CanExecute();
@@ -273,28 +328,32 @@ namespace Wonder.UWP.ViewModels
 
         private DelegateCommand _startSyncWriteCommand;
         public DelegateCommand StartSyncWriteCommand =>
-            _startSyncWriteCommand ?? (_startSyncWriteCommand = new DelegateCommand(ExecuteStartSyncWriteCommand, CanExecuteStartSyncWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => SyncWriteState));
+            _startSyncWriteCommand ?? (_startSyncWriteCommand = new DelegateCommand(ExecuteStartSyncWriteCommand, CanExecuteStartSyncWriteCommand).ObservesProperty(() => IsWritable).ObservesProperty(() => Value).ObservesProperty(() => IsWriting).ObservesProperty(() => LoopWriteState).ObservesProperty(() => SyncWriteState).ObservesProperty(() => IsContinuousUploading));
 
         private bool CanExecuteStartSyncWriteCommand()
-            => IsWritable && !string.IsNullOrWhiteSpace(Value) && !IsWriting && SyncWriteState == LEWriteState.NotWriting;
+            => WriteCommand.CanExecute();
 
         async void ExecuteStartSyncWriteCommand()
         {
             SyncWriteState = LEWriteState.Writing;
             RaisePropertyChanged(nameof(IsWriteOptionAvailable));
+            RaisePropertyChanged(nameof(IsContinuousUploadable));
             LoggerX.LogSyncWriteStarted();
             using (var syncCTS = new CancellationTokenSource())
             {
                 _syncCTS = syncCTS;
                 while (!syncCTS.Token.IsCancellationRequested)
                 {
-                    var send = Encoding.UTF8.GetBytes($"{Value}\r\n");
+                    var send = EndSymbol == EndSymbol.None
+                             ? Encoding.UTF8.GetBytes($"{Value}")
+                             : Encoding.UTF8.GetBytes($"{Value}{EndSymbol.ToValue()}");
                     var received = await SyncWriteAsync(send);
                     LoggerX.LogSyncWrite(send, received);
                 }
                 LoggerX.LogSyncWriteStopped();
                 SyncWriteState = LEWriteState.NotWriting;
                 RaisePropertyChanged(nameof(IsWriteOptionAvailable));
+                RaisePropertyChanged(nameof(IsContinuousUploadable));
             }
         }
 

@@ -18,5 +18,8 @@ namespace Wonder.UWP.Logger
         void LogSyncWriteStarted();
         void LogSyncWrite(byte[] send, byte[] received);
         void LogSyncWriteStopped();
+        void LogContinuousUploadStarted();
+        void LogContinuousUpload(byte[] value);
+        void LogContinuousUploadStopped();
     }
 }

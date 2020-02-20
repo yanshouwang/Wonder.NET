@@ -40,6 +40,8 @@ namespace Wonder.UWP
             base.ConfigureContainer();
             Container.RegisterInstance(Container);
             Container.RegisterType<IThemeService, ThemeService>();
+            Container.RegisterType<IMajorMonitorService, BLEMonitorService>();
+            Container.RegisterType<IMinorMonitorService, SocketMonitorService>();
         }
 
         protected override IDeviceGestureService OnCreateDeviceGestureService()
@@ -74,7 +76,7 @@ namespace Wonder.UWP
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             InitializeTheme();
-            NavigationService.Navigate(ViewTokens.LE, null);
+            NavigationService.Navigate(ViewTokens.MONITOR, null);
             return Task.CompletedTask;
         }
 

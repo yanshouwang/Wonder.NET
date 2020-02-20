@@ -61,7 +61,8 @@
 
   <Capabilities>
     <uap:Capability Name="documentsLibrary"/>
-    <Capability Name="internetClient" />
+    <Capability Name="internetClientServer"/>
+    <Capability Name="privateNetworkClientServer"/>
     <DeviceCapability Name="serialcommunication" />
     <DeviceCapability Name="bluetooth"/>
   </Capabilities>

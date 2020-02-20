@@ -471,7 +471,7 @@
         </muxc:TabView.TabStripFooter>
         <muxc:TabView.TabItems>
             <muxc:TabViewItem IconSource="{StaticResource Home}"
-                              Header="LE"
+                              Header="Monitor"
                               Content="{x:Bind NavFrame}"/>
         </muxc:TabView.TabItems>
     </muxc:TabView>
