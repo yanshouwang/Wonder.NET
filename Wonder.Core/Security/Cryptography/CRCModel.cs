@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wonder.Security.Cryptography
+namespace Wonder.Core.Security.Cryptography
 {
     /// <summary>
     /// CRC 校验模型

@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Text;
+using Wonder.Core.Security.Cryptography;
 
-namespace Wonder.Security.Cryptography
+namespace Wonder.Core.Test.Security.Cryptography
 {
     [TestClass]
     public class CRCTest
@@ -270,27 +269,19 @@ namespace Wonder.Security.Cryptography
         public void TestVerity_CRC4ITU_True()
         {
             var expected = true;
-            var list = new List<byte>();
             var data = Encoding.ASCII.GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            var ccr = BitConverter.GetBytes(0x0BU);
-            list.AddRange(data);
-            list.AddRange(ccr);
-            data = list.ToArray();
-            var actual = CRC4ITU.Verify(data);
+            var ccr = 0x0BU;
+            var actual = CRC4ITU.Verify(data, ccr);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestVerity_CRC4ITU_False()
         {
-            var expected = true;
-            var list = new List<byte>();
+            var expected = false;
             var data = Encoding.ASCII.GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYA");
-            var ccr = BitConverter.GetBytes(0x0BU);
-            list.AddRange(data);
-            list.AddRange(ccr);
-            data = list.ToArray();
-            var actual = CRC4ITU.Verify(data);
+            var ccr = 0x0BU;
+            var actual = CRC4ITU.Verify(data, ccr);
             Assert.AreEqual(expected, actual);
         }
 
@@ -298,13 +289,9 @@ namespace Wonder.Security.Cryptography
         public void TestVerity_CRC5EPC_True()
         {
             var expected = true;
-            var list = new List<byte>();
             var data = Encoding.ASCII.GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            var ccr = BitConverter.GetBytes(0x08U);
-            list.AddRange(data);
-            list.AddRange(ccr);
-            data = list.ToArray();
-            var actual = CRC5EPC.Verify(data);
+            var ccr = 0x08U;
+            var actual = CRC5EPC.Verify(data, ccr);
             Assert.AreEqual(expected, actual);
         }
 
@@ -312,13 +299,9 @@ namespace Wonder.Security.Cryptography
         public void TestVerity_CRC32_True()
         {
             var expected = true;
-            var list = new List<byte>();
             var data = Encoding.ASCII.GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            var ccr = BitConverter.GetBytes(0xABF77822U);
-            list.AddRange(data);
-            list.AddRange(ccr);
-            data = list.ToArray();
-            var actual = CRC32.Verify(data);
+            var ccr = 0xABF77822U;
+            var actual = CRC32.Verify(data, ccr);
             Assert.AreEqual(expected, actual);
         }
     }

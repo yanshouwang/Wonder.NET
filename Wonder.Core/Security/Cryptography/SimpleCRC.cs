@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Wonder.Security.Cryptography
+namespace Wonder.Core.Security.Cryptography
 {
     class SimpleCRC : CRC
     {
@@ -52,11 +52,6 @@ namespace Wonder.Security.Cryptography
             var mask = uint.MaxValue >> 32 - Width;
             crc &= mask;
             return crc;
-        }
-
-        public override bool Verify(byte[] data)
-        {
-            throw new NotImplementedException();
         }
     }
 }

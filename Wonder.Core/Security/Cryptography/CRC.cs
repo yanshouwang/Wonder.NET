@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Wonder.Security.Cryptography
+namespace Wonder.Core.Security.Cryptography
 {
     /// <summary>
     /// 循环冗余校验 (Cyclic Redundancy Check, CRC)
@@ -36,9 +36,19 @@ namespace Wonder.Security.Cryptography
         /// </summary>
         public uint XorOut { get; }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="width">宽度</param>
+        /// <param name="poly">多项式</param>
+        /// <param name="init">初始值</param>
+        /// <param name="refIn">输入反转</param>
+        /// <param name="refOut">输出反转</param>
+        /// <param name="xorOut">输出异或值</param>
         protected CRC(string name, int width, uint poly, uint init, bool refIn, bool refOut, uint xorOut)
         {
-            if (Width > 32)
+            if (width > 32)
             {
                 throw new ArgumentException("CRC 宽度超出范围", nameof(width));
             }
@@ -115,8 +125,13 @@ namespace Wonder.Security.Cryptography
         /// 校验数据
         /// </summary>
         /// <param name="data">数据</param>
+        /// <param name="crc">校验码</param>
         /// <returns>校验结果</returns>
-        public abstract bool Verify(byte[] data);
+        public bool Verify(byte[] data, uint crc)
+        {
+            var expected = Calculate(data);
+            return crc == expected;
+        }
 
         /// <summary>
         /// 计算数据的校验码

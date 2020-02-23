@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wonder
+namespace Wonder.Core
 {
-    public static class ValueExtensions
+    public static class Extensions
     {
         public static void Invert(this ref byte value)
         {

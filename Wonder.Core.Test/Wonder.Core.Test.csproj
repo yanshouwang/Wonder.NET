@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>Wonder</RootNamespace>
+    <RootNamespace>Wonder.Core.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
