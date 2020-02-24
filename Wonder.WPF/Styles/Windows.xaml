@@ -53,7 +53,7 @@
     </Style>
     <!--#endregion-->
     <!--#region BUTTON-->
-    <Style x:Key="Wonder.Windows.Style.BaseButton" TargetType="{x:Type Button}">
+    <Style x:Key="Wonder.Windows.Style.BaseButton" TargetType="Button">
         <Setter Property="FocusVisualStyle" Value="{StaticResource Wonder.Windows.Style.FocusVisual}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -64,7 +64,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -94,7 +94,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="Wonder.Windows.Style.Button" TargetType="{x:Type Button}"
+    <Style x:Key="Wonder.Windows.Style.Button" TargetType="Button"
            BasedOn="{StaticResource Wonder.Windows.Style.BaseButton}">
         <Setter Property="Background" Value="{StaticResource Wonder.Windows.Background.Button.Static}"/>
         <Setter Property="local:Wonder.MouseOverBackground" Value="{StaticResource Wonder.Windows.Background.Button.MouseOver}"/>
@@ -104,7 +104,7 @@
         <Setter Property="local:Wonder.DisabledBackground" Value="{StaticResource Wonder.Windows.Background.Button.Disabled}"/>
         <Setter Property="local:Wonder.DisabledForeground" Value="{StaticResource Wonder.Windows.Foreground.Button.Disabled}"/>
     </Style>
-    <Style x:Key="Wonder.Windows.Style.Button.TitleBar" TargetType="{x:Type Button}"
+    <Style x:Key="Wonder.Windows.Style.Button.TitleBar" TargetType="Button"
            BasedOn="{StaticResource Wonder.Windows.Style.Button}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -125,7 +125,7 @@
     </Style>
     <!--#endregion-->
     <!--#region WINDOW-->
-    <Style x:Key="Wonder.Windows.Style.BaseWindow" TargetType="{x:Type Window}">
+    <Style x:Key="Wonder.Windows.Style.BaseWindow" TargetType="Window">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -138,7 +138,7 @@
         <Setter Property="local:Wonder.IsMaximizedToWorkAera" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Window}">
+                <ControlTemplate TargetType="Window">
                     <!-- 最外层 Border 不可以去掉，否则 Trigger 中最大化边距修改无效 -->
                     <Grid x:Name="EssentialGrid">
                         <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
@@ -148,30 +148,35 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" x:Name="TitleBar">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock x:Name="TitleTextBlock" Grid.Column="0" Grid.ColumnSpan="4" FontSize="12"
+                                <TextBlock x:Name="TitleTextBlock" Grid.Column="0" Grid.ColumnSpan="5"
+                                           FontSize="{TemplateBinding FontSize}"
                                            Text="{TemplateBinding Title}"
                                            Foreground="{TemplateBinding Foreground}"
                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button Grid.Column="1" x:Name="MinimizeButton"
+                                <Image x:Name="IconImage" Grid.Column="0" Source="{TemplateBinding Icon}"
+                                       Width="20" Height="20" Stretch="UniformToFill"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button Grid.Column="2" x:Name="MinimizeButton"
                                         Style="{StaticResource Wonder.Windows.Style.Button.TitleBar}"
                                         Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                         local:Wonder.Geometry="{StaticResource Wonder.Windows.Geometry.Minimize}">
                                     <Path Data="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=(local:Wonder.Geometry)}"
                                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
                                 </Button>
-                                <Button Grid.Column="2" x:Name="MaximizeOrRestoreButton"
+                                <Button Grid.Column="3" x:Name="MaximizeOrRestoreButton"
                                         Style="{StaticResource Wonder.Windows.Style.Button.TitleBar}"
                                         Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                         local:Wonder.Geometry="{StaticResource Wonder.Windows.Geometry.Maximize}">
                                     <Path Data="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=(local:Wonder.Geometry)}"
                                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"/>
                                 </Button>
-                                <Button Grid.Column="3" x:Name="CloseButton"
+                                <Button Grid.Column="4" x:Name="CloseButton"
                                         Style="{StaticResource Wonder.Windows.Style.Button.TitleBar}"
                                         Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                         local:Wonder.Geometry="{StaticResource Wonder.Windows.Geometry.Close}"
@@ -223,8 +228,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="Wonder.Windows.Style.Window" TargetType="{x:Type Window}"
+    <Style x:Key="Wonder.Windows.Style.Window" TargetType="Window"
            BasedOn="{StaticResource Wonder.Windows.Style.BaseWindow}">
+    </Style>
+    <Style x:Key="Wonder.Style.Window" TargetType="Window">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="CanMinimize"/>
     </Style>
     <!--#endregion-->
 </ResourceDictionary>

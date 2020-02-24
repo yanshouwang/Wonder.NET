@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Wonder.WPF.Extension;
 using Wonder.WPF.Util;
 
 namespace Wonder.WPF.Styles

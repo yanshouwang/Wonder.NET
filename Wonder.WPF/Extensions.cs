@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-namespace Wonder.WPF.Extension
+namespace Wonder.WPF
 {
-    public static class UIElementExtensions
+    public static class Extensions
     {
         public static Window GetWindow(this UIElement element)
         {
