@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wonder.Core
+﻿namespace Wonder.Core
 {
     public static class Extensions
     {
@@ -55,6 +51,13 @@ namespace Wonder.Core
             value = ((value & 0xCCCCCCCCCCCCCCCC) >> 2) | ((value & 0x3333333333333333) << 2);
             // 交换每两位
             value = ((value & 0xAAAAAAAAAAAAAAAA) >> 1) | ((value & 0x5555555555555555) << 1);
+        }
+
+        public static string LoopInsert(this string str, int interval, string value)
+        {
+            for (int i = interval; i < str.Length; i += interval + 1)
+                str = str.Insert(i, value);
+            return str;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Wonder.WPF
 {
@@ -12,6 +13,13 @@ namespace Wonder.WPF
                        ? w2
                        : null;
             return window;
+        }
+
+        public static string LoopInsert(this string str, int interval, string value)
+        {
+            for (int i = interval; i < str.Length; i += interval + 1)
+                str = str.Insert(i, value);
+            return str;
         }
     }
 }

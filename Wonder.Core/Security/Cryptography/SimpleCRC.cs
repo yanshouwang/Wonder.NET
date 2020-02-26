@@ -4,14 +4,10 @@ namespace Wonder.Core.Security.Cryptography
 {
     class SimpleCRC : CRC
     {
-        private readonly uint mInit;
-        private readonly uint mPoly;
-
         public SimpleCRC(string name, int width, uint poly, uint init, bool refIn, bool refOut, uint xorOut)
             : base(name, width, poly, init, refIn, refOut, xorOut)
         {
-            mInit = Init << (8 - Width);
-            mPoly = Poly << (8 - Width);
+
         }
 
         public override uint Calculate(byte[] data)
@@ -46,7 +42,7 @@ namespace Wonder.Core.Security.Cryptography
             {
                 // 反转校验码
                 crc.Invert();
-                crc >>= 64 - Width;
+                crc >>= 32 - Width;
             }
             crc ^= XorOut;
             var mask = uint.MaxValue >> 32 - Width;

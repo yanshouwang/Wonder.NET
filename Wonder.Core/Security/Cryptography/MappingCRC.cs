@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Wonder.Core.Security.Cryptography
 {
@@ -75,7 +74,7 @@ namespace Wonder.Core.Security.Cryptography
             {
                 // 反转校验码
                 crc.Invert();
-                crc >>= 64 - Width;
+                crc >>= 32 - Width;
             }
             crc ^= XorOut;
             var mask = uint.MaxValue >> 32 - Width;

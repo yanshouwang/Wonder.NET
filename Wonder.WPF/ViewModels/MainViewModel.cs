@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Wonder.Core.Security.Cryptography;
@@ -10,10 +11,32 @@ namespace Wonder.WPF.ViewModels
     public class MainViewModel : BaseViewModel
     {
         #region 字段
-        private CRCModel mModel = (CRCModel)(-1);
+        private CRCModel mValue = (CRCModel)(-1);
         #endregion
 
         #region 属性
+        private string mKey;
+        public string Key
+        {
+            get { return mKey; }
+            set
+            {
+                if (!SetProperty(ref mKey, value))
+                    return;
+
+                UpdateCRC();
+            }
+        }
+
+        private void UpdateCRC()
+        {
+            var value = Models[Key];
+            if (value == mValue)
+                return;
+            CRC = CRC.Create(value);
+            mValue = value;
+        }
+
         private CRC mCRC;
         public CRC CRC
         {
@@ -21,31 +44,11 @@ namespace Wonder.WPF.ViewModels
             set { SetProperty(ref mCRC, value); }
         }
 
-        private uint mOutcome;
-        public uint Outcome
+        private string mCRCStr;
+        public string CRCStr
         {
-            get { return mOutcome; }
-            set { SetProperty(ref mOutcome, value); }
-        }
-
-        private string mStr;
-        public string Str
-        {
-            get { return mStr; }
-            set
-            {
-                var regex = new Regex(@"^[0-9A-F\s]*$");
-                if (!regex.IsMatch(value))
-                    throw new InvalidCastException();
-                SetProperty(ref mStr, value);
-            }
-        }
-
-        private bool mIsHEX;
-        public bool IsHEX
-        {
-            get { return mIsHEX; }
-            set { SetProperty(ref mIsHEX, value); }
+            get { return mCRCStr; }
+            set { SetProperty(ref mCRCStr, value); }
         }
 
         public IDictionary<string, CRCModel> Models { get; }
@@ -53,8 +56,8 @@ namespace Wonder.WPF.ViewModels
 
         public MainViewModel()
         {
-            Title = "CRC 计算器";
             Models = CreateModels();
+            Key = Models.Keys.First();
         }
 
         private IDictionary<string, CRCModel> CreateModels()
@@ -95,19 +98,6 @@ namespace Wonder.WPF.ViewModels
             };
         }
 
-        private DelegateCommand<string> mUpdateCommand;
-        public DelegateCommand<string> UpdateCommand =>
-            mUpdateCommand ?? (mUpdateCommand = new DelegateCommand<string>(ExecuteUpdateCommand));
-
-        void ExecuteUpdateCommand(string key)
-        {
-            var model = Models[key];
-            if (mModel == model)
-                return;
-            mModel = model;
-            CRC = CRC.Create(model);
-        }
-
         private DelegateCommand<byte[]> mCalculateCommand;
         public DelegateCommand<byte[]> CalculateCommand =>
             mCalculateCommand ?? (mCalculateCommand = new DelegateCommand<byte[]>(ExecuteCalculateCommand));
@@ -116,7 +106,9 @@ namespace Wonder.WPF.ViewModels
         {
             if (data == null)
                 return;
-            Outcome = CRC.Calculate(data);
+            var crc = CRC.Calculate(data);
+            var length = Math.Ceiling(CRC.Width / 8.0) * 2;
+            CRCStr = $"0x{crc.ToString($"X{length}")}";
         }
     }
 }

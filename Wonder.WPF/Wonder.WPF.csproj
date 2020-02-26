@@ -13,7 +13,6 @@
     <Resource Include="Assets\Logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
     <PackageReference Include="Prism.DryIoc" Version="7.2.0.1367" />
     <PackageReference Include="Wonder.Core" Version="1.0.0" />
   </ItemGroup>
