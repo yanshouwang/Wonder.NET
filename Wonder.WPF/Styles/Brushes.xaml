@@ -1,0 +1,299 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Wonder.WPF.Styles">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <!--#region RED-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.50" Color="{StaticResource Wonder.Color.Red.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.100" Color="{StaticResource Wonder.Color.Red.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.200" Color="{StaticResource Wonder.Color.Red.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.300" Color="{StaticResource Wonder.Color.Red.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.400" Color="{StaticResource Wonder.Color.Red.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.500" Color="{StaticResource Wonder.Color.Red.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.600" Color="{StaticResource Wonder.Color.Red.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.700" Color="{StaticResource Wonder.Color.Red.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.800" Color="{StaticResource Wonder.Color.Red.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.900" Color="{StaticResource Wonder.Color.Red.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.A100" Color="{StaticResource Wonder.Color.Red.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.A200" Color="{StaticResource Wonder.Color.Red.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.A400" Color="{StaticResource Wonder.Color.Red.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Red.A700" Color="{StaticResource Wonder.Color.Red.A700}"/>
+    <!--#endregion-->
+    <!--#region PINK-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.50" Color="{StaticResource Wonder.Color.Pink.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.100" Color="{StaticResource Wonder.Color.Pink.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.200" Color="{StaticResource Wonder.Color.Pink.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.300" Color="{StaticResource Wonder.Color.Pink.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.400" Color="{StaticResource Wonder.Color.Pink.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.500" Color="{StaticResource Wonder.Color.Pink.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.600" Color="{StaticResource Wonder.Color.Pink.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.700" Color="{StaticResource Wonder.Color.Pink.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.800" Color="{StaticResource Wonder.Color.Pink.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.900" Color="{StaticResource Wonder.Color.Pink.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.A100" Color="{StaticResource Wonder.Color.Pink.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.A200" Color="{StaticResource Wonder.Color.Pink.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.A400" Color="{StaticResource Wonder.Color.Pink.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Pink.A700" Color="{StaticResource Wonder.Color.Pink.A700}"/>
+    <!--#endregion-->
+    <!--#region PURPLE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.50" Color="{StaticResource Wonder.Color.Purple.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.100" Color="{StaticResource Wonder.Color.Purple.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.200" Color="{StaticResource Wonder.Color.Purple.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.300" Color="{StaticResource Wonder.Color.Purple.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.400" Color="{StaticResource Wonder.Color.Purple.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.500" Color="{StaticResource Wonder.Color.Purple.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.600" Color="{StaticResource Wonder.Color.Purple.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.700" Color="{StaticResource Wonder.Color.Purple.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.800" Color="{StaticResource Wonder.Color.Purple.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.900" Color="{StaticResource Wonder.Color.Purple.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.A100" Color="{StaticResource Wonder.Color.Purple.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.A200" Color="{StaticResource Wonder.Color.Purple.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.A400" Color="{StaticResource Wonder.Color.Purple.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Purple.A700" Color="{StaticResource Wonder.Color.Purple.A700}"/>
+    <!--#endregion-->
+    <!--#region DEEP PURPLE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.50" Color="{StaticResource Wonder.Color.DeepPurple.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.100" Color="{StaticResource Wonder.Color.DeepPurple.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.200" Color="{StaticResource Wonder.Color.DeepPurple.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.300" Color="{StaticResource Wonder.Color.DeepPurple.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.400" Color="{StaticResource Wonder.Color.DeepPurple.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.500" Color="{StaticResource Wonder.Color.DeepPurple.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.600" Color="{StaticResource Wonder.Color.DeepPurple.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.700" Color="{StaticResource Wonder.Color.DeepPurple.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.800" Color="{StaticResource Wonder.Color.DeepPurple.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.900" Color="{StaticResource Wonder.Color.DeepPurple.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.A100" Color="{StaticResource Wonder.Color.DeepPurple.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.A200" Color="{StaticResource Wonder.Color.DeepPurple.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.A400" Color="{StaticResource Wonder.Color.DeepPurple.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepPurple.A700" Color="{StaticResource Wonder.Color.DeepPurple.A700}"/>
+    <!--#endregion-->
+    <!--#region INDIGO-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.50" Color="{StaticResource Wonder.Color.Indigo.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.100" Color="{StaticResource Wonder.Color.Indigo.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.200" Color="{StaticResource Wonder.Color.Indigo.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.300" Color="{StaticResource Wonder.Color.Indigo.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.400" Color="{StaticResource Wonder.Color.Indigo.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.500" Color="{StaticResource Wonder.Color.Indigo.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.600" Color="{StaticResource Wonder.Color.Indigo.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.700" Color="{StaticResource Wonder.Color.Indigo.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.800" Color="{StaticResource Wonder.Color.Indigo.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.900" Color="{StaticResource Wonder.Color.Indigo.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.A100" Color="{StaticResource Wonder.Color.Indigo.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.A200" Color="{StaticResource Wonder.Color.Indigo.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.A400" Color="{StaticResource Wonder.Color.Indigo.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Indigo.A700" Color="{StaticResource Wonder.Color.Indigo.A700}"/>
+    <!--#endregion-->
+    <!--#region BLUE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.50" Color="{StaticResource Wonder.Color.Blue.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.100" Color="{StaticResource Wonder.Color.Blue.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.200" Color="{StaticResource Wonder.Color.Blue.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.300" Color="{StaticResource Wonder.Color.Blue.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.400" Color="{StaticResource Wonder.Color.Blue.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.500" Color="{StaticResource Wonder.Color.Blue.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.600" Color="{StaticResource Wonder.Color.Blue.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.700" Color="{StaticResource Wonder.Color.Blue.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.800" Color="{StaticResource Wonder.Color.Blue.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.900" Color="{StaticResource Wonder.Color.Blue.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.A100" Color="{StaticResource Wonder.Color.Blue.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.A200" Color="{StaticResource Wonder.Color.Blue.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.A400" Color="{StaticResource Wonder.Color.Blue.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Blue.A700" Color="{StaticResource Wonder.Color.Blue.A700}"/>
+    <!--#endregion-->
+    <!--#region LIGHT BLUE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.50" Color="{StaticResource Wonder.Color.LightBlue.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.100" Color="{StaticResource Wonder.Color.LightBlue.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.200" Color="{StaticResource Wonder.Color.LightBlue.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.300" Color="{StaticResource Wonder.Color.LightBlue.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.400" Color="{StaticResource Wonder.Color.LightBlue.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.500" Color="{StaticResource Wonder.Color.LightBlue.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.600" Color="{StaticResource Wonder.Color.LightBlue.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.700" Color="{StaticResource Wonder.Color.LightBlue.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.800" Color="{StaticResource Wonder.Color.LightBlue.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.900" Color="{StaticResource Wonder.Color.LightBlue.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.A100" Color="{StaticResource Wonder.Color.LightBlue.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.A200" Color="{StaticResource Wonder.Color.LightBlue.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.A400" Color="{StaticResource Wonder.Color.LightBlue.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightBlue.A700" Color="{StaticResource Wonder.Color.LightBlue.A700}"/>
+    <!--#endregion-->
+    <!--#region CYAN-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.50" Color="{StaticResource Wonder.Color.Cyan.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.100" Color="{StaticResource Wonder.Color.Cyan.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.200" Color="{StaticResource Wonder.Color.Cyan.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.300" Color="{StaticResource Wonder.Color.Cyan.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.400" Color="{StaticResource Wonder.Color.Cyan.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.500" Color="{StaticResource Wonder.Color.Cyan.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.600" Color="{StaticResource Wonder.Color.Cyan.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.700" Color="{StaticResource Wonder.Color.Cyan.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.800" Color="{StaticResource Wonder.Color.Cyan.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.900" Color="{StaticResource Wonder.Color.Cyan.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.A100" Color="{StaticResource Wonder.Color.Cyan.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.A200" Color="{StaticResource Wonder.Color.Cyan.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.A400" Color="{StaticResource Wonder.Color.Cyan.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Cyan.A700" Color="{StaticResource Wonder.Color.Cyan.A700}"/>
+    <!--#endregion-->
+    <!--#region TEAL-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.50" Color="{StaticResource Wonder.Color.Teal.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.100" Color="{StaticResource Wonder.Color.Teal.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.200" Color="{StaticResource Wonder.Color.Teal.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.300" Color="{StaticResource Wonder.Color.Teal.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.400" Color="{StaticResource Wonder.Color.Teal.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.500" Color="{StaticResource Wonder.Color.Teal.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.600" Color="{StaticResource Wonder.Color.Teal.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.700" Color="{StaticResource Wonder.Color.Teal.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.800" Color="{StaticResource Wonder.Color.Teal.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.900" Color="{StaticResource Wonder.Color.Teal.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.A100" Color="{StaticResource Wonder.Color.Teal.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.A200" Color="{StaticResource Wonder.Color.Teal.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.A400" Color="{StaticResource Wonder.Color.Teal.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Teal.A700" Color="{StaticResource Wonder.Color.Teal.A700}"/>
+    <!--#endregion-->
+    <!--#region GREEN-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.50" Color="{StaticResource Wonder.Color.Green.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.100" Color="{StaticResource Wonder.Color.Green.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.200" Color="{StaticResource Wonder.Color.Green.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.300" Color="{StaticResource Wonder.Color.Green.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.400" Color="{StaticResource Wonder.Color.Green.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.500" Color="{StaticResource Wonder.Color.Green.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.600" Color="{StaticResource Wonder.Color.Green.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.700" Color="{StaticResource Wonder.Color.Green.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.800" Color="{StaticResource Wonder.Color.Green.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.900" Color="{StaticResource Wonder.Color.Green.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.A100" Color="{StaticResource Wonder.Color.Green.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.A200" Color="{StaticResource Wonder.Color.Green.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.A400" Color="{StaticResource Wonder.Color.Green.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Green.A700" Color="{StaticResource Wonder.Color.Green.A700}"/>
+    <!--#endregion-->
+    <!--#region LIGHT GREEN-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.50" Color="{StaticResource Wonder.Color.LightGreen.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.100" Color="{StaticResource Wonder.Color.LightGreen.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.200" Color="{StaticResource Wonder.Color.LightGreen.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.300" Color="{StaticResource Wonder.Color.LightGreen.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.400" Color="{StaticResource Wonder.Color.LightGreen.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.500" Color="{StaticResource Wonder.Color.LightGreen.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.600" Color="{StaticResource Wonder.Color.LightGreen.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.700" Color="{StaticResource Wonder.Color.LightGreen.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.800" Color="{StaticResource Wonder.Color.LightGreen.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.900" Color="{StaticResource Wonder.Color.LightGreen.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.A100" Color="{StaticResource Wonder.Color.LightGreen.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.A200" Color="{StaticResource Wonder.Color.LightGreen.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.A400" Color="{StaticResource Wonder.Color.LightGreen.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.LightGreen.A700" Color="{StaticResource Wonder.Color.LightGreen.A700}"/>
+    <!--#endregion-->
+    <!--#region LIME-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.50" Color="{StaticResource Wonder.Color.Lime.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.100" Color="{StaticResource Wonder.Color.Lime.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.200" Color="{StaticResource Wonder.Color.Lime.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.300" Color="{StaticResource Wonder.Color.Lime.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.400" Color="{StaticResource Wonder.Color.Lime.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.500" Color="{StaticResource Wonder.Color.Lime.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.600" Color="{StaticResource Wonder.Color.Lime.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.700" Color="{StaticResource Wonder.Color.Lime.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.800" Color="{StaticResource Wonder.Color.Lime.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.900" Color="{StaticResource Wonder.Color.Lime.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.A100" Color="{StaticResource Wonder.Color.Lime.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.A200" Color="{StaticResource Wonder.Color.Lime.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.A400" Color="{StaticResource Wonder.Color.Lime.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Lime.A700" Color="{StaticResource Wonder.Color.Lime.A700}"/>
+    <!--#endregion-->
+    <!--#region YELLOW-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.50" Color="{StaticResource Wonder.Color.Yellow.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.100" Color="{StaticResource Wonder.Color.Yellow.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.200" Color="{StaticResource Wonder.Color.Yellow.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.300" Color="{StaticResource Wonder.Color.Yellow.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.400" Color="{StaticResource Wonder.Color.Yellow.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.500" Color="{StaticResource Wonder.Color.Yellow.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.600" Color="{StaticResource Wonder.Color.Yellow.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.700" Color="{StaticResource Wonder.Color.Yellow.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.800" Color="{StaticResource Wonder.Color.Yellow.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.900" Color="{StaticResource Wonder.Color.Yellow.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.A100" Color="{StaticResource Wonder.Color.Yellow.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.A200" Color="{StaticResource Wonder.Color.Yellow.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.A400" Color="{StaticResource Wonder.Color.Yellow.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Yellow.A700" Color="{StaticResource Wonder.Color.Yellow.A700}"/>
+    <!--#endregion-->
+    <!--#region AMBER-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.50" Color="{StaticResource Wonder.Color.Amber.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.100" Color="{StaticResource Wonder.Color.Amber.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.200" Color="{StaticResource Wonder.Color.Amber.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.300" Color="{StaticResource Wonder.Color.Amber.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.400" Color="{StaticResource Wonder.Color.Amber.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.500" Color="{StaticResource Wonder.Color.Amber.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.600" Color="{StaticResource Wonder.Color.Amber.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.700" Color="{StaticResource Wonder.Color.Amber.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.800" Color="{StaticResource Wonder.Color.Amber.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.900" Color="{StaticResource Wonder.Color.Amber.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.A100" Color="{StaticResource Wonder.Color.Amber.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.A200" Color="{StaticResource Wonder.Color.Amber.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.A400" Color="{StaticResource Wonder.Color.Amber.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Amber.A700" Color="{StaticResource Wonder.Color.Amber.A700}"/>
+    <!--#endregion-->
+    <!--#region ORANGE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.50" Color="{StaticResource Wonder.Color.Orange.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.100" Color="{StaticResource Wonder.Color.Orange.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.200" Color="{StaticResource Wonder.Color.Orange.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.300" Color="{StaticResource Wonder.Color.Orange.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.400" Color="{StaticResource Wonder.Color.Orange.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.500" Color="{StaticResource Wonder.Color.Orange.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.600" Color="{StaticResource Wonder.Color.Orange.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.700" Color="{StaticResource Wonder.Color.Orange.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.800" Color="{StaticResource Wonder.Color.Orange.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.900" Color="{StaticResource Wonder.Color.Orange.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.A100" Color="{StaticResource Wonder.Color.Orange.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.A200" Color="{StaticResource Wonder.Color.Orange.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.A400" Color="{StaticResource Wonder.Color.Orange.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Orange.A700" Color="{StaticResource Wonder.Color.Orange.A700}"/>
+    <!--#endregion-->
+    <!--#region DEEP ORANGE-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.50" Color="{StaticResource Wonder.Color.DeepOrange.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.100" Color="{StaticResource Wonder.Color.DeepOrange.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.200" Color="{StaticResource Wonder.Color.DeepOrange.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.300" Color="{StaticResource Wonder.Color.DeepOrange.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.400" Color="{StaticResource Wonder.Color.DeepOrange.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.500" Color="{StaticResource Wonder.Color.DeepOrange.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.600" Color="{StaticResource Wonder.Color.DeepOrange.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.700" Color="{StaticResource Wonder.Color.DeepOrange.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.800" Color="{StaticResource Wonder.Color.DeepOrange.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.900" Color="{StaticResource Wonder.Color.DeepOrange.900}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.A100" Color="{StaticResource Wonder.Color.DeepOrange.A100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.A200" Color="{StaticResource Wonder.Color.DeepOrange.A200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.A400" Color="{StaticResource Wonder.Color.DeepOrange.A400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.DeepOrange.A700" Color="{StaticResource Wonder.Color.DeepOrange.A700}"/>
+    <!--#endregion-->
+    <!--#region BROWN-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.50" Color="{StaticResource Wonder.Color.Brown.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.100" Color="{StaticResource Wonder.Color.Brown.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.200" Color="{StaticResource Wonder.Color.Brown.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.300" Color="{StaticResource Wonder.Color.Brown.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.400" Color="{StaticResource Wonder.Color.Brown.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.500" Color="{StaticResource Wonder.Color.Brown.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.600" Color="{StaticResource Wonder.Color.Brown.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.700" Color="{StaticResource Wonder.Color.Brown.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.800" Color="{StaticResource Wonder.Color.Brown.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Brown.900" Color="{StaticResource Wonder.Color.Brown.900}"/>
+    <!--#endregion-->
+    <!--#region GREY-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.50" Color="{StaticResource Wonder.Color.Grey.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.100" Color="{StaticResource Wonder.Color.Grey.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.200" Color="{StaticResource Wonder.Color.Grey.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.300" Color="{StaticResource Wonder.Color.Grey.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.400" Color="{StaticResource Wonder.Color.Grey.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.500" Color="{StaticResource Wonder.Color.Grey.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.600" Color="{StaticResource Wonder.Color.Grey.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.700" Color="{StaticResource Wonder.Color.Grey.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.800" Color="{StaticResource Wonder.Color.Grey.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.Grey.900" Color="{StaticResource Wonder.Color.Grey.900}"/>
+    <!--#endregion-->
+    <!--#region BLUE GREY-->
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.50" Color="{StaticResource Wonder.Color.BlueGrey.50}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.100" Color="{StaticResource Wonder.Color.BlueGrey.100}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.200" Color="{StaticResource Wonder.Color.BlueGrey.200}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.300" Color="{StaticResource Wonder.Color.BlueGrey.300}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.400" Color="{StaticResource Wonder.Color.BlueGrey.400}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.500" Color="{StaticResource Wonder.Color.BlueGrey.500}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.600" Color="{StaticResource Wonder.Color.BlueGrey.600}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.700" Color="{StaticResource Wonder.Color.BlueGrey.700}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.800" Color="{StaticResource Wonder.Color.BlueGrey.800}"/>
+    <SolidColorBrush x:Key="Wonder.SolidColorBrush.BlueGrey.900" Color="{StaticResource Wonder.Color.BlueGrey.900}"/>
+    <!--#endregion-->
+</ResourceDictionary>
