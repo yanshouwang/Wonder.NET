@@ -1,7 +1,14 @@
 ﻿namespace Wonder.Core
 {
+    /// <summary>
+    /// 扩展类
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// 逆序运算
+        /// </summary>
+        /// <param name="value">逆序目标</param>
         public static void Invert(this ref byte value)
         {
             // 神奇算法
@@ -11,6 +18,10 @@
             value = (byte)v3;
         }
 
+        /// <summary>
+        /// 逆序运算
+        /// </summary>
+        /// <param name="value">逆序目标</param>
         public static void Invert(this ref ushort value)
         {
             // 交换相邻的两个字节
@@ -23,6 +34,10 @@
             value = (ushort)(((value & 0xAAAA) >> 1) | ((value & 0x5555) << 1));
         }
 
+        /// <summary>
+        /// 逆序运算
+        /// </summary>
+        /// <param name="value">逆序目标</param>
         public static void Invert(this ref uint value)
         {
             // 交换前后两个双字节
@@ -37,6 +52,10 @@
             value = ((value & 0xAAAAAAAA) >> 1) | ((value & 0x55555555) << 1);
         }
 
+        /// <summary>
+        /// 逆序运算
+        /// </summary>
+        /// <param name="value">逆序目标</param>
         public static void Invert(this ref ulong value)
         {
             // 交换前后两个四字节
@@ -53,6 +72,13 @@
             value = ((value & 0xAAAAAAAAAAAAAAAA) >> 1) | ((value & 0x5555555555555555) << 1);
         }
 
+        /// <summary>
+        /// 循环插入指定字符串
+        /// </summary>
+        /// <param name="str">源字符串</param>
+        /// <param name="interval">间隔</param>
+        /// <param name="value">插入字符串</param>
+        /// <returns>目标字符串</returns>
         public static string LoopInsert(this string str, int interval, string value)
         {
             for (int i = interval; i < str.Length; i += interval + 1)

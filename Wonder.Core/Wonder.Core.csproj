@@ -1,8 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>NETStandard2.0;NETStandard2.1</TargetFrameworks>
     <AssemblyName>Wonder.Core</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>iDotNET</Authors>
+    <Company>Wonder</Company>
+    <Description>Wonder.NET 基础类库</Description>
+    <Copyright>Copyright © Wonder 2020</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/yanshouwang/Wonder.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/yanshouwang/Wonder.NET</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>- 项目转移到 .NETStandard 下以支持更多平台
+- 修复问题</PackageReleaseNotes>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|NETStandard2.0|AnyCPU'">
+    <DocumentationFile>C:\Users\YSW\Projects\GitHub\Wonder.NET\Wonder.Core\Wonder.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
