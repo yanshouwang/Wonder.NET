@@ -12,18 +12,21 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Wonder.UWP.Logger;
+using Wonder.UWP.ViewModels;
 
-//https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
+// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace Wonder.UWP.Views
 {
-    public sealed partial class LELoggerView : UserControl
+    /// <summary>
+    /// 可用于自身或导航至 Frame 内部的空白页。
+    /// </summary>
+    public sealed partial class LELoopWriteView : Page
     {
-        public ILELoggerX ViewModel
-            => DataContext as ILELoggerX;
+        public LELoopWriteViewModel ViewModel
+            => DataContext as LELoopWriteViewModel;
 
-        public LELoggerView()
+        public LELoopWriteView()
         {
             this.InitializeComponent();
         }

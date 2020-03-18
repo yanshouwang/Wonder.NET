@@ -11,7 +11,7 @@ namespace Wonder.UWP.ViewModels
 {
     public class SerialViewModel : BaseViewModel
     {
-        private readonly DeviceWatcher _watcher;
+        private readonly DeviceWatcher mWatcher;
 
         public ObservableCollection<SerialDeviceViewModel> Devices { get; }
 
@@ -20,24 +20,24 @@ namespace Wonder.UWP.ViewModels
         {
             Devices = new ObservableCollection<SerialDeviceViewModel>();
             var selector = SerialDevice.GetDeviceSelector();
-            _watcher = DeviceInformation.CreateWatcher(selector);
-            _watcher.Added += OnDeviceAdded;
-            _watcher.Removed += OnDeviceRemoved;
-            _watcher.Updated += OnDeviceUpdated;
-            _watcher.EnumerationCompleted += OnWatcherEnumerationCompleted;
-            _watcher.Stopped += OnWatcherStoped;
+            mWatcher = DeviceInformation.CreateWatcher(selector);
+            mWatcher.Added += OnDeviceAdded;
+            mWatcher.Removed += OnDeviceRemoved;
+            mWatcher.Updated += OnDeviceUpdated;
+            mWatcher.EnumerationCompleted += OnWatcherEnumerationCompleted;
+            mWatcher.Stopped += OnWatcherStoped;
         }
 
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
         {
             base.OnNavigatedTo(e, viewModelState);
-            _watcher.Start();
+            mWatcher.Start();
         }
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
             base.OnNavigatingFrom(e, viewModelState, suspending);
-            _watcher.Stop();
+            mWatcher.Stop();
         }
 
         private void OnWatcherStoped(DeviceWatcher sender, object args)

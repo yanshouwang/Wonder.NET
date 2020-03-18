@@ -134,7 +134,7 @@
     <comment>说明</comment>
   </data>
   <data name="DisplayName" xml:space="preserve">
-    <value>Wonder</value>
+    <value>蓝牙调试工具</value>
     <comment>显示名称</comment>
   </data>
   <data name="LicenseHLK.NavigateUri" xml:space="preserve">

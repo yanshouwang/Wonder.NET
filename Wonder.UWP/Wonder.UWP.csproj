@@ -37,6 +37,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -157,11 +158,22 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Extension\FrameworkElementExtensions.cs" />
     <Compile Include="Helpers\NavHelper.cs" />
-    <Compile Include="Logger\ILELoggerX.cs" />
-    <Compile Include="Logger\Log.cs" />
-    <Compile Include="Logger\FileLELoggerX.cs" />
-    <Compile Include="Logger\ILELogger.cs" />
-    <Compile Include="Logger\MemoryLELoggerX.cs" />
+    <Compile Include="Logger\Extensions.cs" />
+    <Compile Include="Models\LogModel.cs" />
+    <Compile Include="ViewModels\LEAdapterViewModel.cs" />
+    <Compile Include="ViewModels\LEContinuousNotifyLoggerViewModel.cs" />
+    <Compile Include="ViewModels\LEContinuousNotifyViewModel.cs" />
+    <Compile Include="ViewModels\LEBaseLoggerViewModel.cs" />
+    <Compile Include="ViewModels\LELoopWriteLoggerViewModel.cs" />
+    <Compile Include="ViewModels\LELoopWriteViewModel.cs" />
+    <Compile Include="ViewModels\LERSSILoggerViewModel.cs" />
+    <Compile Include="ViewModels\LERSSIViewModel.cs" />
+    <Compile Include="ViewModels\LESyncWriteLoggerViewModel.cs" />
+    <Compile Include="ViewModels\LESyncWriteViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="Logger\LogMode.cs" />
+    <Compile Include="Logger\StorageLogger.cs" />
+    <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Models\ValueModel.cs" />
     <Compile Include="Services\BaseMonitorService.cs" />
     <Compile Include="Services\BLEMonitorService.cs" />
@@ -184,16 +196,18 @@
     <Compile Include="Util\MathUtils.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EndSymbol.cs" />
+    <Compile Include="ViewModels\LECharacteristicValueEventArgs.cs" />
     <Compile Include="ViewModels\LECharacteristicViewModel.cs" />
     <Compile Include="ViewModels\LEDeviceState.cs" />
     <Compile Include="ViewModels\LEDeviceViewModel.cs" />
+    <Compile Include="ViewModels\LELoggerViewModel.cs" />
     <Compile Include="ViewModels\LEWriteState.cs" />
     <Compile Include="ViewModels\MonitorViewModel.cs" />
-    <Compile Include="Views\LECharacteristicView.xaml.cs">
-      <DependentUpon>LECharacteristicView.xaml</DependentUpon>
+    <Compile Include="Views\LEContinuousNotifyView.xaml.cs">
+      <DependentUpon>LEContinuousNotifyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LEDeviceView.xaml.cs">
-      <DependentUpon>LEDeviceView.xaml</DependentUpon>
+    <Compile Include="Views\LELoopWriteView.xaml.cs">
+      <DependentUpon>LELoopWriteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LENode.cs" />
     <Compile Include="ViewModels\LEServiceViewModel.cs" />
@@ -204,14 +218,14 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\HorizontalListView.cs" />
     <Compile Include="Views\LEDataTemplateSelector.cs" />
-    <Compile Include="Views\LEServiceView.xaml.cs">
-      <DependentUpon>LEServiceView.xaml</DependentUpon>
+    <Compile Include="Views\LERSSIView.xaml.cs">
+      <DependentUpon>LERSSIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LESyncWriteView.xaml.cs">
+      <DependentUpon>LESyncWriteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LEView.xaml.cs">
       <DependentUpon>LEView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LELoggerView.xaml.cs">
-      <DependentUpon>LELoggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MonitorView.xaml.cs">
       <DependentUpon>MonitorView.xaml</DependentUpon>
@@ -301,23 +315,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LECharacteristicView.xaml">
+    <Page Include="Views\LEContinuousNotifyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LEDeviceView.xaml">
+    <Page Include="Views\LELoopWriteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LEServiceView.xaml">
+    <Page Include="Views\LERSSIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LESyncWriteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LEView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LELoggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

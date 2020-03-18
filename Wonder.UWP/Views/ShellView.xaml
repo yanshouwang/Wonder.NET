@@ -2,16 +2,13 @@
     x:Class="Wonder.UWP.Views.ShellView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Wonder.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
+    xmlns:v="using:Wonder.UWP.Views"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:primitiveContract7Present="using:Microsoft.UI.Xaml.Controls.Primitives?IsApiContractPresent(Windows.Foundation.UniversalApiContract,7)"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:helpers="using:Wonder.UWP.Helpers"
     mc:Ignorable="d"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -471,8 +468,21 @@
         </muxc:TabView.TabStripFooter>
         <muxc:TabView.TabItems>
             <muxc:TabViewItem IconSource="{StaticResource Home}"
-                              Header="Monitor"
-                              Content="{x:Bind NavFrame}"/>
+                              Header="信号强度">
+                <v:LERSSIView DataContext="{x:Bind ViewModel.RSSI}"/>
+            </muxc:TabViewItem>
+            <muxc:TabViewItem IconSource="{StaticResource Home}"
+                              Header="循环发送">
+                <v:LELoopWriteView DataContext="{x:Bind ViewModel.LoopWrite}"/>
+            </muxc:TabViewItem>
+            <muxc:TabViewItem IconSource="{StaticResource Home}"
+                              Header="同步发送">
+                <v:LESyncWriteView DataContext="{x:Bind ViewModel.SyncWrite}"/>
+            </muxc:TabViewItem>
+            <muxc:TabViewItem IconSource="{StaticResource Home}"
+                              Header="连续上传">
+                <v:LEContinuousNotifyView DataContext="{x:Bind ViewModel.ContinuousNotify}"/>
+            </muxc:TabViewItem>
         </muxc:TabView.TabItems>
     </muxc:TabView>
 </Page>

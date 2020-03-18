@@ -11,16 +11,16 @@ namespace Wonder.UWP.Services
         public event EventHandler StateChanged;
         public event EventHandler<ValueEventArgs> ValueChanged;
 
-        private bool _isMonitoring;
+        private bool mIsMonitoring;
         public bool IsMonitoring
         {
-            get => _isMonitoring;
+            get => mIsMonitoring;
             protected set
             {
-                if (_isMonitoring == value)
+                if (mIsMonitoring == value)
                     return;
 
-                _isMonitoring = value;
+                mIsMonitoring = value;
                 StateChanged?.Invoke(this, EventArgs.Empty);
             }
         }

@@ -16,18 +16,18 @@ namespace Wonder.UWP.ViewModels
         protected IMajorMonitorService MajorMonitorService { get; }
         protected IMinorMonitorService MinorMonitorService { get; }
 
-        private bool _isMajorMonitoring;
+        private bool mIsMajorMonitoring;
         public bool IsMajorMonitoring
         {
-            get { return _isMajorMonitoring; }
-            set { SetProperty(ref _isMajorMonitoring, value); }
+            get { return mIsMajorMonitoring; }
+            set { SetProperty(ref mIsMajorMonitoring, value); }
         }
 
-        private bool _isMinorMonitoring;
+        private bool mIsMinorMonitoring;
         public bool IsMinorMonitoring
         {
-            get { return _isMinorMonitoring; }
-            set { SetProperty(ref _isMinorMonitoring, value); }
+            get { return mIsMinorMonitoring; }
+            set { SetProperty(ref mIsMinorMonitoring, value); }
         }
 
         public IList<ValueModel> ValueModels { get; }
@@ -77,9 +77,9 @@ namespace Wonder.UWP.ViewModels
             IsMinorMonitoring = MinorMonitorService.IsMonitoring;
         }
 
-        private DelegateCommand _startCommand;
+        private DelegateCommand mStartCommand;
         public DelegateCommand StartCommand =>
-            _startCommand ?? (_startCommand = new DelegateCommand(ExecuteStartCommand, CanExecuteStartCommand).ObservesProperty(() => IsMinorMonitoring));
+            mStartCommand ?? (mStartCommand = new DelegateCommand(ExecuteStartCommand, CanExecuteStartCommand).ObservesProperty(() => IsMinorMonitoring));
 
         private bool CanExecuteStartCommand()
         {
@@ -91,9 +91,9 @@ namespace Wonder.UWP.ViewModels
             await MinorMonitorService.StartAsync();
         }
 
-        private DelegateCommand _stopCommand;
+        private DelegateCommand mStopCommand;
         public DelegateCommand StopCommand =>
-            _stopCommand ?? (_stopCommand = new DelegateCommand(ExecuteStopCommand, CanExecuteStopCommand).ObservesProperty(() => IsMinorMonitoring));
+            mStopCommand ?? (mStopCommand = new DelegateCommand(ExecuteStopCommand, CanExecuteStopCommand).ObservesProperty(() => IsMinorMonitoring));
 
         private bool CanExecuteStopCommand()
         {
@@ -105,9 +105,9 @@ namespace Wonder.UWP.ViewModels
             MinorMonitorService.Stop();
         }
 
-        private DelegateCommand _switchStateCommand;
+        private DelegateCommand mSwitchStateCommand;
         public DelegateCommand SwitchStateCommand =>
-            _switchStateCommand ?? (_switchStateCommand = new DelegateCommand(ExecuteSwitchStateCommand));
+            mSwitchStateCommand ?? (mSwitchStateCommand = new DelegateCommand(ExecuteSwitchStateCommand));
 
         void ExecuteSwitchStateCommand()
         {
@@ -121,9 +121,9 @@ namespace Wonder.UWP.ViewModels
             }
         }
 
-        private DelegateCommand _clearCommand;
+        private DelegateCommand mClearCommand;
         public DelegateCommand ClearCommand =>
-            _clearCommand ?? (_clearCommand = new DelegateCommand(ExecuteClearCommand));
+            mClearCommand ?? (mClearCommand = new DelegateCommand(ExecuteClearCommand));
 
         void ExecuteClearCommand()
         {

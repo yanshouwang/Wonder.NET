@@ -39,22 +39,22 @@ namespace Wonder.UWP.Util
             }
 
             int count = colors.Count();
-            _stops = new ColorScaleStop[count];
+            mStops = new ColorScaleStop[count];
             int index = 0;
             foreach (Color color in colors)
             {
                 // Clean up floating point jaggies
                 if (index == 0)
                 {
-                    _stops[index] = new ColorScaleStop(color, 0);
+                    mStops[index] = new ColorScaleStop(color, 0);
                 }
                 else if (index == count - 1)
                 {
-                    _stops[index] = new ColorScaleStop(color, 1);
+                    mStops[index] = new ColorScaleStop(color, 1);
                 }
                 else
                 {
-                    _stops[index] = new ColorScaleStop(color, (double)index * (1.0 / (double)(count - 1)));
+                    mStops[index] = new ColorScaleStop(color, (double)index * (1.0 / (double)(count - 1)));
                 }
                 index++;
             }
@@ -68,11 +68,11 @@ namespace Wonder.UWP.Util
             }
 
             int count = stops.Count();
-            _stops = new ColorScaleStop[count];
+            mStops = new ColorScaleStop[count];
             int index = 0;
             foreach (ColorScaleStop stop in stops)
             {
-                _stops[index] = new ColorScaleStop(stop);
+                mStops[index] = new ColorScaleStop(stop);
                 index++;
             }
         }
@@ -84,58 +84,58 @@ namespace Wonder.UWP.Util
                 throw new ArgumentNullException("source");
             }
 
-            _stops = new ColorScaleStop[source._stops.Length];
-            for (int i = 0; i < _stops.Length; i++)
+            mStops = new ColorScaleStop[source.mStops.Length];
+            for (int i = 0; i < mStops.Length; i++)
             {
-                _stops[i] = new ColorScaleStop(source._stops[i]);
+                mStops[i] = new ColorScaleStop(source.mStops[i]);
             }
         }
 
-        private readonly ColorScaleStop[] _stops;
+        private readonly ColorScaleStop[] mStops;
 
         public Color GetColor(double position, ColorScaleInterpolationMode mode = ColorScaleInterpolationMode.RGB)
         {
-            if (_stops.Length == 1)
+            if (mStops.Length == 1)
             {
-                return _stops[0].Color;
+                return mStops[0].Color;
             }
             if (position <= 0)
             {
-                return _stops[0].Color;
+                return mStops[0].Color;
             }
             else if (position >= 1)
             {
-                return _stops[_stops.Length - 1].Color;
+                return mStops[mStops.Length - 1].Color;
             }
             int lowerIndex = 0;
-            for (int i = 0; i < _stops.Length; i++)
+            for (int i = 0; i < mStops.Length; i++)
             {
-                if (_stops[i].Position <= position)
+                if (mStops[i].Position <= position)
                 {
                     lowerIndex = i;
                 }
             }
             int upperIndex = lowerIndex + 1;
-            if (upperIndex >= _stops.Length)
+            if (upperIndex >= mStops.Length)
             {
-                upperIndex = _stops.Length - 1;
+                upperIndex = mStops.Length - 1;
             }
-            double scalePosition = (position - _stops[lowerIndex].Position) * (1.0 / (_stops[upperIndex].Position - _stops[lowerIndex].Position));
+            double scalePosition = (position - mStops[lowerIndex].Position) * (1.0 / (mStops[upperIndex].Position - mStops[lowerIndex].Position));
 
             switch (mode)
             {
                 case ColorScaleInterpolationMode.LAB:
-                    LAB leftLAB = ColorUtils.RGBToLAB(_stops[lowerIndex].Color, false);
-                    LAB rightLAB = ColorUtils.RGBToLAB(_stops[upperIndex].Color, false);
+                    LAB leftLAB = ColorUtils.RGBToLAB(mStops[lowerIndex].Color, false);
+                    LAB rightLAB = ColorUtils.RGBToLAB(mStops[upperIndex].Color, false);
                     LAB targetLAB = ColorUtils.InterpolateLAB(leftLAB, rightLAB, scalePosition);
                     return ColorUtils.LABToRGB(targetLAB, false).Denormalize();
                 case ColorScaleInterpolationMode.XYZ:
-                    XYZ leftXYZ = ColorUtils.RGBToXYZ(_stops[lowerIndex].Color, false);
-                    XYZ rightXYZ = ColorUtils.RGBToXYZ(_stops[upperIndex].Color, false);
+                    XYZ leftXYZ = ColorUtils.RGBToXYZ(mStops[lowerIndex].Color, false);
+                    XYZ rightXYZ = ColorUtils.RGBToXYZ(mStops[upperIndex].Color, false);
                     XYZ targetXYZ = ColorUtils.InterpolateXYZ(leftXYZ, rightXYZ, scalePosition);
                     return ColorUtils.XYZToRGB(targetXYZ, false).Denormalize();
                 default:
-                    return ColorUtils.InterpolateRGB(_stops[lowerIndex].Color, _stops[upperIndex].Color, scalePosition);
+                    return ColorUtils.InterpolateRGB(mStops[lowerIndex].Color, mStops[upperIndex].Color, scalePosition);
             }
         }
 
@@ -149,13 +149,13 @@ namespace Wonder.UWP.Util
             {
                 return new ColorScale(new Color[] { GetColor(lowerBound, mode) });
             }
-            List<ColorScaleStop> containedStops = new List<ColorScaleStop>(_stops.Length);
+            List<ColorScaleStop> containedStops = new List<ColorScaleStop>(mStops.Length);
 
-            for (int i = 0; i < _stops.Length; i++)
+            for (int i = 0; i < mStops.Length; i++)
             {
-                if (_stops[i].Position >= lowerBound && _stops[i].Position <= upperBound)
+                if (mStops[i].Position >= lowerBound && mStops[i].Position <= upperBound)
                 {
-                    containedStops.Add(_stops[i]);
+                    containedStops.Add(mStops[i]);
                 }
             }
 

@@ -86,13 +86,14 @@ namespace Wonder.UWP.Views
             var item = ViewsTVW.TabItems.FirstOrDefault(i => i is MUXC.TabViewItem j && j.Content is Frame k && k.Content is SettingsView);
             if (item == null)
             {
-                var frame = new Frame();
-                frame.Navigate(typeof(SettingsView));
+                //var frame = new Frame();
+                //frame.Navigate(typeof(SettingsView));
+                NavFrame.Navigate(typeof(SettingsView));
                 item = new MUXC.TabViewItem()
                 {
                     IconSource = new MUXC.SymbolIconSource() { Symbol = Symbol.Setting },
                     Header = "设置",
-                    Content = frame
+                    Content = NavFrame
                 };
                 ViewsTVW.TabItems.Add(item);
                 ViewsTVW.SelectedItem = item;

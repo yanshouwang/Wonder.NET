@@ -1,62 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prism.Windows.Navigation;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
-using Wonder.UWP.Logger;
 
 namespace Wonder.UWP.ViewModels
 {
     public class LEServiceViewModel : BaseViewModel, IDisposable
     {
-        private readonly GattDeviceService _service;
+        #region 字段
+        private readonly GattDeviceService mService;
+        #endregion
 
+        #region 属性
         public Guid UUID
-            => _service.Uuid;
-        public ObservableCollection<LECharacteristicViewModel> Characteristics { get; }
-        public ILELoggerX LoggerX { get; }
+            => mService.Uuid;
 
-        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics, ILELoggerX loggerX)
+        public ObservableCollection<LECharacteristicViewModel> Characteristics { get; }
+        #endregion
+
+        #region 构造
+        public LEServiceViewModel(INavigationService navigationService, GattDeviceService service, IList<LECharacteristicViewModel> characteristics)
             : base(navigationService)
         {
-            _service = service;
+            mService = service;
             Characteristics = characteristics == null
                             ? new ObservableCollection<LECharacteristicViewModel>()
                             : new ObservableCollection<LECharacteristicViewModel>(characteristics);
-            LoggerX = loggerX;
         }
+        #endregion
 
         #region IDisposable Support
-        private bool disposedValue = false; // 要检测冗余调用
+        private bool mDisposed = false; // 要检测冗余调用
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!mDisposed)
             {
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)。
                     foreach (var characteristic in Characteristics)
                     {
-                        if (characteristic.StopLoopWriteCommand.CanExecute())
+                        if (characteristic.StopNotifyCommand.CanExecute())
                         {
-                            characteristic.StopLoopWriteCommand.Execute();
-                        }
-                        if (characteristic.StopNotificationCommand.CanExecute())
-                        {
-                            characteristic.StopNotificationCommand.Execute();
+                            characteristic.StopNotifyCommand.Execute();
                         }
                     }
-                    _service.Dispose();
+                    mService.Dispose();
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
                 // TODO: 将大型字段设置为 null。
 
-                disposedValue = true;
+                mDisposed = true;
             }
         }
 

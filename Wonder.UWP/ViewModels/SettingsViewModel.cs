@@ -19,25 +19,25 @@ namespace Wonder.UWP.ViewModels
     {
         public IThemeService ThemeService { get; }
 
-        private ThemeMode _themeMode;
+        private ThemeMode mThemeMode;
         public ThemeMode ThemeMode
         {
-            get { return _themeMode; }
-            set { SetProperty(ref _themeMode, value); }
+            get { return mThemeMode; }
+            set { SetProperty(ref mThemeMode, value); }
         }
 
-        private string _displayName;
+        private string mDisplayName;
         public string DisplayName
         {
-            get { return _displayName; }
-            set { SetProperty(ref _displayName, value); }
+            get { return mDisplayName; }
+            set { SetProperty(ref mDisplayName, value); }
         }
 
-        private Version _version;
+        private Version mVersion;
         public Version Version
         {
-            get { return _version; }
-            set { SetProperty(ref _version, value); }
+            get { return mVersion; }
+            set { SetProperty(ref mVersion, value); }
         }
 
         public SettingsViewModel(INavigationService navigationService, IThemeService themeService)
@@ -65,9 +65,9 @@ namespace Wonder.UWP.ViewModels
             return displayName;
         }
 
-        private DelegateCommand<object> _setThemeModeCommand;
+        private DelegateCommand<object> mSetThemeModeCommand;
         public DelegateCommand<object> SetThemeModeCommand =>
-            _setThemeModeCommand ?? (_setThemeModeCommand = new DelegateCommand<object>(ExecuteSetThemeModeCommand));
+            mSetThemeModeCommand ?? (mSetThemeModeCommand = new DelegateCommand<object>(ExecuteSetThemeModeCommand));
 
         void ExecuteSetThemeModeCommand(object obj)
         {
@@ -79,9 +79,9 @@ namespace Wonder.UWP.ViewModels
             Analytics.TrackEvent("Settings", properties);
         }
 
-        private DelegateCommand<object> _setThemeColorCommand;
+        private DelegateCommand<object> mSetThemeColorCommand;
         public DelegateCommand<object> SetThemeColorCommand =>
-            _setThemeColorCommand ?? (_setThemeColorCommand = new DelegateCommand<object>(ExecuteSetThemeColorCommand));
+            mSetThemeColorCommand ?? (mSetThemeColorCommand = new DelegateCommand<object>(ExecuteSetThemeColorCommand));
 
         void ExecuteSetThemeColorCommand(object obj)
         {

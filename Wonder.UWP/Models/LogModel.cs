@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Wonder.UWP.Logger
+namespace Wonder.UWP.Models
 {
-    public class Log
+    public class LogModel
     {
-        public Log(string message)
+        public LogModel(string message)
         {
             Time = DateTime.Now;
             Message = message;

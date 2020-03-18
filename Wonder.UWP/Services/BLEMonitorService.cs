@@ -125,7 +125,7 @@ namespace Wonder.UWP.Services
                     Array.Copy(data, i * 20, carriage, 0, 20);
                     var value = CryptographicBuffer.CreateFromByteArray(carriage);
                     var status = await characteristic.WriteValueAsync(value, option);
-                    //var result = await _characteristic.WriteValueWithResultAsync(value, option);
+                    //var result = await characteristic.WriteValueWithResultAsync(value, option);
                     //var status = result.Status;
                     if (status != GattCommunicationStatus.Success)
                     {

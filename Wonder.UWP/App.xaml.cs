@@ -32,7 +32,15 @@ namespace Wonder.UWP
         public App()
         {
             this.InitializeComponent();
+
+            this.UnhandledException += OnCrashed;
             AppCenter.Start("4b6186ec-c43a-41f6-922f-d808d207ab4c", typeof(Analytics), typeof(Crashes));
+        }
+
+        private void OnCrashed(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            var ex = e.Exception;
+            throw ex;
         }
 
         protected override void ConfigureContainer()
@@ -76,7 +84,7 @@ namespace Wonder.UWP
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
             InitializeTheme();
-            NavigationService.Navigate(ViewTokens.MONITOR, null);
+            //NavigationService.Navigate(ViewTokens.SETTINGS, null);
             return Task.CompletedTask;
         }
 
