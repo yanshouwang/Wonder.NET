@@ -1,4 +1,6 @@
-﻿namespace Wonder.Core
+﻿using System;
+
+namespace Wonder.Core
 {
     /// <summary>
     /// 扩展类
